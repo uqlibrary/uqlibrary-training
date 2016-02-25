@@ -1,0 +1,114 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-training>` is a simple element that displays the opening hours for each of the libraries
+
+Example:
+
+    <uqlibrary-training compact-view="false" auto-load="true"></uqlibrary-training>
+
+@demo
+
+@demo demo/index.html Demo of the Full view
+@demo demo/index-compact.html Demo of the Compact view
+-->
+<dom-module id="uqlibrary-training">
+
+    <style is="custom-style" include="common-styles">
+        :host {
+            font-family: var(--font-family);
+        }
+
+        paper-ripple {
+            @apply(--layout-fit);
+        }
+
+        paper-item {
+            padding: 5px;
+        }
+
+        paper-item.link {
+            color: var(--accent-color);
+            cursor: pointer;
+        }
+
+        paper-item.category {
+            min-height: 20px;
+            padding-left: 20px;
+            font-size: 16px;
+        }
+
+        paper-item.item {
+            min-height: 15px;
+            padding-left: 30px;
+            font-size: 14px;
+            @apply(--layout-row);
+        }
+
+        .category-container:not(:first-of-type) paper-item.category {
+            padding-top: 20px;
+        }
+
+        .bullet {
+            border-radius: 50%;
+            height: 6px;
+            width: 6px;
+            min-height: 6px;
+            min-width: 6px;
+            background-color: #666;
+            border: 0;
+            padding: 0;
+            margin-right: 5px;
+            margin-top: 6px;
+
+            @apply(--layout-flex-none);
+            @apply(--layout-self-start);
+        }
+
+        .item-name {
+            @apply(--layout-flex);
+        }
+
+        .category {
+            @apply(--layout-column);
+        }
+    </style>
+
+    <template>
+        <uqlibrary-api-training id="trainingApi"></uqlibrary-api-training>
+        <uqlibrary-ga id="ga" appName="Links"></uqlibrary-ga>
+
+        <!-- Category Repeat -->
+        <template id="list" is="dom-repeat" items="{{links}}">
+            <!-- Single Category -->
+            <div class="category-container">
+                <paper-item
+                        class$="category {{ itemClass(item) }}"
+                        role$="{{itemRole(item)}}"
+                        on-click="_linkClicked">
+                    {{ item.name }}
+                    <paper-ripple></paper-ripple>
+                </paper-item>
+
+                <div class="item-container">
+                    <!-- Sub item repeat -->
+                    <template is="dom-repeat" items="{{item.items}}" as="sub">
+                        <!-- Single Item -->
+                        <paper-item
+                                class$="item {{ itemClass(sub) }}"
+                                role$="{{itemRole(sub)}}"
+                                on-click="_linkClicked">
+                            <div class="bullet"></div>
+                            <div class="item-name">
+                                {{sub.name}}
+                            </div>
+                            <paper-ripple></paper-ripple>
+                        </paper-item>
+                    </template>
+                </div>
+            </div>
+        </template>
+
+    </template>
+    <script src="uqlibrary-training.js"></script>
+</dom-module>
