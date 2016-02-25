@@ -69,10 +69,6 @@ Example:
         .item-name {
             @apply(--layout-flex);
         }
-
-        .category {
-            @apply(--layout-column);
-        }
     </style>
 
     <template>
@@ -86,6 +82,8 @@ Example:
                 <paper-item
                         class$="category {{ itemClass(item) }}"
                         role$="{{itemRole(item)}}"
+                        aria-label$="{{item.name}}"
+                        title$="{{item.name}}"
                         on-click="_linkClicked">
                     {{ item.name }}
                     <paper-ripple></paper-ripple>
@@ -98,6 +96,8 @@ Example:
                         <paper-item
                                 class$="item {{ itemClass(sub) }}"
                                 role$="{{itemRole(sub)}}"
+                                aria-label$="{{sub.name}}"
+                                title$="{{sub.name}}"
                                 on-click="_linkClicked">
                             <div class="bullet"></div>
                             <div class="item-name">

@@ -12,7 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html>
 <head>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>uql-ia-button</title>
+    <title>uqlibrary-training</title>
 
     <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <script src="../bower_components/web-component-tester/browser.js"></script>
@@ -20,52 +20,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <link rel="import" href="../bower_components/test-fixture/test-fixture.html">
 
     <!-- Import the element to test -->
-    <link rel="import" href="../elements/uqlibrary-hours.html">
+    <link rel="import" href="../elements/uqlibrary-training.html">
 
 </head>
 <body>
 
-<test-fixture id="hours">
+<test-fixture id="basic">
     <template>
-        <uqlibrary-hours auto-load="false"></uqlibrary-hours>
+        <uqlibrary-training auto-load="false"></uqlibrary-training>
     </template>
 </test-fixture>
 
 <script>
-    suite('<uqlibrary-hours> tests', function () {
+    suite('<uqlibrary-training> tests', function () {
         var element;
 
         setup(function () {
-            document.cookie="UQLMockData=enabled";
-
-            element = fixture('hours');
+            element = fixture('basic');
         });
 
 
         test('It should load data', function (done) {
-            element.addEventListener('uqlibrary-hours-loaded', function(){
+            element.addEventListener('uqlibrary-training-loaded', function(){
                 var _items = element.$.list.items;
 
-                // Check if the List has the right items
-                expect(_items.length).to.be.equal(element.hours.length);
-                expect(_items[0].name).to.be.equal(element.hours[0].name);
+                expect(_items.length).to.be.equal(element.links.length);
 
-                // Check opening hours functionality
-                var dayString = moment().format('YYYY-MM-DD');
-                var _open = moment(dayString+ ' ' + element.hours[0].open);
-                var _close = moment(dayString+ ' ' + element.hours[0].close);
-                var _now = moment();
-                expect(_items[0].times).to.be.equal(_open.format("h:mm a") + ' - ' + _close.format("h:mm a"));
-
-                expect(_items[0].class).to.be.equal( ((_open.isBefore(_now) && _close.isAfter(_now)) ? 'open' : 'closed') );
-
-                expect(_items[1].name).to.be.equal(element.hours[1].name);
-                expect(_items[1].times).to.be.equal('Open 24 hours');
+                expect(_items[0].name).to.be.equal(element.links[0].name);
+                expect(_items[1].items[1].link).to.be.equal(element.links[1].items[1].link);
 
                 done();
             });
 
-            element.$.hoursApi.get();
+            element.$.trainingApi.get();
         });
     });
 </script>
