@@ -6,6 +6,7 @@
     "polymer",
     "web-components"
   ],
+  "ignore": [],
   "private": true,
   "main": "elements/uqlibrary-training.html",
   "dependencies": {
