@@ -19,12 +19,9 @@ Example:
             font-family: var(--font-family);
         }
 
-        paper-ripple {
-            @apply(--layout-fit);
-        }
-
         paper-item {
             padding: 5px;
+            align-items: flex-start;
         }
 
         paper-item.link {
@@ -42,7 +39,6 @@ Example:
             min-height: 15px;
             padding-left: 10px;
             font-size: 14px;
-            @apply(--layout-row);
         }
 
         .category-container:not(:first-of-type) paper-item.category {
@@ -59,14 +55,7 @@ Example:
             border: 0;
             padding: 0;
             margin-right: 5px;
-            margin-top: 6px;
-
-            @apply(--layout-flex-none);
-            @apply(--layout-self-start);
-        }
-
-        .item-name {
-            @apply(--layout-flex);
+            margin-top: 5px;
         }
     </style>
 
