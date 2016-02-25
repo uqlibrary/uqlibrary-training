@@ -80,8 +80,8 @@ Example:
             <!-- Single Category -->
             <div class="category-container">
                 <paper-item
-                        class$="category {{ itemClass(item) }}"
-                        role$="{{itemRole(item)}}"
+                        class$="category {{ _itemClass(item) }}"
+                        role$="{{_itemRole(item)}}"
                         aria-label$="{{item.name}}"
                         title$="{{item.name}}"
                         on-click="_linkClicked">
@@ -94,8 +94,8 @@ Example:
                     <template is="dom-repeat" items="{{item.items}}" as="sub">
                         <!-- Single Item -->
                         <paper-item
-                                class$="item {{ itemClass(sub) }}"
-                                role$="{{itemRole(sub)}}"
+                                class$="item {{ _itemClass(sub) }}"
+                                role$="{{_itemRole(sub)}}"
                                 aria-label$="{{sub.name}}"
                                 title$="{{sub.name}}"
                                 on-click="_linkClicked">

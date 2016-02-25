@@ -8,7 +8,7 @@
         observer: "_linksChanged"
       },
       /**
-       * Autoloads the library opening hours from the API
+       * Autoloads the training links from the API
        * @type {Boolean}
        */
       autoLoad: {
@@ -45,7 +45,7 @@
      * @param item
      * @returns {string}
      */
-    itemClass: function (item) {
+    _itemClass: function (item) {
       return (item.link !== '' ? 'link' : '');
     },
     /**
@@ -53,7 +53,7 @@
      * @param item
      * @returns {string}
      */
-    itemRole: function (item) {
+    _itemRole: function (item) {
       return (item.link !== '' ? 'link' : 'any');
     },
     _linkClicked: function (e) {
