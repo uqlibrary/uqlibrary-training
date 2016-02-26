@@ -5,12 +5,11 @@
 
 Example:
 
-    <uqlibrary-training compact-view="false" auto-load="true"></uqlibrary-training>
+    <uqlibrary-training auto-load="true"></uqlibrary-training>
 
 @demo
 
 @demo demo/index.html Demo of the Full view
-@demo demo/index-compact.html Demo of the Compact view
 -->
 <dom-module id="uqlibrary-training">
 
@@ -21,42 +20,33 @@ Example:
 
         paper-item {
             padding: 5px;
-            align-items: flex-start;
-        }
-
-        paper-item.link {
-            color: var(--accent-color);
-            cursor: pointer;
         }
 
         paper-item.category {
-            min-height: 20px;
+            border-bottom: 1px solid #333;
+            display: block;
+            text-align: center;
+            line-height: 30px;
+            min-height: 30px;
             font-size: 16px;
-            font-weight: bold;
+            background-color: var(--theme-color);
+            color: #FFF;
+        }
+
+        div.item-container {
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
         }
 
         paper-item.item {
-            min-height: 15px;
-            padding-left: 10px;
             font-size: 14px;
-            line-height: 16px;
+            line-height: 20px;
+            min-height: 20px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .category-container:not(:first-of-type) paper-item.category {
-            padding-top: 20px;
-        }
-
-        .bullet {
-            border-radius: 50%;
-            height: 6px;
-            width: 6px;
-            min-height: 6px;
-            min-width: 6px;
-            background-color: #666;
-            border: 0;
-            padding: 0;
-            margin-right: 5px;
-            margin-top: 5px;
+        paper-item.link {
+            cursor: pointer;
         }
     </style>
 
