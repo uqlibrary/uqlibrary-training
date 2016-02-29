@@ -16,31 +16,11 @@ Example:
     <style is="custom-style" include="common-styles">
         :host {
             font-family: var(--font-family);
-        }
-
-        paper-item {
-            padding: 5px;
-        }
-
-        paper-item.category {
-            display: block;
-            text-align: center;
-            line-height: 30px;
-            min-height: 30px;
-            font-size: 16px;
-            background-color: var(--accent-color);
-            color: #FFF;
-        }
-
-        div.item-container {
-            border-left: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
+            font-size: var(--body-font-size);
         }
 
         paper-item.item {
-            font-size: 14px;
-            line-height: 20px;
-            min-height: 20px;
+            min-height: 30px;
             border-bottom: 1px solid var(--border-color);
             padding-left: 16px;
         }
@@ -59,7 +39,7 @@ Example:
             <!-- Single Category -->
             <div class="category-container">
                 <paper-item
-                        class$="category {{ _itemClass(item) }}"
+                        class$="header {{ _itemClass(item) }}"
                         role$="{{_itemRole(item)}}"
                         aria-label$="{{item.name}}"
                         title$="{{item.name}}"
