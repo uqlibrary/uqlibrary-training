@@ -14,6 +14,21 @@
       autoLoad: {
         type: Object,
         value: true
+      },
+      /**
+       * Prefix for the google analytics category name. For example: "Home page"
+       */
+      gaCategoryPrefix: {
+        type: String,
+        value: '',
+        observer: '_gaCategoryPrefixChanged'
+      },
+      /**
+       * Holds the Google Analytics app name of this component
+       */
+      _gaAppName: {
+        type: String,
+        value: ''
       }
     },
     ready: function () {
@@ -56,12 +71,24 @@
     _itemRole: function (item) {
       return (item.link !== '' ? 'link' : 'any');
     },
+		/**
+     * Called when a link is clicked
+     * @param e
+     * @private
+     */
     _linkClicked: function (e) {
       var item = e.model.item || e.model.sub;
       if (item && item.link !== '') {
-        this.$.ga.addEvent('Library Training link clicked', item.name);
+        this.$.ga.addEvent('Click', item.name);
         window.location = item.link;
       }
+    },
+    /**
+     * Sets the Google Analytics app name
+     * @private
+     */
+    _gaCategoryPrefixChanged: function () {
+      this._gaAppName = (this.gaCategoryPrefix ? this.gaCategoryPrefix + ' Training' : 'Training');
     }
   });
 })();
