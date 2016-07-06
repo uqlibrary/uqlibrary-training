@@ -20,15 +20,9 @@ Example:
         }
 
         paper-item.item {
-            min-height: 30px;
             border-bottom: 1px solid var(--border-color);
-            padding-left: 16px;
-            font-size: 14px;
         }
 
-        paper-item.link {
-            cursor: pointer;
-        }
     </style>
 
     <template>
@@ -54,13 +48,13 @@ Example:
                     <template is="dom-repeat" items="{{item.items}}" as="sub">
                         <!-- Single Item -->
                         <paper-item
-                                class$="item {{ _itemClass(sub) }}"
+                                class$="compact detail-item {{ _itemClass(sub) }}"
                                 role$="{{_itemRole(sub)}}"
                                 aria-label$="{{sub.name}}"
                                 title$="{{sub.name}}"
                                 on-click="_linkClicked">
                             <div class="bullet"></div>
-                            <div class="item-name body1">
+                            <div class="linked-item item-name body1">
                                 {{sub.name}}
                             </div>
                             <paper-ripple></paper-ripple>
