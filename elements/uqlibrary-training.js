@@ -49,6 +49,10 @@
      * @param links
      */
     setTrainingLinks: function (links) {
+      for (var i = 0; i < links.length; i++) {
+        links[i].link = 'https://careerhub.uq.edu.au/students/events/detail/' + links[i].id;
+      }
+
       this.links = links;
     },
     /** Parses and formats the JSON array when hours has updated */
