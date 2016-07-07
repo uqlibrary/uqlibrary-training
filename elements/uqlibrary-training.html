@@ -29,22 +29,41 @@ Example:
         <uqlibrary-api-training id="trainingApi"></uqlibrary-api-training>
         <uqlibrary-ga id="ga" app-name="[[_gaAppName]]"></uqlibrary-ga>
 
-        <paper-item class="header">UPCOMING TRAINING</paper-item>
-
+        <!-- Category Repeat -->
         <template id="list" is="dom-repeat" items="{{links}}">
-            <!-- Single Item -->
-            <paper-item
-                class$="compact detail-item"
-                aria-label$="[[item.title]]"
-                title$="[[item.title]]"
-                on-click="_linkClicked">
-                <div class="bullet"></div>
-                <div class="linked-item item-name body1">
-                    [[item.title]]
+            <!-- Single Category -->
+            <div class="category-container">
+                <paper-item
+                        class$="header {{ _itemClass(item) }}"
+                        role$="{{_itemRole(item)}}"
+                        aria-label$="{{item.name}}"
+                        title$="{{item.name}}"
+                        on-click="_linkClicked">
+                    {{ item.name }}
+                    <paper-ripple></paper-ripple>
+                </paper-item>
+
+                <div class="item-container">
+                    <!-- Sub item repeat -->
+                    <template is="dom-repeat" items="{{item.items}}" as="sub">
+                        <!-- Single Item -->
+                        <paper-item
+                                class$="compact detail-item {{ _itemClass(sub) }}"
+                                role$="{{_itemRole(sub)}}"
+                                aria-label$="{{sub.name}}"
+                                title$="{{sub.name}}"
+                                on-click="_linkClicked">
+                            <div class="bullet"></div>
+                            <div class="linked-item item-name body1">
+                                {{sub.name}}
+                            </div>
+                            <paper-ripple></paper-ripple>
+                        </paper-item>
+                    </template>
                 </div>
-                <paper-ripple></paper-ripple>
-            </paper-item>
+            </div>
         </template>
+
     </template>
     <script src="uqlibrary-training.js"></script>
 </dom-module>
