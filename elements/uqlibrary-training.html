@@ -25,6 +25,11 @@ Example:
             cursor: pointer;
         }
 
+        paper-item.no-classes span {
+            text-align: center;
+            @apply(--layout-flex);
+        }
+
         paper-item-body {
             padding-left: 20px;
         }
@@ -57,6 +62,7 @@ Example:
 
         <paper-item class="header">UPCOMING TRAINING</paper-item>
 
+        <!-- Training API list -->
         <template id="list" is="dom-repeat" items="{{links}}">
             <!-- Single Item -->
             <paper-item
@@ -73,6 +79,47 @@ Example:
                     <div class="secondary" secondary>[[item.startTime]], [[item.location]]</div>
                 </paper-item-body>
             </paper-item>
+        </template>
+
+        <!-- Backup list in case no result are found in the API -->
+        <template is="dom-if" if="[[_showBackupLinks]]">
+            <paper-item class="item body1 no-classes">
+                <span>No classes scheduled, check back soon.</span>
+            </paper-item>
+            <!-- Category Repeat -->
+            <template id="backuplist" is="dom-repeat" items="{{_backupLinks()}}">
+                <!-- Single Category -->
+                <div class="category-container">
+                    <paper-item
+                        class$="header {{ _itemClass(item) }}"
+                        role$="{{_itemRole(item)}}"
+                        aria-label$="{{item.name}}"
+                        title$="{{item.name}}"
+                        on-click="_linkClicked">
+                        {{ item.name }}
+                        <paper-ripple></paper-ripple>
+                    </paper-item>
+
+                    <div class="item-container">
+                        <!-- Sub item repeat -->
+                        <template is="dom-repeat" items="{{item.items}}" as="sub">
+                            <!-- Single Item -->
+                            <paper-item
+                                class$="compact detail-item {{ _itemClass(sub) }}"
+                                role$="{{_itemRole(sub)}}"
+                                aria-label$="{{sub.name}}"
+                                title$="{{sub.name}}"
+                                on-click="_linkClicked">
+                                <div class="bullet"></div>
+                                <div class="linked-item item-name body1">
+                                    {{sub.name}}
+                                </div>
+                                <paper-ripple></paper-ripple>
+                            </paper-item>
+                        </template>
+                    </div>
+                </div>
+            </template>
         </template>
     </template>
     <script src="uqlibrary-training.js"></script>

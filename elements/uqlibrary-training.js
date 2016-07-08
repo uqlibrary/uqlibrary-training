@@ -29,6 +29,13 @@
       _gaAppName: {
         type: String,
         value: ''
+      },
+      /**
+       * Specifies whether to show the backup links
+       */
+      _showBackupLinks: {
+        type: Boolean,
+        value: false
       }
     },
     ready: function () {
@@ -41,7 +48,9 @@
 
       // Fetch hours
       if (this.autoLoad) {
-        this.$.trainingApi.get();
+        this.$.trainingApi.get({
+          fetch: 5
+        });
       }
     },
     /**
@@ -56,6 +65,8 @@
         links[i].location = links[i].venue.split(',')[0];
         links[i].link = 'https://careerhub.uq.edu.au/students/events/detail/' + links[i].id;
       }
+
+      this._showBackupLinks = (links.length === 0);
 
       this.links = links;
     },
@@ -89,6 +100,70 @@
      */
     _gaCategoryPrefixChanged: function () {
       this._gaAppName = (this.gaCategoryPrefix ? this.gaCategoryPrefix + ' Training' : 'Training');
+    },
+    /**
+     * These are the backup links. Saved in the JS to make it easier to minify.
+     * @private
+     */
+    _backupLinks: function () {
+      return [
+        {
+          "name": "Online training",
+          "description": "Access online resources",
+          "link": "",
+          "items": [
+            {
+              "name": "Library 101",
+              "description": "LIBRARY 101 Library skills tutorial",
+              "link": "https://learn.uq.edu.au/webapps/login/?new_loc=/webapps/blackboard/execute/enrollCourse?context=Course%26course_id=_13002_1"
+            },
+            {
+              "name": "lynda.com",
+              "description": "lynda.com online software and skills training Library classes",
+              "link": "http://www.lynda.com/"
+            },
+            {
+              "name": "Law online tutorial",
+              "description": "",
+              "link": "https://web.library.uq.edu.au/library-services/training/law-online-tutorial"
+            }
+          ]
+        },
+        {
+          "name": "Library classes",
+          "description": "Book into in person training offered by the Library",
+          "link": "",
+          "items": [
+            {
+              "name": "Research skills",
+              "description": "",
+              "link": "https://www.library.uq.edu.au/training/#Research Skills"
+            },
+            {
+              "name": "EndNote",
+              "description": "",
+              "link": "https://www.library.uq.edu.au/training/#EndNote"
+            },
+            {
+              "name": "IT Training",
+              "description": "",
+              "link": "https://www.library.uq.edu.au/training/#General Classes"
+            }
+          ]
+        },
+        {
+          "name": "Other UQ classes",
+          "description": "",
+          "link": "",
+          "items": [
+            {
+              "name": "UQ Student Services",
+              "description": "",
+              "link": "http://www.uq.edu.au/student-services/learning"
+            }
+          ]
+        }
+      ];
     }
   });
 })();
