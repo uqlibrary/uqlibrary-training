@@ -60,7 +60,7 @@ Example:
         <uqlibrary-api-training id="trainingApi"></uqlibrary-api-training>
         <uqlibrary-ga id="ga" app-name="[[_gaAppName]]"></uqlibrary-ga>
 
-        <paper-item class="header">UPCOMING TRAINING</paper-item>
+        <paper-item class="header">Upcoming training</paper-item>
 
         <!-- Training API list -->
         <template id="list" is="dom-repeat" items="{{links}}">
@@ -71,12 +71,13 @@ Example:
                 aria-label$="[[item.title]]"
                 title$="[[item.title]]">
                 <div class$="date [[_dateClass(item)]]">
+                    <span class="body1 inverse">[[item.startDayWeek]]</span>
                     <span class="headline inverse">[[ item.startDay ]]</span>
                     <span class="body1 inverse">[[ item.startMonth ]]</span>
                 </div>
                 <paper-item-body two-line>
                     <div class="caption">[[item.title]]</div>
-                    <div class="secondary" secondary>[[item.startTime]], [[item.location]]</div>
+                    <div class="secondary" secondary>[[item.startTime]], [[item.location]] (Log in to book)</div>
                 </paper-item-body>
             </paper-item>
         </template>

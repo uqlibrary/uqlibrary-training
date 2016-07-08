@@ -59,9 +59,10 @@
      */
     setTrainingLinks: function (links) {
       for (var i = 0; i < links.length; i++) {
+        links[i].startDayWeek = moment(links[i].start).format("ddd");
         links[i].startDay = moment(links[i].start).format("D");
         links[i].startMonth = moment(links[i].start).format("MMM");
-        links[i].startTime = moment(links[i].start).format("hh:mma");
+        links[i].startTime = moment(links[i].start).format("h:mma");
         links[i].location = links[i].venue.split(',')[0];
         links[i].link = 'https://careerhub.uq.edu.au/students/events/detail/' + links[i].id;
       }
@@ -94,10 +95,7 @@
      * @private
      */
     _dateClass: function (item) {
-      var d = moment(item.start);
-      var old = moment().add(14, 'days').endOf('day');
-
-      return (d.isBefore(old) ? 'close' : '');
+      return (moment().format("MM") === moment(item.start).format("MM") ? 'close' : '');
     },
     /**
      * Sets the Google Analytics app name
