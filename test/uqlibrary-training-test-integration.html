@@ -47,7 +47,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 expect(_items.length).to.be.equal(element.links.length);
 
                 expect(_items[0].title).to.be.equal(element.links[0].title);
-                expect(_items[1].startTime).to.be.equal(moment(element.links[1].start).format("hh:mma"));
+                expect(_items[1].startTime).to.be.equal(moment(element.links[1].start).format("h:mma"));
 
                 done();
             });
