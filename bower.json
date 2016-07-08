@@ -15,7 +15,8 @@
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "uqlibrary-api": "uqlibrary/uqlibrary-api#training",
     "uqlibrary-ga": "uqlibrary/uqlibrary-ga#v1.0.3",
-    "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.9"
+    "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.0.9",
+    "moment": "^2.14.1"
   },
   "devDependencies": {
     "web-component-tester": "*",

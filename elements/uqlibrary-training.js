@@ -50,6 +50,10 @@
      */
     setTrainingLinks: function (links) {
       for (var i = 0; i < links.length; i++) {
+        links[i].startDay = moment(links[i].start).format("D");
+        links[i].startMonth = moment(links[i].start).format("MMM");
+        links[i].startTime = moment(links[i].start).format("hh:mma");
+        links[i].location = links[i].venue.split(',')[0];
         links[i].link = 'https://careerhub.uq.edu.au/students/events/detail/' + links[i].id;
       }
 
@@ -59,33 +63,25 @@
     _linksChanged: function () {
       this.fire('uqlibrary-training-loaded');
     },
-    /**
-     * Returns the dynamic CSS class for this item
-     * @param item
-     * @returns {string}
-     */
-    _itemClass: function (item) {
-      return (item.link !== '' ? 'link' : '');
-    },
-    /**
-     * Returns the ARIA role for this item
-     * @param item
-     * @returns {string}
-     */
-    _itemRole: function (item) {
-      return (item.link !== '' ? 'link' : 'any');
-    },
 		/**
      * Called when a link is clicked
      * @param e
      * @private
      */
     _linkClicked: function (e) {
-      var item = e.model.item || e.model.sub;
-      if (item && item.link !== '') {
-        this.$.ga.addEvent('Click', item.name);
-        window.location = item.link;
-      }
+      this.$.ga.addEvent('Click', e.model.item.title);
+      window.location = e.model.item.link;
+    },
+    /**
+     * Checks whether this date is within 14 days
+     * @param item
+     * @private
+     */
+    _dateClass: function (item) {
+      var d = moment(item.start);
+      var old = moment().add(14, 'days').endOf('day');
+
+      return (d.isBefore(old) ? 'close' : '');
     },
     /**
      * Sets the Google Analytics app name

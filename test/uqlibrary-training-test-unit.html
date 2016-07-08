@@ -17,6 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../webcomponentsjs/webcomponents.min.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
     <script src="../../test-fixture/test-fixture-mocha.js"></script>
+    <script src="../../moment/min/moment.min.js"></script>
     <link rel="import" href="../../test-fixture/test-fixture.html">
 
     <!-- Import the element to test -->
@@ -34,32 +35,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <script>
     var training = [
         {
-            "name": "Getting Started",
-            "description": "Getting Started",
-            "link": "http://www.library.uq.edu.au/training/index.phtml#Getting Started",
-            "items": [
-                {
-                    "name": "Library 101",
-                    "description": "Library 101",
-                    "link": "http://www.library.uq.edu.au/training/index.phtml#TAL038"
-                }
-            ]
+            "id": 439800,
+            "title": "TEST - do not book:Databases for Engineering Honours ",
+            "summary": "Learn about the databases you should be using for research",
+            "details": "<p>test research session for honours</p>",
+            "venue": "St Lucia, \r\n\r\nDorothy Hill Engineering & Sciences Library, \r\n\r\nHawken Bldg (50), \r\n\r\neZone , Level 2",
+            "startUtc": "2016-07-12T11:00:00+10:00",
+            "endUtc": "2016-07-12T12:00:00+10:00",
+            "start": "2016-07-12T21:00:00+10:00",
+            "end": "2016-07-12T22:00:00+10:00",
+            "email": "",
+            "phone": ""
         },
         {
-            "name": "Research Skills & Training",
-            "description": "Research Skills & Training",
-            "items": [
-                {
-                    "name": "Advanced Research Skills at Gatton",
-                    "description": "Advanced Research Skills at Gatton",
-                    "link": "http://www.library.uq.edu.au/training/index.phtml#INF85"
-                },
-                {
-                    "name": "CIVL4560/4582 - 4th Yr Thesis",
-                    "description": "CIVL4560/4582 - 4th Yr Thesis",
-                    "link": "http://www.library.uq.edu.au/training/index.phtml#RIS106"
-                }
-            ]
+            "id": 442519,
+            "title": "UQ 2016 Student Summit - Think Tank Session",
+            "summary": "This interactive workshop will help you to prepare for the Summit, by working in groups to summarise the key issues for discussion at the event.\r\n\r\nThis event is only available to successful candidates for the UQ 2016 Student Summit program.",
+            "details": "<p>This interactive workshop will help you to prepare for the Summit, by working in groups to summarise the key issues for discussion at the event.</p><p>This event is only available to successful candidates for the UQ 2016 Student Summit program.</p>",
+            "venue": "Room 273- Global Change Institute Building # 20",
+            "startUtc": "2016-07-21T08:30:00+10:00",
+            "endUtc": "2016-07-21T10:30:00+10:00",
+            "start": "2016-07-21T18:30:00+10:00",
+            "end": "2016-07-21T20:30:00+10:00",
+            "email": "b.brear@uq.edu.au",
+            "phone": ""
         }
     ];
 
@@ -78,8 +77,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 expect(_items.length).to.be.equal(element.links.length);
                 expect(_items.length).to.be.equal(training.length);
 
-                expect(_items[0].name).to.be.equal(training[0].name);
-                expect(_items[1].items[1].link).to.be.equal(training[1].items[1].link);
+                expect(_items[0].title).to.be.equal(training[0].title);
+                expect(_items[1].startTime).to.be.equal(moment(training[1].start).format("hh:mma"));
 
                 done();
             });

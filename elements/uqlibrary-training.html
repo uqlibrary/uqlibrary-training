@@ -21,8 +21,33 @@ Example:
 
         paper-item.item {
             border-bottom: 1px solid var(--border-color);
+            padding: 0;
         }
 
+        paper-item-body {
+            padding-left: 20px;
+        }
+
+        paper-item-body .secondary {
+            color: var(--secondary-color);
+            font-size: 12px;
+        }
+
+        .date {
+            text-align: center;
+            background-color: var(--accent-color-dark);
+            color: #FFF;
+            @apply(--layout-vertical);
+            @apply(--layout-center-justified);
+            @apply(--layout-self-stretch);
+            flex: none;
+            width: 80px;
+            min-height: 80px;
+        }
+
+        .date.close {
+            background-color: #00b300;
+        }
     </style>
 
     <template>
@@ -34,15 +59,18 @@ Example:
         <template id="list" is="dom-repeat" items="{{links}}">
             <!-- Single Item -->
             <paper-item
-                class$="compact detail-item"
+                class="item"
+                on-click="_linkClicked"
                 aria-label$="[[item.title]]"
-                title$="[[item.title]]"
-                on-click="_linkClicked">
-                <div class="bullet"></div>
-                <div class="linked-item item-name body1">
-                    [[item.title]]
+                title$="[[item.title]]">
+                <div class$="date [[_dateClass(item)]]">
+                    <span class="headline inverse">[[ item.startDay ]]</span>
+                    <span class="body1 inverse">[[ item.startMonth ]]</span>
                 </div>
-                <paper-ripple></paper-ripple>
+                <paper-item-body two-line>
+                    <div class="caption">[[item.title]]</div>
+                    <div class="secondary" secondary>[[item.startTime]], [[item.location]]</div>
+                </paper-item-body>
             </paper-item>
         </template>
     </template>
