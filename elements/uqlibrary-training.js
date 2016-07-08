@@ -66,6 +66,11 @@
         links[i].link = 'https://careerhub.uq.edu.au/students/events/detail/' + links[i].id;
       }
 
+      // TODO: Remove before going live. Debug only
+      if (window.location.href.indexOf('noEvents=1') !== -1) {
+        links = [];
+      }
+
       this._showBackupLinks = (links.length === 0);
 
       this.links = links;
