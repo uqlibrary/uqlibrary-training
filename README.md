@@ -20,3 +20,4 @@ Tests are run using the Web Component Tester. Either navigate to /tests/index.ht
 ```sh
 wct --local all
 ```
+
