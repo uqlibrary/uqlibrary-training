@@ -49,7 +49,7 @@
       // Fetch hours
       if (this.autoLoad) {
         this.$.trainingApi.get({
-          fetch: 5
+          take: 5
         });
       }
     },
@@ -88,14 +88,6 @@
     _linkClicked: function (e) {
       this.$.ga.addEvent('Click', e.model.item.title);
       window.location = e.model.item.link;
-    },
-    /**
-     * Checks whether this date is within 14 days
-     * @param item
-     * @private
-     */
-    _dateClass: function (item) {
-      return (moment().format("MM") === moment(item.start).format("MM") ? 'close' : '');
     },
     /**
      * Sets the Google Analytics app name

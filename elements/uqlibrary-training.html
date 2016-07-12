@@ -23,6 +23,7 @@ Example:
             border-bottom: 1px solid var(--border-color);
             padding: 0;
             cursor: pointer;
+            font-size: 1em;
         }
 
         paper-item.no-classes span {
@@ -31,7 +32,10 @@ Example:
         }
 
         paper-item-body {
-            padding-left: 20px;
+            padding-right: 20px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
         }
 
         paper-item-body .secondary {
@@ -41,18 +45,16 @@ Example:
 
         .date {
             text-align: center;
-            background-color: var(--accent-color-dark);
-            color: #FFF;
             @apply(--layout-vertical);
             @apply(--layout-center-justified);
             @apply(--layout-self-stretch);
             flex: none;
-            width: 80px;
+            width: 100px;
             min-height: 80px;
         }
 
-        .date.close {
-            background-color: #00b300;
+        .date .body1, .date .headline {
+            color: var(--accent-color);
         }
     </style>
 
@@ -70,14 +72,14 @@ Example:
                 on-click="_linkClicked"
                 aria-label$="[[item.title]]"
                 title$="[[item.title]]">
-                <div class$="date [[_dateClass(item)]]">
-                    <span class="body1 inverse">[[item.startDayWeek]]</span>
-                    <span class="headline inverse">[[ item.startDay ]]</span>
-                    <span class="body1 inverse">[[ item.startMonth ]]</span>
+                <div class="date">
+                    <span class="body1">[[item.startDayWeek]]</span>
+                    <span class="headline">[[ item.startDay ]]</span>
+                    <span class="body1">[[ item.startMonth ]]</span>
                 </div>
                 <paper-item-body two-line>
-                    <div class="caption">[[item.title]]</div>
-                    <div class="secondary" secondary>[[item.startTime]], [[item.location]] (Log in to book)</div>
+                    <span class="body1">[[item.title]]</span><br />
+                    <span class="secondary" secondary>[[item.startTime]], [[item.location]] (Log in to book)</span>
                 </paper-item-body>
             </paper-item>
         </template>
