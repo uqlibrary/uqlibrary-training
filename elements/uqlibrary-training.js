@@ -49,7 +49,8 @@
       // Fetch hours
       if (this.autoLoad) {
         this.$.trainingApi.get({
-          take: 5
+          take: 5,
+          filterIds: [ 104 ]
         });
       }
     },
@@ -65,11 +66,6 @@
         links[i].startTime = moment(links[i].start).format("h:mma");
         links[i].location = links[i].venue.split(',')[0];
         links[i].link = 'https://careerhub.uq.edu.au/students/events/detail/' + links[i].id;
-      }
-
-      // TODO: Remove before going live. Debug only
-      if (window.location.href.indexOf('noEvents=1') !== -1) {
-        links = [];
       }
 
       this._showBackupLinks = (links.length === 0);
