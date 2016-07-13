@@ -36,6 +36,21 @@
       _showBackupLinks: {
         type: Boolean,
         value: false
+      },
+      /**
+       * Specifies filter id
+       */
+      filterId: {
+        type: Number,
+        value: 104
+      },
+      
+      /**
+       * Specifies number of items to fetch
+       */
+      take: {
+        type: Number,
+        value: 5
       }
     },
     ready: function () {
@@ -49,8 +64,8 @@
       // Fetch hours
       if (this.autoLoad) {
         this.$.trainingApi.get({
-          take: 5,
-          filterIds: [ 104 ]
+          take: this.take,
+          filterIds: [ this.filterId ]
         });
       }
     },
