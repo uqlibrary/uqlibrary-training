@@ -24,6 +24,7 @@ Example:
             padding: 0;
             cursor: pointer;
             font-size: 1em;
+            line-height: 1.4em;
         }
 
         paper-item.no-classes span {
@@ -32,15 +33,15 @@ Example:
         }
 
         paper-item-body {
-            padding-right: 20px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
+            padding-right: 1em;
         }
 
         paper-item-body .secondary {
             color: var(--secondary-color);
             font-size: 12px;
+            height: 1.4em;
+            overflow: hidden;
+            display: block;
         }
 
         .date {
@@ -49,7 +50,7 @@ Example:
             @apply(--layout-center-justified);
             @apply(--layout-self-stretch);
             flex: none;
-            width: 100px;
+            width: 80px;
             min-height: 80px;
         }
 
