@@ -71,16 +71,16 @@ Example:
             <paper-item
                 class="item"
                 on-click="_linkClicked"
-                aria-label$="[[item.title]]"
-                title$="[[item.title]]">
+                aria-label$="[[item.name]]"
+                title$="[[item.name]]">
                 <div class="date">
                     <span class="body1">[[item.startDayWeek]]</span>
                     <span class="headline">[[ item.startDay ]]</span>
                     <span class="body1">[[ item.startMonth ]]</span>
                 </div>
                 <paper-item-body two-line>
-                    <span class="body1">[[item.title]]</span><br />
-                    <span class="secondary" secondary>[[item.startTime]], [[item.location]] (Log in required)</span>
+                    <span class="body1">[[item.name]]</span><br />
+                    <span class="secondary" secondary>[[item.startTime]], [[item.categories.campus]] (Log in required)</span>
                 </paper-item-body>
             </paper-item>
         </template>
