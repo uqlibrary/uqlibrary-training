@@ -95,11 +95,11 @@ Example:
                 <!-- Single Category -->
                 <div class="category-container">
                     <paper-item
-                        class$="header {{ _itemClass(item) }}"
-                        role$="{{_itemRole(item)}}"
+                        class="header"
+                        role="link"
                         aria-label$="{{item.name}}"
                         title$="{{item.name}}"
-                        on-click="_linkClicked">
+                        on-click="_backupLinkClicked">
                         {{ item.name }}
                         <paper-ripple></paper-ripple>
                     </paper-item>
@@ -109,11 +109,11 @@ Example:
                         <template is="dom-repeat" items="{{item.items}}" as="sub">
                             <!-- Single Item -->
                             <paper-item
-                                class$="compact detail-item {{ _itemClass(sub) }}"
-                                role$="{{_itemRole(sub)}}"
+                                class="compact detail-item"
+                                role="link"
                                 aria-label$="{{sub.name}}"
                                 title$="{{sub.name}}"
-                                on-click="_linkClicked">
+                                on-click="_backupLinkClicked">
                                 <div class="bullet"></div>
                                 <div class="linked-item item-name body1">
                                     {{sub.name}}

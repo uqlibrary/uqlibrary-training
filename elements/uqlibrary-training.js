@@ -100,6 +100,18 @@
       window.location = e.model.item.link;
     },
     /**
+     * Called when a backup link is clicked
+     * @param e
+     * @private
+     */
+    _backupLinkClicked: function (e) {
+      var item = e.model.item || e.model.sub;
+      if (item && item.link !== '') {
+        this.$.ga.addEvent('Library Training link clicked', item.name);
+        window.location = item.link;
+      }
+    },
+    /**
      * Sets the Google Analytics app name
      * @private
      */
