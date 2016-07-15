@@ -44,7 +44,7 @@
        */
       filterId: {
         type: Number,
-        value: 104
+        value: 107
       },
       /**
        * Specifies number of items to fetch
