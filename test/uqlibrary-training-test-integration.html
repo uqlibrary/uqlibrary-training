@@ -42,12 +42,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         test('It should load data', function (done) {
             element.addEventListener('uqlibrary-training-loaded', function(){
-                var _items = element.$.list.items;
+                var _items = element.$.list.$.list.items;
 
-                expect(_items.length).to.be.equal(element.links.length);
+                expect(_items.length).to.be.equal(element.events.length);
 
-                expect(_items[0].title).to.be.equal(element.links[0].title);
-                expect(_items[1].startTime).to.be.equal(moment(element.links[1].start).format("h:mma"));
+                expect(_items[0].name).to.be.equal(element.events[0].name);
+                expect(_items[1].startTime).to.be.equal(moment(element.events[1].start).format("h:mma"));
 
                 done();
             });

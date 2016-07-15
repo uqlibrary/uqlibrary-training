@@ -2,10 +2,19 @@
   Polymer({
     is: 'uqlibrary-training',
     properties: {
-      /** Opening hours of all libraries in JSON format */
-      links: {
+      /**
+       * List of all events (raw)
+       */
+      events: {
         type: Array,
-        observer: "_linksChanged"
+        observer: "_eventsChanged"
+      },
+      /**
+       * List of all formatted events
+       */
+      _formattedEvents: {
+        type: Array,
+        notify: true
       },
       /**
        * Autoloads the training links from the API
@@ -31,26 +40,45 @@
         value: ''
       },
       /**
-       * Specifies whether to show the backup links
-       */
-      _showBackupLinks: {
-        type: Boolean,
-        value: false
-      },
-      /**
        * Specifies filter id
        */
       filterId: {
         type: Number,
         value: 104
       },
-      
       /**
        * Specifies number of items to fetch
        */
       take: {
         type: Number,
         value: 5
+      },
+      /**
+       * Entry animation
+       */
+      _entryAnimation: {
+        type: String,
+        value: 'slide-from-right-animation'
+      },
+      /**
+       * Exit animation
+       */
+      _exitAnimation: {
+        type: String,
+        value: 'slide-left-animation'
+      },
+      /**
+       * Selected page
+       */
+      _selectedPage: {
+        type: Number,
+        value: 0
+      },
+      /**
+       * Selected event
+       */
+      _selectedEvent: {
+        type: Object
       }
     },
     ready: function () {
@@ -58,7 +86,7 @@
 
       // Setup event listener for Training
       this.$.trainingApi.addEventListener('uqlibrary-api-training', function (e) {
-        self.setTrainingLinks(e.detail);
+        self.events = e.detail;
       });
 
       // Fetch hours
@@ -69,47 +97,19 @@
         });
       }
     },
-    /**
-     * Sets the "links" variable
-     * @param links
-     */
-    setTrainingLinks: function (links) {
-      for (var i = 0; i < links.length; i++) {
-        links[i].startDayWeek = moment(links[i].start).format("ddd");
-        links[i].startDay = moment(links[i].start).format("D");
-        links[i].startMonth = moment(links[i].start).format("MMM");
-        links[i].startTime = moment(links[i].start).format("h:mma");
-        links[i].link = 'https://careerhub.uq.edu.au/students/events/detail/' + links[i].entityId;
-      }
-
-      this._showBackupLinks = (links.length === 0);
-
-      this.links = links;
-    },
     /** Parses and formats the JSON array when hours has updated */
-    _linksChanged: function () {
-      this.fire('uqlibrary-training-loaded');
-    },
-		/**
-     * Called when a link is clicked
-     * @param e
-     * @private
-     */
-    _linkClicked: function (e) {
-      this.$.ga.addEvent('Click', e.model.item.title);
-      window.location = e.model.item.link;
-    },
-    /**
-     * Called when a backup link is clicked
-     * @param e
-     * @private
-     */
-    _backupLinkClicked: function (e) {
-      var item = e.model.item || e.model.sub;
-      if (item && item.link !== '') {
-        this.$.ga.addEvent('Library Training link clicked', item.name);
-        window.location = item.link;
+    _eventsChanged: function () {
+      events = this.events;
+      for (var i = 0; i < events.length; i++) {
+        events[i].startDayWeek = moment(events[i].start).format("ddd");
+        events[i].startDay = moment(events[i].start).format("D");
+        events[i].startMonth = moment(events[i].start).format("MMM");
+        events[i].startTime = moment(events[i].start).format("h:mma");
+        events[i].link = 'https://careerhub.uq.edu.au/students/events/detail/' + events[i].entityId;
       }
+
+      this._formattedEvents = events;
+      this.fire('uqlibrary-training-loaded');
     },
     /**
      * Sets the Google Analytics app name
@@ -119,68 +119,33 @@
       this._gaAppName = (this.gaCategoryPrefix ? this.gaCategoryPrefix + ' Training' : 'Training');
     },
     /**
-     * These are the backup links. Saved in the JS to make it easier to minify.
-     * @private
+     * Called when an event is clicked on the list page
+     * @param e
      */
-    _backupLinks: function () {
-      return [
-        {
-          "name": "Online training",
-          "description": "Access online resources",
-          "link": "",
-          "items": [
-            {
-              "name": "Library 101",
-              "description": "LIBRARY 101 Library skills tutorial",
-              "link": "https://learn.uq.edu.au/webapps/login/?new_loc=/webapps/blackboard/execute/enrollCourse?context=Course%26course_id=_13002_1"
-            },
-            {
-              "name": "lynda.com",
-              "description": "lynda.com online software and skills training Library classes",
-              "link": "http://www.lynda.com/"
-            },
-            {
-              "name": "Law online tutorial",
-              "description": "",
-              "link": "https://web.library.uq.edu.au/library-services/training/law-online-tutorial"
-            }
-          ]
-        },
-        {
-          "name": "Library classes",
-          "description": "Book into in person training offered by the Library",
-          "link": "",
-          "items": [
-            {
-              "name": "Research skills",
-              "description": "",
-              "link": "https://www.library.uq.edu.au/training/#Research Skills"
-            },
-            {
-              "name": "EndNote",
-              "description": "",
-              "link": "https://www.library.uq.edu.au/training/#EndNote"
-            },
-            {
-              "name": "IT Training",
-              "description": "",
-              "link": "https://www.library.uq.edu.au/training/#General Classes"
-            }
-          ]
-        },
-        {
-          "name": "Other UQ classes",
-          "description": "",
-          "link": "",
-          "items": [
-            {
-              "name": "UQ Student Services",
-              "description": "",
-              "link": "http://www.uq.edu.au/student-services/learning"
-            }
-          ]
-        }
-      ];
+    _eventClicked: function (e) {
+      this._selectedEvent = e.detail;
+      this._switchToPage(1);
+    },
+    /**
+     * Called when a user closes the details view
+     */
+    _showList: function () {
+      this._switchToPage(0);
+    },
+    /**
+     * Changes animation and changes page
+     * @param requestedPage
+     */
+    _switchToPage: function (requestedPage) {
+      if (requestedPage > this._selectedPage) {
+        this._entryAnimation = 'slide-from-right-animation';
+        this._exitAnimation = 'slide-left-animation';
+      } else {
+        this._entryAnimation = 'slide-from-left-animation';
+        this._exitAnimation = 'slide-right-animation';
+      }
+
+      this._selectedPage = requestedPage;
     }
   });
 })();

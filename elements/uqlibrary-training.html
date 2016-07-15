@@ -1,7 +1,7 @@
 <link rel="import" href="elements.html">
 
 <!--
-`<uqlibrary-training>` is a simple element that displays the opening hours for each of the libraries
+`<uqlibrary-training>` is a simple element that displays training events for a given filter ID
 
 Example:
 
@@ -19,43 +19,12 @@ Example:
             font-size: var(--body-font-size);
         }
 
-        paper-item.item {
-            border-bottom: 1px solid var(--border-color);
-            padding: 0;
-            cursor: pointer;
-            font-size: 1em;
-            line-height: 1.4em;
-        }
-
-        paper-item.no-classes span {
-            text-align: center;
-            @apply(--layout-flex);
-        }
-
-        paper-item-body {
-            padding-right: 1em;
-        }
-
-        paper-item-body .secondary {
-            color: var(--secondary-color);
-            font-size: 12px;
-            height: 1.4em;
-            overflow: hidden;
-            display: block;
-        }
-
-        .date {
-            text-align: center;
-            @apply(--layout-vertical);
-            @apply(--layout-center-justified);
-            @apply(--layout-self-stretch);
-            flex: none;
-            width: 80px;
-            min-height: 80px;
-        }
-
-        .date .body1, .date .headline {
-            color: var(--accent-color);
+        #pages {
+            position: absolute;
+            top: 0;
+            right:0;
+            left:0;
+            bottom: 0;
         }
     </style>
 
@@ -63,68 +32,24 @@ Example:
         <uqlibrary-api-training id="trainingApi"></uqlibrary-api-training>
         <uqlibrary-ga id="ga" app-name="[[_gaAppName]]"></uqlibrary-ga>
 
-        <paper-item class="header">Upcoming training</paper-item>
-
-        <!-- Training API list -->
-        <template id="list" is="dom-repeat" items="{{links}}">
-            <!-- Single Item -->
-            <paper-item
-                class="item"
-                on-click="_linkClicked"
-                aria-label$="[[item.name]]"
-                title$="[[item.name]]">
-                <div class="date">
-                    <span class="body1">[[item.startDayWeek]]</span>
-                    <span class="headline">[[ item.startDay ]]</span>
-                    <span class="body1">[[ item.startMonth ]]</span>
-                </div>
-                <paper-item-body two-line>
-                    <span class="body1">[[item.name]]</span><br />
-                    <span class="secondary" secondary>[[item.startTime]], [[item.categories.campus]] (Log in required)</span>
-                </paper-item-body>
-            </paper-item>
-        </template>
-
-        <!-- Backup list in case no result are found in the API -->
-        <template is="dom-if" if="[[_showBackupLinks]]">
-            <paper-item class="item body1 no-classes">
-                <span>No classes scheduled, check back soon.</span>
-            </paper-item>
-            <!-- Category Repeat -->
-            <template id="backuplist" is="dom-repeat" items="{{_backupLinks()}}">
-                <!-- Single Category -->
-                <div class="category-container">
-                    <paper-item
-                        class="header"
-                        role="link"
-                        aria-label$="{{item.name}}"
-                        title$="{{item.name}}"
-                        on-click="_backupLinkClicked">
-                        {{ item.name }}
-                        <paper-ripple></paper-ripple>
-                    </paper-item>
-
-                    <div class="item-container">
-                        <!-- Sub item repeat -->
-                        <template is="dom-repeat" items="{{item.items}}" as="sub">
-                            <!-- Single Item -->
-                            <paper-item
-                                class="compact detail-item"
-                                role="link"
-                                aria-label$="{{sub.name}}"
-                                title$="{{sub.name}}"
-                                on-click="_backupLinkClicked">
-                                <div class="bullet"></div>
-                                <div class="linked-item item-name body1">
-                                    {{sub.name}}
-                                </div>
-                                <paper-ripple></paper-ripple>
-                            </paper-item>
-                        </template>
-                    </div>
-                </div>
-            </template>
-        </template>
+        <neon-animated-pages
+                id="pages"
+                selected="{{_selectedPage}}"
+                entry-animation="[[_entryAnimation]]"
+                exit-animation="[[_exitAnimation]]">
+            <uqlibrary-training-list
+                id="list"
+                ga-app-name="[[_gaAppName]]"
+                events="[[_formattedEvents]]"
+                on-event-clicked="_eventClicked">
+            </uqlibrary-training-list>
+            <uqlibrary-training-details
+                id="details"
+                ga-app-name="[[_gaAppName]]"
+                event="[[_selectedEvent]]"
+                on-show-list="_showList">
+            </uqlibrary-training-details>
+        </neon-animated-pages>
     </template>
     <script src="uqlibrary-training.js"></script>
 </dom-module>
