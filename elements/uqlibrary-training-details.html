@@ -19,40 +19,33 @@ Example:
       font-size: var(--body-font-size);
     }
 
-    .image-header {
-      background-size: cover;
-      background-position: 50% 50%;
-      padding-top: 150px;
+    .header {
       background-color: var(--theme-color-lighter);
-      background-image: url('//web.library.uq.edu.au/files/20285/trainingImage_homePage.jpg');
+      padding: 16px;
     }
 
-    .title-container {
-      /* Cannot be var(--theme-color-lighter) because of opacity */
-      background-color: rgba(123,12,157,.7);
-      padding: 16px;
-      @apply(--layout-horizontal);
+    .header .library-name {
+      padding-top: 16px;
     }
 
     paper-icon-item {
       font-size: 1em;
+      margin-bottom: 10px;
+
+      --paper-item-icon: {
+        min-width: 56px;
+      }
     }
 
     .details {
       padding: 20px;
     }
 
-    .close {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-    }
-
-    .close paper-icon-button {
-      color: #FFF;
+    paper-icon-button.arrow-back {
+      color: var(--theme-color-lighter);
 
       --paper-icon-button: {
-        background-color: var(--theme-color-lighter);
+        background-color: #FFF;
         border-radius: 50%;
       };
     }
@@ -61,19 +54,22 @@ Example:
       margin-right: 20px;
       float: right;
     }
+
+    .action-row {
+      margin-top: 10px;
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
+      @apply(--layout-around-justified);
+    }
   </style>
 
   <template>
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
     <!-- Image Header -->
-    <div class="image-header">
-      <div class="close">
-        <paper-icon-button icon="arrow-back" on-click="_showListView" aria-label="Back to computers view"></paper-icon-button>
-      </div>
-      <div class="title-container">
-        <div class="headline inverse library-name">[[ event.name ]]</div>
-      </div>
+    <div class="header">
+      <paper-icon-button class="arrow-back" icon="arrow-back" on-click="_showListView" aria-label="Back to computers view"></paper-icon-button>
+      <div class="headline inverse library-name">[[ event.name ]]</div>
     </div>
 
     <div id="details" class="details body1"></div>
@@ -83,7 +79,7 @@ Example:
       <iron-icon item-icon icon="date-range"></iron-icon>
       <paper-item-body two-line>
         <div class="body1">[[ _fullDate ]]</div>
-        <div secondary class="caption">[[_startTime]] - [[_endTime]]</div>
+        <div secondary class="body1">[[_startTime]] - [[_endTime]]</div>
       </paper-item-body>
     </paper-icon-item>
 
@@ -96,9 +92,19 @@ Example:
     </paper-icon-item>
 
     <!-- Book button -->
-    <a href="[[event.link]]" target="_blank" tabindex="-1">
-      <paper-button class="button-colored-accent" on-click="_openEvent">Log in and book</paper-button>
-    </a>
+    <div class="action-row">
+      <span class="caption">
+        <template is="dom-if" if="[[_bookableEvent]]">
+          [[event.attendance.total]] out of [[event.bookingSettings.bookingLimit]] places booked
+        </template>
+        <template is="dom-if" if="[[!_bookableEvent]]">
+          Bookings not required
+        </template>
+      </span>
+      <a href="[[event.link]]" target="_blank" tabindex="-1">
+        <paper-button class="button-colored-accent" on-click="_openEvent">Log in and book</paper-button>
+      </a>
+    </div>
   </template>
   <script src="uqlibrary-training-details.js"></script>
 </dom-module>

@@ -97,6 +97,12 @@
         });
       }
     },
+    /**
+     * Resets the element to the first tab
+     */
+    reset: function () {
+      this._selectedPage = 0;
+    },
     /** Parses and formats the JSON array when hours has updated */
     _eventsChanged: function () {
       events = this.events;
