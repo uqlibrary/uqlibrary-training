@@ -149,7 +149,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     setTimeout(function () {
                         expect(element._selectedPage).to.be.equal(1);
 
-                        element.$.details.$$('.close paper-icon-button').click();
+                        element.$.details.$$('paper-icon-button').click();
 
                         setTimeout(function () {
                             expect(element._selectedPage).to.be.equal(0);
@@ -169,7 +169,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                     setTimeout(function () {
                         expect(element.$.details.event.name).to.be.equal(training[0].name);
-                        expect(element.$.details._fullDate).to.be.equal(moment(training[0].start).format("dddd, MMMM DD YYYY"))
+                        expect(element.$.details._fullDate).to.be.equal(moment(training[0].start).format("dddd MMMM DD YYYY"))
                         done();
                     }, 100);
                 }, 100);
