@@ -41,7 +41,7 @@
         if (this.event.bookingSettings.bookingLimit !== null) {
           this._bookingText = this.event.attendance.total + ' out of ' + this.event.bookingSettings.bookingLimit + ' places booked';
         } else {
-          this._bookingText = 'this.event.attendance.total booked';
+          this._bookingText = this.event.attendance.total + ' booked';
         }
       }
     },
