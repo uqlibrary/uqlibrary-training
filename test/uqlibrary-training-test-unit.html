@@ -169,7 +169,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                     setTimeout(function () {
                         expect(element.$.details.event.name).to.be.equal(training[0].name);
-                        expect(element.$.details._fullDate).to.be.equal(moment(training[0].start).format("dddd MMMM DD YYYY"))
+                        expect(element.$.details._fullDate).to.be.equal(moment(training[0].start).format("dddd DD MMMM YYYY"));
                         done();
                     }, 100);
                 }, 100);

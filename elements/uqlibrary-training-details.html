@@ -93,14 +93,7 @@ Example:
 
     <!-- Book button -->
     <div class="action-row">
-      <span class="caption">
-        <template is="dom-if" if="[[_bookableEvent]]">
-          [[event.attendance.total]] out of [[event.bookingSettings.bookingLimit]] places booked
-        </template>
-        <template is="dom-if" if="[[!_bookableEvent]]">
-          Bookings not required
-        </template>
-      </span>
+      <span class="caption">[[_bookingText]]</span>
       <a href="[[event.link]]" target="_blank" tabindex="-1">
         <paper-button class="button-colored-accent" on-click="_openEvent">Log in and book</paper-button>
       </a>

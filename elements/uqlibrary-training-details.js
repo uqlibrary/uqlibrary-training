@@ -21,23 +21,29 @@
       _fullDate: {
         type: String
       },
-      _bookableEvent: {
-        type: Boolean
+      _bookingText: {
+        type: String
       }
     },
     /**
      * Called when the event object changes
      */
     _eventChanged: function () {
-      console.log(this.event);
       // Set inner HTML. Only way to do this with Polymer
       this.$.details.innerHTML = this.event.summary.replace('\n', '<br />');
 
       this._startTime = moment(this.event.start).format("h:mma");
       this._endTime = moment(this.event.end).format("h:mma");
-      this._fullDate = moment(this.event.start).format("dddd MMMM DD YYYY");
+      this._fullDate = moment(this.event.start).format("dddd DD MMMM YYYY");
 
-      this._bookableEvent = this.event.bookingSettings !== null;
+      this._bookingText = "Bookings not required";
+      if (this.event.bookingSettings !== null) {
+        if (this.event.bookingSettings.bookingLimit !== null) {
+          this._bookingText = this.event.attendance.total + ' out of ' + this.event.bookingSettings.bookingLimit + ' places booked';
+        } else {
+          this._bookingText = 'this.event.attendance.total booked';
+        }
+      }
     },
     /**
      * Called when the user presses the close/back button
