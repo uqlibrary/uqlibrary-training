@@ -20,17 +20,22 @@ Example:
     }
 
     .header {
+      background-color: var(--theme-color);
+      padding: 8px;
+    }
+    
+    .header span.headline {
+      vertical-align: middle;
+    } 
+
+    .event-name {
       background-color: var(--theme-color-lighter);
       padding: 16px;
     }
 
-    .header .library-name {
-      padding-top: 16px;
-    }
-
     paper-icon-item {
       font-size: 1em;
-      margin-bottom: 10px;
+      padding: 16px 16px;
 
       --paper-item-icon: {
         min-width: 56px;
@@ -38,14 +43,13 @@ Example:
     }
 
     .details {
-      padding: 20px;
+      padding: 16px;
     }
 
     paper-icon-button.arrow-back {
-      color: var(--theme-color-lighter);
+      color: #FFF;
 
       --paper-icon-button: {
-        background-color: #FFF;
         border-radius: 50%;
       };
     }
@@ -69,7 +73,10 @@ Example:
     <!-- Image Header -->
     <div class="header">
       <paper-icon-button class="arrow-back" icon="arrow-back" on-click="_showListView" aria-label="Back to computers view"></paper-icon-button>
-      <div class="headline inverse library-name">[[ event.name ]]</div>
+      <span class="headline inverse">Event details</span>
+    </div>
+    <div class="subhead event-name inverse">
+      [[ event.name ]]
     </div>
 
     <div id="details" class="details body1"></div>
@@ -78,7 +85,16 @@ Example:
     <paper-icon-item>
       <iron-icon item-icon icon="date-range"></iron-icon>
       <paper-item-body two-line>
-        <div class="body1">[[ _fullDate ]]</div>
+        <div class="title">Date</div>
+        <div secondary class="body1">[[ _fullDate ]]</div>
+      </paper-item-body>
+    </paper-icon-item>
+
+    <!-- Time -->
+    <paper-icon-item>
+      <iron-icon item-icon icon="device:access-time"></iron-icon>
+      <paper-item-body two-line>
+        <div class="title">Time</div>
         <div secondary class="body1">[[_startTime]] - [[_endTime]]</div>
       </paper-item-body>
     </paper-icon-item>
@@ -86,18 +102,20 @@ Example:
     <!-- Location -->
     <paper-icon-item>
       <iron-icon item-icon icon="communication:location-on"></iron-icon>
-      <paper-item-body class="body1">
-        [[ event.venue ]]
+      <paper-item-body>
+        <div class="title">Location</div>
+        <div secondary class="body1">[[ event.venue ]]</div>
       </paper-item-body>
     </paper-icon-item>
 
-    <!-- Book button -->
-    <div class="action-row">
-      <span class="caption">[[_bookingText]]</span>
-      <a href="[[event.link]]" target="_blank" tabindex="-1">
-        <paper-button class="button-colored-accent" on-click="_openEvent">Log in and book</paper-button>
-      </a>
-    </div>
+    <!-- Registration -->
+    <paper-icon-item>
+      <iron-icon item-icon icon="notification:event-available"></iron-icon>
+      <paper-item-body>
+        <div class="title">Registration</div>
+        <div secondary class="body1">[[_bookingText]]</div>
+      </paper-item-body>
+    </paper-icon-item>
   </template>
   <script src="uqlibrary-training-details.js"></script>
 </dom-module>
