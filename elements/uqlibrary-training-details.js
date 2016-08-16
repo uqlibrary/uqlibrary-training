@@ -36,13 +36,17 @@
       this._endTime = moment(this.event.end).format("h:mma");
       this._fullDate = moment(this.event.start).format("dddd DD MMMM YYYY");
 
-      this._bookingText = "Bookings not required";
+      this._bookingText = "Booking is not required";
+
       if (this.event.bookingSettings !== null) {
-        if (this.event.bookingSettings.bookingLimit !== null) {
-          this._bookingText = this.event.attendance.total + ' out of ' + this.event.bookingSettings.bookingLimit + ' places booked';
-        } else {
-          this._bookingText = this.event.attendance.total + ' booked';
-        }
+        this._bookingText = 'Places sill available';
+
+        console.log(this.event.bookingSettings.bookingLimit);
+        console.log(this.event.attendance.total);
+
+        if (this.event.bookingSettings.placesRemaining == 0) {
+            this._bookingText = 'Class is full. Register for waitlist.';
+          }
       }
     },
     /**
