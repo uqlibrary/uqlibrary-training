@@ -26,6 +26,21 @@ Example:
             left:0;
             bottom: 0;
         }
+
+        uqlibrary-training-details .header {
+            background-color: var(--theme-color);
+            text-align: left;
+        }
+
+        uqlibrary-training-details .header span {
+            vertical-align: middle;
+        }
+
+        .arrow-back {
+            --paper-icon-button: {
+                border-radius: 50%;
+            };
+        }
     </style>
 
     <template>
@@ -42,12 +57,19 @@ Example:
                 ga-app-name="[[_gaAppName]]"
                 events="[[_formattedEvents]]"
                 on-event-clicked="_eventClicked">
+            <paper-item class="header inverse">Upcoming training</paper-item>
             </uqlibrary-training-list>
             <uqlibrary-training-details
                 id="details"
                 ga-app-name="[[_gaAppName]]"
                 event="[[_selectedEvent]]"
                 on-show-list="_showList">
+                <content>
+                    <paper-item class="header inverse">
+                        <paper-icon-button class="button-colored-theme arrow-back" icon="arrow-back" on-click="_showList" aria-label="Back to events list"></paper-icon-button>
+                        <span>Event details</span>
+                    </paper-item>
+                </content>
             </uqlibrary-training-details>
         </neon-animated-pages>
     </template>

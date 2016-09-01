@@ -19,15 +19,6 @@ Example:
       font-size: var(--body-font-size);
     }
 
-    .header {
-      background-color: var(--theme-color);
-      padding: 8px;
-    }
-    
-    .header span.headline {
-      vertical-align: middle;
-    } 
-
     .event-name {
       background-color: var(--theme-color-lighter);
       padding: 16px;
@@ -35,7 +26,7 @@ Example:
 
     paper-icon-item {
       font-size: 1em;
-      padding: 16px 16px;
+      padding: 16px;
 
       --paper-item-icon: {
         min-width: 56px;
@@ -46,37 +37,20 @@ Example:
       padding: 16px;
     }
 
-    paper-icon-button.arrow-back {
-      color: #FFF;
-
-      --paper-icon-button: {
-        border-radius: 50%;
-      };
-    }
-
     paper-button {
       margin-right: 20px;
       float: right;
     }
 
-    .action-row {
-      margin-top: 10px;
-      @apply(--layout-horizontal);
-      @apply(--layout-center);
-      @apply(--layout-around-justified);
-    }
   </style>
 
   <template>
+    <content></content>
+
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
-    <!-- Image Header -->
-    <div class="header">
-      <paper-icon-button class="arrow-back" icon="arrow-back" on-click="_showListView" aria-label="Back to computers view"></paper-icon-button>
-      <span class="headline inverse">Event details</span>
-    </div>
     <div class="subhead event-name inverse">
-      [[ event.name ]]
+      <h3 class="inverse">[[ event.name ]]</h3>
     </div>
 
     <div id="details" class="details body1"></div>
@@ -108,6 +82,26 @@ Example:
         <div secondary class="body1">[[_bookingText]]</div>
       </paper-item-body>
     </paper-icon-item>
+
+    <!-- Display only if user is not logged in or user is non-UQ user -->
+    <paper-icon-item>
+      <iron-icon item-icon icon="info-outline"></iron-icon>
+      <paper-item-body>
+        <div class="title">Library member registration (for non-UQ students and staff)</div>
+        <a id$="event[[event.entityId]]" href="#" on-click="sendEmail">Send email</a> to training-events@library.uq.edu.au with your name and the event id ([[event.entityId]]), event name and date to reserve a place.
+        We’ll email you a confirmation within 2 business days.
+      </paper-item-body>
+    </paper-icon-item>
+
+    <!-- Display only if user is not logged in or user is UQ user -->
+    <template is="dom-if" if="[[showLoginButton]]">
+    <paper-button class="button-colored-accent">
+      <a href="https://careerhub.uq.edu.au/students/events/detail/[[event.entityId]]">
+        Login and book
+      </a>
+    </paper-button>
+    </template>
+
   </template>
   <script src="uqlibrary-training-details.js"></script>
 </dom-module>

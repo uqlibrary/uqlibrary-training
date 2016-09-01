@@ -57,12 +57,13 @@ Example:
     .date .body1, .date .headline {
       color: var(--accent-color);
     }
+
   </style>
 
   <template>
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
-
-    <paper-item class="header">Upcoming training</paper-item>
+    <content></content>
+    <!--<paper-item class="header">Upcoming training</paper-item>-->
 
     <!-- Training API list -->
     <template id="list" is="dom-repeat" items="[[events]]">
