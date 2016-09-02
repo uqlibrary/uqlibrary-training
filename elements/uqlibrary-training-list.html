@@ -19,42 +19,30 @@ Example:
       font-size: var(--body-font-size);
     }
 
-    paper-item.item {
+    paper-icon-item {
       border-bottom: 1px solid var(--border-color);
-      padding: 0;
-      cursor: pointer;
-      font-size: 1em;
-      line-height: 1.4em;
-    }
-
-    paper-item.no-classes span {
-      text-align: center;
-      @apply(--layout-flex);
+      --paper-item-icon: {
+        padding-right: 16px;
+      };
     }
 
     paper-item-body {
-      padding-right: 1em;
+      line-height: 1.4em;
     }
 
-    paper-item-body .secondary {
-      color: var(--secondary-color);
-      font-size: 0.9em;
-      height: 1.4em;
-      overflow: hidden;
-      display: block;
+    .no-classes span {
+      text-align: center;
+      @apply(--layout-flex);
     }
 
     .date {
       text-align: center;
       @apply(--layout-vertical);
       @apply(--layout-center-justified);
-      @apply(--layout-self-stretch);
-      flex: none;
-      width: 80px;
-      min-height: 80px;
+      width: 100%;
     }
 
-    .date .body1, .date .headline {
+    .date span {
       color: var(--accent-color);
     }
 
@@ -62,39 +50,39 @@ Example:
 
   <template>
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
-    <content></content>
-    <!--<paper-item class="header">Upcoming training</paper-item>-->
+    <paper-item class="header">Upcoming training</paper-item>
 
-    <!-- Training API list -->
+    <!-- Training events list -->
     <template id="list" is="dom-repeat" items="[[events]]">
+
       <!-- Single Item -->
-      <paper-item
-          class="item"
-          on-click="_linkClicked"
-          aria-label$="[[item.name]]"
-          title$="[[item.name]]">
-        <div class="date">
+      <paper-icon-item on-click="_linkClicked"
+                       aria-label$="[[item.name]]"
+                       title$="[[item.name]]">
+        <div class="date" item-icon>
           <span class="body1">[[item.startDayWeek]]</span>
           <span class="headline">[[ item.startDay ]]</span>
           <span class="body1">[[ item.startMonth ]]</span>
         </div>
         <paper-item-body two-line>
-          <span class="body1">[[item.name]]</span><br />
-          <span class="secondary" secondary>[[item.startTime]], [[item.categories.campus]]</span>
+          <div class="body1">[[item.name]]</div>
+          <div secondary>[[item.startTime]], [[item.categories.campus]] </div>
         </paper-item-body>
-      </paper-item>
+      </paper-icon-item>
+
     </template>
 
     <!-- Backup list in case no result are found in the API -->
+
     <template is="dom-if" if="[[_showBackupLinks]]">
-      <paper-item class="item body1 no-classes">
+      <paper-item class="no-classes">
         <span>No classes scheduled, check back soon.</span>
       </paper-item>
+
       <!-- Category Repeat -->
       <template id="backuplist" is="dom-repeat" items="{{_backupLinks()}}">
         <!-- Single Category -->
-        <div class="category-container">
-          <paper-item
+        <paper-item
               class="header"
               role="link"
               aria-label$="{{item.name}}"
@@ -104,27 +92,25 @@ Example:
             <paper-ripple></paper-ripple>
           </paper-item>
 
-          <div class="item-container">
-            <!-- Sub item repeat -->
-            <template is="dom-repeat" items="{{item.items}}" as="sub">
+        <!-- Sub item repeat -->
+        <template is="dom-repeat" items="{{item.items}}" as="sub">
               <!-- Single Item -->
               <paper-item
-                  class="compact detail-item"
+                  class="linked-item"
                   role="link"
                   aria-label$="{{sub.name}}"
                   title$="{{sub.name}}"
                   on-click="_backupLinkClicked">
-                <div class="bullet"></div>
-                <div class="linked-item item-name body1">
+                <span class="linked-item">
                   {{sub.name}}
-                </div>
+                </span>
                 <paper-ripple></paper-ripple>
               </paper-item>
             </template>
-          </div>
-        </div>
       </template>
+
     </template>
   </template>
+
   <script src="uqlibrary-training-list.js"></script>
 </dom-module>
