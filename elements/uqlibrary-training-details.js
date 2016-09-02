@@ -33,7 +33,7 @@
       },
 
       showLoginButton: {
-        type: Object,
+        type: Boolean,
         value: false
       },
 
