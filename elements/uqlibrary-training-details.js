@@ -14,8 +14,22 @@
       userAccount: {
         type: Object,
         value: function() {
-          return { hasSession: true };
-        }
+          return {
+            hasSession: true,
+            id: 'emjmalik'
+          };
+        },
+        observer: '_userAccountChanged'
+      },
+
+      registrationEmail: {
+        type: String,
+        value: 'training-events@library.uq.edu.au'
+      },
+
+      showRegistrationForNonUQ: {
+        type: Boolean,
+        value: true
       },
 
       showLoginButton: {
@@ -64,6 +78,7 @@
           }
       }
     },
+
     /**
      * Open event
      */
@@ -72,32 +87,36 @@
       window.open(this.event.link);
     },
 
+    _userAccountChanged: function(newValue, oldValue) {
+      console.log(this.userAccount);
+      this.showRegistrationForNonUQ = !this.userAccount || !this.userAccount.hasSession || (this.userAccount.id && this.userAccount.id.match(/^em/) !== null);
+      console.log(this.showRegistrationForNonUQ);
+    },
+
+    /*
+    * sendEmail - prepopulates email body with event details and user details (if available)
+    *
+    * */
     sendEmail: function(e) {
+      var mailText = 'mailto:' + this.registrationEmail + '?';
+      mailText += '&subject=Expression of interest for event';
+      mailText += '&body=Hi, \nI\'d like to participate in the following training event: \n\n';
+      mailText += 'Event Id: ' + this.event.entityId + '\n';
+      mailText += 'Event Title: ' + this.event.name + '\n';
+      mailText += 'Event Date: ' + this._fullDate + ' at ' + this._startTime + ' (' + this.event.start + ')' + '\n';
+      mailText += 'Username: ' + (this.userAccount && this.userAccount.id ? this.userAccount.id : '') + '\n';
+      mailText += 'Name: ' + (this.userAccount && this.userAccount.name ? this.userAccount.name : '') + '\n';
+      mailText += 'Email: ' + (this.userAccount && this.userAccount.mail ? this.userAccount.mail : '') + '\n';
+      mailText += '\n\nThank you' + ',\n' + (this.userAccount && this.userAccount.name ? this.userAccount.name : '');
 
-      var trainingEvent = this.event;
+      window.location = encodeURI(mailText);
 
-      if (this.userAccount && this.userAccount.hasSession) {
-        //user is logged in, create email template
-        var mailText = 'mailto:training_events@library.uq.edu.au?';
-        mailText += '&subject=Expression of interest for event';
-        mailText += '&body=Hi, \nI\'d like to participate in the following training event: \n\n';
-        mailText += 'Event Id: ' + trainingEvent.entityId + '\n';
-        mailText += 'Event Title: ' + trainingEvent.name + '\n';
-        mailText += 'Event Date: ' + this._fullDate + ' at ' + this._startTime + ' (' + trainingEvent.start + ')' + '\n';
-        mailText += 'Username: ' + this.userAccount.id + '\n';
-        mailText += 'Name: ' + this.userAccount.name + '\n';
-        mailText += 'Email: ' + this.userAccount.mail + '\n';
-        mailText += '\n\nThank you' + ',\n' + this.userAccount.name;
-
-        window.location = encodeURI(mailText);
-
-      } else {
-        //user is not logged in, redirect to login page
-        var href = window.location.href;
-        if (href.indexOf('?') > 0)
-          href = href.substr(0, href.indexOf('?'));
-        this.$.accountApi.login(href + '?eventId=' + trainingEvent.entityId + '#' + trainingEvent.entityId);
-      }
+      //TODO: if will be required - make user login before sending an email
+      //user is not logged in, redirect to login page
+      // var href = window.location.href;
+      // if (href.indexOf('?') > 0)
+      //   href = href.substr(0, href.indexOf('?'));
+      // this.$.accountApi.login(href + '?eventId=' + trainingEvent.entityId);
 
     }
   });

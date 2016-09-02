@@ -38,7 +38,7 @@ Example:
     }
 
     paper-button {
-      margin-right: 20px;
+      margin: 16px;
       float: right;
     }
 
@@ -84,14 +84,16 @@ Example:
     </paper-icon-item>
 
     <!-- Display only if user is not logged in or user is non-UQ user -->
+    <template is="dom-if" if="[[showRegistrationForNonUQ]]">
     <paper-icon-item>
       <iron-icon item-icon icon="info-outline"></iron-icon>
       <paper-item-body>
-        <div class="title">Library member registration (for non-UQ students and staff)</div>
-        <a id$="event[[event.entityId]]" href="#" on-click="sendEmail">Send email</a> to training-events@library.uq.edu.au with your name and the event id ([[event.entityId]]), event name and date to reserve a place.
+        <div class="title">Library member registration</div>
+        For library members (non-UQ students and staff) <a id$="event[[event.entityId]]" href="#" on-click="sendEmail">send email</a> to [[registrationEmail]] with your name, event id ([[event.entityId]]), event name and date to reserve a place.
         We’ll email you a confirmation within 2 business days.
       </paper-item-body>
     </paper-icon-item>
+    </template>
 
     <!-- Display only if user is not logged in or user is UQ user -->
     <template is="dom-if" if="[[showLoginButton]]">

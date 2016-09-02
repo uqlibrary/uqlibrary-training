@@ -57,13 +57,16 @@ Example:
                 ga-app-name="[[_gaAppName]]"
                 events="[[_formattedEvents]]"
                 on-event-clicked="_eventClicked">
-            <paper-item class="header inverse">Upcoming training</paper-item>
+                <content>
+                    <paper-item class="header inverse">Upcoming training</paper-item>
+                </content>
             </uqlibrary-training-list>
+
             <uqlibrary-training-details
+                    show-login-button="true"
                 id="details"
                 ga-app-name="[[_gaAppName]]"
-                event="[[_selectedEvent]]"
-                on-show-list="_showList">
+                event="[[_selectedEvent]]">
                 <content>
                     <paper-item class="header inverse">
                         <paper-icon-button class="button-colored-theme arrow-back" icon="arrow-back" on-click="_showList" aria-label="Back to events list"></paper-icon-button>
@@ -71,6 +74,7 @@ Example:
                     </paper-item>
                 </content>
             </uqlibrary-training-details>
+
         </neon-animated-pages>
     </template>
     <script src="uqlibrary-training.js"></script>
