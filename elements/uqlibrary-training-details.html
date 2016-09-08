@@ -37,6 +37,10 @@ Example:
       padding: 16px;
     }
 
+    .training-event {
+      font-weight: bold;
+    }
+
     paper-button {
       margin: 16px;
       float: right;
@@ -89,8 +93,10 @@ Example:
         <iron-icon item-icon icon="info-outline"></iron-icon>
         <paper-item-body>
           <div class="title">Library member registration</div>
-          For library members (non-UQ students and staff) <a id$="event[[event.entityId]]" href="#" on-click="sendEmail">send email</a> to [[registrationEmail]] with your name, event id ([[event.entityId]]), event name and date to reserve a place.
-          We’ll email you a confirmation within 2 business days.
+          <div secondary class="body1">
+            Library members (non-UQ students and staff) <a id$="event[[event.entityId]]" href="#" on-click="sendEmail">send email</a> to <span class="training-event">[[registrationEmail]]</span> with your name, event id ([[event.entityId]]), event name and date to reserve a place.
+            We’ll email you a confirmation within 2 business days.
+          </div>
         </paper-item-body>
       </paper-icon-item>
     </template>
