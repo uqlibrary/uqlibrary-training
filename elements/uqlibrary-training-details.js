@@ -1,9 +1,12 @@
 (function () {
   Polymer({
     is: 'uqlibrary-training-details',
+
     properties: {
       /**
-       * Training event object
+       * event - object representing training event from CareerHub
+       *
+       * @type {Object}
        */
       event: {
         type: Object,
@@ -11,16 +14,21 @@
       },
 
       //TODO: pass user account from parent
+      /**
+       * userAccount - object of currently logged in user
+       *
+       * @type {Object}
+       */
       userAccount: {
-        type: Object,
-        value: function() {
-          return {
-            hasSession: true,
-            id: 'emjmalik'
-          };
+          type: Object,
+          value: function() {
+            return {
+              hasSession: true,
+              id: 'emjmalik'
+            };
+          },
+          observer: '_userAccountChanged'
         },
-        observer: '_userAccountChanged'
-      },
 
       registrationEmail: {
         type: String,
@@ -57,12 +65,16 @@
         type: String
       }
     },
+
     /**
-     * Called when the event object changes
+     * Observer handler for event object
      */
     _eventChanged: function () {
       // Set inner HTML. Only way to do this with Polymer
-      this.$.details.innerHTML = this.event.summary.replace('\n', '<br />');
+      this.$.summary.innerHTML = this.event.summary.replace('\n', '<br />');
+
+      if (this.showLoginButton)
+        this.$.details.innerHTML = this.event.details.replace('\n', '<br />');
 
       this._startTime = moment(this.event.start).format("h:mma");
       this._endTime = moment(this.event.end).format("h:mma");
@@ -80,18 +92,21 @@
     },
 
     /**
-     * Open event
+    * Observer handler for userAccount object
+    * */
+    _userAccountChanged: function(newValue, oldValue) {
+      this.showRegistrationForNonUQ = !this.userAccount || !this.userAccount.hasSession || (this.userAccount.id && this.userAccount.id.match(/^em/) !== null);
+    },
+
+    /**
+     * Navigate to event's page in career hub
      */
-    _openEvent: function () {
+    navigate: function () {
       this.$.ga.addEvent('Library Training link clicked', this.event.name);
       window.open(this.event.link);
     },
 
-    _userAccountChanged: function(newValue, oldValue) {
-      console.log(this.userAccount);
-      this.showRegistrationForNonUQ = !this.userAccount || !this.userAccount.hasSession || (this.userAccount.id && this.userAccount.id.match(/^em/) !== null);
-      console.log(this.showRegistrationForNonUQ);
-    },
+
 
     /*
     * sendEmail - prepopulates email body with event details and user details (if available)

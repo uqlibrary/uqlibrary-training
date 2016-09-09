@@ -19,62 +19,33 @@ Example:
             font-size: var(--body-font-size);
         }
 
-        #pages {
-            position: absolute;
-            top: 0;
-            right:0;
-            left:0;
-            bottom: 0;
-        }
-
-        uqlibrary-training-details .header {
-            background-color: var(--theme-color);
-            text-align: left;
-        }
-
-        uqlibrary-training-details .header span {
-            vertical-align: middle;
-        }
-
-        .arrow-back {
-            --paper-icon-button: {
-                border-radius: 50%;
-            };
+        uqlibrary-training-list-category,
+        uqlibrary-training-filter {
+            margin-bottom: 16px;
         }
     </style>
 
     <template>
-        <uqlibrary-api-training id="trainingApi"></uqlibrary-api-training>
+        <uqlibrary-api-training id="trainingApi" on-uqlibrary-api-training="_trainingDataLoaded"></uqlibrary-api-training>
         <uqlibrary-ga id="ga" app-name="[[_gaAppName]]"></uqlibrary-ga>
 
-        <neon-animated-pages
-                id="pages"
-                selected="{{_selectedPage}}"
-                entry-animation="[[_entryAnimation]]"
-                exit-animation="[[_exitAnimation]]">
-            <uqlibrary-training-list
-                id="list"
-                ga-app-name="[[_gaAppName]]"
-                events="[[_formattedEvents]]"
-                on-event-clicked="_eventClicked">
-                <content>
-                    <paper-item class="header inverse">Upcoming training</paper-item>
-                </content>
-            </uqlibrary-training-list>
+        <uqlibrary-training-filter
+                month-list="{{monthList}}"
+                campus-list="{{campusList}}"
+                filter-criteria="{{filterCriteria}}"
+                ga-app-name="[[_gaAppName]]"></uqlibrary-training-filter>
 
-            <uqlibrary-training-details
-                id="details"
-                ga-app-name="[[_gaAppName]]"
-                event="[[_selectedEvent]]">
-                <content>
-                    <paper-item class="header inverse">
-                        <paper-icon-button class="button-colored-theme arrow-back" icon="arrow-back" on-click="_showList" aria-label="Back to events list"></paper-icon-button>
-                        <span>Event details</span>
-                    </paper-item>
-                </content>
-            </uqlibrary-training-details>
+        <template is="dom-repeat" items="[[_trainingEventsByCategory]]" as="category">
 
-        </neon-animated-pages>
+        <uqlibrary-training-list-category
+            filter-criteria="{{filterCriteria}}"
+            category="[[category]]"
+            ga-app-name="[[_gaAppName]]">
+        </uqlibrary-training-list-category>
+
+        </template>
+
     </template>
+
     <script src="uqlibrary-training.js"></script>
 </dom-module>

@@ -57,6 +57,7 @@ Example:
       <h3 class="inverse">[[ event.name ]]</h3>
     </div>
 
+    <div id="summary" class="details body1"></div>
     <div id="details" class="details body1"></div>
 
     <!-- Date Range -->
@@ -104,7 +105,8 @@ Example:
     <!-- Display only if user is not logged in or user is UQ user -->
     <template is="dom-if" if="[[showLoginButton]]">
       <paper-button class="button-colored-accent">
-        <a href="https://careerhub.uq.edu.au/students/events/detail/[[event.entityId]]">
+        <!--TODO: navigate to careerhub - use JS -->
+        <a href$="[[event.link]]">
           Login and book
         </a>
       </paper-button>

@@ -18,6 +18,11 @@ Example:
     :host {
       font-family: var(--font-family);
       font-size: var(--body-font-size);
+
+      display: block;
+      position: relative;
+      box-sizing: border-box;
+
     }
 
     .card-active {
@@ -44,7 +49,7 @@ Example:
     }
 
     .event-date {
-      min-width: 120px;
+      min-width: 140px;
       cursor: default;
     }
 
@@ -60,10 +65,14 @@ Example:
 
     <paper-card heading="[[category.displayName]]">
 
-      <template is="dom-repeat" items="[[category.events]]" as="trainingEvent" filter="{{fitFilter()}}">
+      <template is="dom-repeat"
+                items="[[category.events]]"
+                as="trainingEvent"
+                filter="{{filterEvents(filterCriteria.keyword, filterCriteria.month, filterCriteria.campus)}}"
+                rendered-item-count="{{renderedCount}}">
 
         <paper-item on-click="toggle">
-          <div class="event-date">[[trainingEvent.formattedDate]]</div>
+          <div class="event-date">[[_formatDate(trainingEvent.start)]]</div>
           <div class="event-link flex"><a>[[trainingEvent.name]] ([[ trainingEvent.categories.campus ]])</a></div>
           <div class="event-show-indicator">
             <iron-icon class="down" icon="icons:arrow-drop-down"></iron-icon>
@@ -74,7 +83,6 @@ Example:
         <iron-collapse id$="collapse[[trainingEvent.entityId]]">
           <div class="card-active">
             <div class="card-content">
-
               <paper-card>
                 <uqlibrary-training-details event="[[trainingEvent]]" show-login-button="true">
                 </uqlibrary-training-details>
@@ -82,7 +90,13 @@ Example:
             </div>
           </div>
         </iron-collapse>
+      </template>
 
+
+      <template is="dom-if" if="{{!renderedCount}}">
+        <div class="card-content">
+        No events available
+        </div>
       </template>
 
     </paper-card>

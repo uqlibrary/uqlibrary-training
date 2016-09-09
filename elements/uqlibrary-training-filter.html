@@ -1,0 +1,85 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-training>` is a simple element that displays training events for a given filter ID
+
+Example:
+
+    <uqlibrary-training auto-load="true"></uqlibrary-training>
+
+@demo
+
+@demo demo/index.html Demo of the Full view
+-->
+<dom-module id="uqlibrary-training-filter">
+
+    <style is="custom-style" include="common-styles">
+        :host {
+            font-family: var(--font-family);
+            font-size: var(--body-font-size);
+
+            display: block;
+            position: relative;
+            box-sizing: border-box;
+
+        }
+
+        paper-card {
+            width: 100%;
+        }
+
+        .card-content {
+            @apply(--layout-horizontal);
+        }
+        /* TODO: more styling */
+        .card-content div {
+            padding-left: 16px;
+            @apply(--layout-flex);
+        }
+
+    </style>
+
+    <template>
+        <uqlibrary-ga id="ga" app-name="[[_gaAppName]]"></uqlibrary-ga>
+
+        <paper-card heading="Filter events">
+            <div class="card-content">
+
+                <div>
+                    <paper-input id="inputKeyword" aria-label="filter by keyword" label="By keyword" value="{{searchString}}"></paper-input>
+                </div>
+
+                <div>
+                    <!--todo: index to campus/month value -->
+                    <paper-dropdown-menu label="By campus" aria-label="filter by campus">
+                        <paper-listbox class="dropdown-content" selected="{{campusIndex}}">
+                            <paper-item label="All locations" aria-label="All locations" role="option">All locations</paper-item>
+                            <template is="dom-repeat" items="{{campusList}}">
+                                <paper-item label="[[item]]" aria-label="[[item]]" role="option">[[item]]</paper-item>
+                            </template>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
+                </div>
+
+                <div>
+                    <paper-dropdown-menu label="By month" aria-label="filter by month" selectedItem="{{searchMonth}}">
+                        <paper-menu class="dropdown-content">
+                            <paper-item label="All available" aria-label="All available" role="option">All available</paper-item>
+                            <template is="dom-repeat" items="{{monthList}}">
+                                <paper-item label="[[item]]" aria-label="[[item]]" role="option">[[item]]</paper-item>
+                            </template>
+                        </paper-menu>
+                    </paper-dropdown-menu>
+                </div>
+
+            </div>
+            <div class="card-action">
+                <paper-button>Clear filter</paper-button>
+            </div>
+
+        </paper-card>
+
+    </template>
+
+    <script src="uqlibrary-training-filter.js"></script>
+</dom-module>

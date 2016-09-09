@@ -1,7 +1,10 @@
 (function () {
   Polymer({
+
     is: 'uqlibrary-training',
+
     properties: {
+
       /**
        * List of all events (raw)
        */
@@ -9,13 +12,37 @@
         type: Array,
         observer: "_eventsChanged"
       },
-      /**
-       * List of all formatted events
-       */
-      _formattedEvents: {
-        type: Array,
-        notify: true
+
+      filterCriteria: {
+        type: Object,
+        value: function () {
+          return {
+            keyword: '',
+            month: '',
+            campus: ''
+          };
+        }
       },
+
+      searchString: {
+        type: String,
+        observer: "_searchStringChanged"
+      },
+
+      searchMonth: {
+        type: String,
+        observer: "_searchMonthChanged"
+      },
+
+      searchCampus: {
+        type: String,
+        observer: "_searchCampusChanged"
+      },
+
+      _trainingEventsByCategory: {
+        type: Array
+      },
+
       /**
        * Autoloads the training links from the API
        * @type {Boolean}
@@ -24,70 +51,76 @@
         type: Object,
         value: true
       },
+
       /**
        * Prefix for the google analytics category name. For example: "Home page"
+       * @type {String}
        */
       gaCategoryPrefix: {
         type: String,
         value: '',
         observer: '_gaCategoryPrefixChanged'
       },
+
       /**
-       * Holds the Google Analytics app name of this component
+       * Google Analytics app name of this component
+       * @type {String}
        */
       _gaAppName: {
         type: String,
         value: ''
       },
+
       /**
-       * Specifies filter id
+       * Value of filter to extract data from career hub
+       * @type {Number}
        */
       filterId: {
         type: Number,
         value: 107
       },
+
       /**
        * Specifies number of items to fetch
+       * @type {Number}
        */
       take: {
         type: Number,
         value: 5
       },
+
       /**
-       * Entry animation
+       * Specifies list of campuses, auto populated from api
+       * @type {Array}
        */
-      _entryAnimation: {
-        type: String,
-        value: 'slide-from-right-animation'
+      campusList: {
+        type: Array
       },
+
       /**
-       * Exit animation
+       * Specifies list of event months, auto populated from api
+       * @type {Array}
        */
-      _exitAnimation: {
-        type: String,
-        value: 'slide-left-animation'
-      },
-      /**
-       * Selected page
-       */
-      _selectedPage: {
-        type: Number,
-        value: 0
-      },
-      /**
-       * Selected event
-       */
-      _selectedEvent: {
-        type: Object
+      monthList : {
+        type: Array
       }
+
     },
+
+    _searchStringChanged: function() {
+      this.set('filterCriteria.keyword', this.searchString);
+    },
+
+    _searchMonthChanged: function() {
+      this.set('filterCriteria.month', this.searchMonth);
+    },
+
+    _searchCampusChanged: function() {
+      this.set('filterCriteria.campus', this.searchCampus);
+    },
+
     ready: function () {
       var self = this;
-
-      // Setup event listener for Training
-      this.$.trainingApi.addEventListener('uqlibrary-api-training', function (e) {
-        self.events = e.detail;
-      });
 
       // Fetch hours
       if (this.autoLoad) {
@@ -97,26 +130,94 @@
         });
       }
     },
+
     /**
-     * Resets the element to the first tab
+     * Event handler for training api call
+     * @private
      */
-    reset: function () {
-      this._selectedPage = 0;
+    _trainingDataLoaded: function(event) {
+      this.events = event.detail;
     },
-    /** Parses and formats the JSON array when hours has updated */
-    _eventsChanged: function () {
-      events = this.events;
-      for (var i = 0; i < events.length; i++) {
-        events[i].startDayWeek = moment(events[i].start).format("ddd");
-        events[i].startDay = moment(events[i].start).format("D");
-        events[i].startMonth = moment(events[i].start).format("MMM");
-        events[i].startTime = moment(events[i].start).format("h:mma");
-        events[i].link = 'https://careerhub.uq.edu.au/students/events/detail/' + events[i].entityId;
+
+    /**
+     * Observer handler for events array
+     * @private
+     */
+    _eventsChanged: function() {
+      this._processData(this.events);
+    },
+
+    /**
+     * Processes raw data from events, extracts months/campuses/categories(labels)
+     * @private
+     */
+    _processData: function (events) {
+
+      var processedEvents = [];
+      var categories = [];
+      var campuses = [];
+      var months = [];
+
+      for(var eventIndex = 0; eventIndex < events.length; eventIndex++){
+        var event = events[eventIndex];
+
+        //if event doesn't have a category, put it into category 'Other'
+        if (!event.labels) {
+          event.labels = [{ id: '0', name: 'Other'}];
+        }
+
+        //set up all categories
+        if (event.labels) {
+          for(var labelIndex = 0; labelIndex < event.labels.length; labelIndex++) {
+            var category = event.labels[labelIndex];
+
+            var catIndex = categories.indexOf(category.id);
+
+            if (catIndex < 0) {
+              category.events = [];
+              category.displayName = category.name.replace(/.*\./ , '');
+              processedEvents.push(category);
+
+              categories.push(category.id);
+              catIndex = categories.length - 1;
+            }
+
+            if (!category.events) {
+              category = processedEvents[catIndex];
+            }
+
+            //create display string for start date
+            var startDate = new Date(event.start);
+            event.formattedDate = moment(event.start).format('ddd D MMM YYYY');
+            event.link = 'https://careerhub.uq.edu.au/students/events/detail/' + event.entityId;;
+
+            //add this event to the category
+            category.events.push(event);
+          }
+        }
+
+        //setup all campuses
+        if (event.categories && event.categories.campus) {
+          for(var index=0; index < event.categories.campus.length; index++) {
+            var campus = event.categories.campus[index];
+            if (campuses.indexOf(campus) < 0) {
+              campuses.push(campus);
+            }
+          }
+        }
+
+        //setup all event months
+        var monthName = moment(event.start).format('MMMM');
+        if (months.indexOf(monthName) < 0) {
+          months.push(monthName);
+        }
       }
 
-      this._formattedEvents = events;
-      this.fire('uqlibrary-training-loaded');
+      this._trainingEventsByCategory = processedEvents;
+      this.campusList = campuses;
+      this.monthList = months;
     },
+
     /**
      * Sets the Google Analytics app name
      * @private
@@ -124,34 +225,12 @@
     _gaCategoryPrefixChanged: function () {
       this._gaAppName = (this.gaCategoryPrefix ? this.gaCategoryPrefix + ' Training' : 'Training');
     },
+
     /**
      * Called when an event is clicked on the list page
      * @param e
      */
     _eventClicked: function (e) {
-      this._selectedEvent = e.detail;
-      this._switchToPage(1);
-    },
-    /**
-     * Called when a user closes the details view
-     */
-    _showList: function () {
-      this._switchToPage(0);
-    },
-    /**
-     * Changes animation and changes page
-     * @param requestedPage
-     */
-    _switchToPage: function (requestedPage) {
-      if (requestedPage > this._selectedPage) {
-        this._entryAnimation = 'slide-from-right-animation';
-        this._exitAnimation = 'slide-left-animation';
-      } else {
-        this._entryAnimation = 'slide-from-left-animation';
-        this._exitAnimation = 'slide-right-animation';
-      }
-
-      this._selectedPage = requestedPage;
     }
   });
 })();
