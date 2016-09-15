@@ -35,6 +35,7 @@ Example:
 
     .details {
       padding: 16px;
+      overflow: hidden;
     }
 
     .training-event {
@@ -76,6 +77,7 @@ Example:
       <paper-item-body>
         <div class="title">Location</div>
         <div secondary class="body1">[[ event.venue ]]</div>
+        <div secondary class="body1">[[ event.categories.campus ]]</div>
       </paper-item-body>
     </paper-icon-item>
 
@@ -95,8 +97,8 @@ Example:
         <paper-item-body>
           <div class="title">Library member registration</div>
           <div secondary class="body1">
-            Library members (non-UQ students and staff) <a id$="event[[event.entityId]]" href="#" on-click="sendEmail">send email</a> to <span class="training-event">[[registrationEmail]]</span> with your name, event id ([[event.entityId]]), event name and date to reserve a place.
-            We’ll email you a confirmation within 2 business days.
+            Non-UQ clients should <a id$="event[[event.entityId]]" href="#" on-click="sendEmail">submit an expression of interest</a> to attend the session, or send an email to <span class="training-event">[[registrationEmail]]</span>.
+            Please include the event id ([[event.entityId]]), title, date and time of the session and your name and contact details. We’ll email you a confirmation within 2 business days.
           </div>
         </paper-item-body>
       </paper-icon-item>

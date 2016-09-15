@@ -32,26 +32,21 @@
         }
       },
 
-      searchString: {
-        type: String,
-        observer: "_searchStringChanged"
-      },
-
-      searchMonth: {
-        type: String,
-        observer: "_searchMonthChanged"
-      },
-
-      searchCampus: {
-        type: String,
+      _selectedCampusIndex: {
+        type: Number,
         observer: "_searchCampusChanged"
+      },
+
+      _selectedMonthIndex: {
+        type: Number,
+        observer: "_searchMonthChanged"
       },
 
       /**
        * Google Analytics app name of this component
        * @type {String}
        */
-      _gaAppName: {
+      gaAppName: {
         type: String,
         value: ''
       },
@@ -74,28 +69,26 @@
 
     },
 
-    _searchStringChanged: function() {
-      this.set('filterCriteria.keyword', this.searchString);
+    _searchMonthChanged: function(newValue, oldValue) {
+      if (this._selectedMonthIndex > 0)
+        this.set('filterCriteria.month', this.monthList[newValue - 1]);
+      else
+        this.set('filterCriteria.month', '');
     },
 
-    _searchMonthChanged: function() {
-      console.log(this.searchMonth);
-      this.set('filterCriteria.month', this.searchMonth);
+    _searchCampusChanged: function(newValue, oldValue) {
+      if (this._selectedCampusIndex > 0)
+        this.set('filterCriteria.campus', this.campusList[newValue - 1]);
+      else
+        this.set('filterCriteria.campus', '');
     },
 
-    _searchCampusChanged: function() {
-      this.set('filterCriteria.campus', this.searchCampus);
+    _clearFilter: function(event) {
+      this.set('filterCriteria.keyword', '');
     },
 
     ready: function () {
-
-    },
-
-    /**
-     * Called when an event is clicked on the list page
-     * @param e
-     */
-    _eventClicked: function (e) {
     }
+
   });
 })();

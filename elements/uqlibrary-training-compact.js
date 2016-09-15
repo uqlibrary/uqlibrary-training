@@ -25,19 +25,11 @@
         value: true
       },
       /**
-       * Prefix for the google analytics category name. For example: "Home page"
-       */
-      gaCategoryPrefix: {
-        type: String,
-        value: '',
-        observer: '_gaCategoryPrefixChanged'
-      },
-      /**
        * Holds the Google Analytics app name of this component
        */
-      _gaAppName: {
+      gaAppName: {
         type: String,
-        value: ''
+        value: 'Training'
       },
       /**
        * Specifies filter id
@@ -116,13 +108,6 @@
 
       this._formattedEvents = events;
       this.fire('uqlibrary-training-loaded');
-    },
-    /**
-     * Sets the Google Analytics app name
-     * @private
-     */
-    _gaCategoryPrefixChanged: function () {
-      this._gaAppName = (this.gaCategoryPrefix ? this.gaCategoryPrefix + ' Training' : 'Training');
     },
     /**
      * Called when an event is clicked on the list page

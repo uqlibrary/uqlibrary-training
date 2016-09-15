@@ -21,7 +21,6 @@ Example:
             display: block;
             position: relative;
             box-sizing: border-box;
-
         }
 
         paper-card {
@@ -31,28 +30,57 @@ Example:
         .card-content {
             @apply(--layout-horizontal);
         }
-        /* TODO: more styling */
-        .card-content div {
+
+        paper-dropdown-menu {
+            width: 100%;
+        }
+
+        .card-content > div {
             padding-left: 16px;
             @apply(--layout-flex);
+        }
+
+        @media all and (max-width: 650px) {
+
+            .card-content {
+                @apply(--layout-vertical);
+                overflow: hidden;
+            }
+
+            .card-content > div {
+                @apply(--layout-flex-none);
+                padding: 0px;
+            }
+        }
+
+        paper-input paper-icon-button{
+            --paper-icon-button: {
+                padding: 0px;
+                width: 24px;
+                height: 24px;
+                color: #9b9b9b;
+            }
         }
 
     </style>
 
     <template>
-        <uqlibrary-ga id="ga" app-name="[[_gaAppName]]"></uqlibrary-ga>
+        <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
         <paper-card heading="Filter events">
             <div class="card-content">
 
                 <div>
-                    <paper-input id="inputKeyword" aria-label="filter by keyword" label="By keyword" value="{{searchString}}"></paper-input>
+                    <paper-input label="By keyword" aria-label="filter by keyword" id="inputKeyword" value="{{filterCriteria.keyword}}">
+                        <paper-icon-button suffix on-tap="_clearFilter" icon="clear" alt="clear" title="clear" aria-label="clear filter">
+                        </paper-icon-button>
+                    </paper-input>
+
                 </div>
 
                 <div>
-                    <!--todo: index to campus/month value -->
                     <paper-dropdown-menu label="By campus" aria-label="filter by campus">
-                        <paper-listbox class="dropdown-content" selected="{{campusIndex}}">
+                        <paper-listbox class="dropdown-content" selected="{{_selectedCampusIndex}}">
                             <paper-item label="All locations" aria-label="All locations" role="option">All locations</paper-item>
                             <template is="dom-repeat" items="{{campusList}}">
                                 <paper-item label="[[item]]" aria-label="[[item]]" role="option">[[item]]</paper-item>
@@ -62,21 +90,16 @@ Example:
                 </div>
 
                 <div>
-                    <paper-dropdown-menu label="By month" aria-label="filter by month" selectedItem="{{searchMonth}}">
-                        <paper-menu class="dropdown-content">
+                    <paper-dropdown-menu label="By month" aria-label="filter by month">
+                        <paper-listbox class="dropdown-content" selected="{{_selectedMonthIndex}}">
                             <paper-item label="All available" aria-label="All available" role="option">All available</paper-item>
                             <template is="dom-repeat" items="{{monthList}}">
                                 <paper-item label="[[item]]" aria-label="[[item]]" role="option">[[item]]</paper-item>
                             </template>
-                        </paper-menu>
+                        </paper-listbox>
                     </paper-dropdown-menu>
                 </div>
-
             </div>
-            <div class="card-action">
-                <paper-button>Clear filter</paper-button>
-            </div>
-
         </paper-card>
 
     </template>

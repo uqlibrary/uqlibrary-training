@@ -27,9 +27,10 @@
 
     filterEvents: function(keyword, month, campus) {
       return function(trainingEvent) {
+
         return (!keyword || trainingEvent.name.toLowerCase().indexOf(keyword) >= 0 || trainingEvent.details.toLowerCase().indexOf(keyword) >= 0)
-            && (!month || moment(trainingEvent.start).format("MMMM").toLowerCase().indexOf(month) >= 0)
-            && (!campus || trainingEvent.categories.campus.join(',').toLowerCase().indexOf(campus) >= 0);
+            && (!month || moment(trainingEvent.start).format("MMMM").toLowerCase().indexOf(month.toLowerCase()) >= 0)
+            && (!campus || trainingEvent.categories.campus.join(',').toLowerCase().indexOf(campus.toLowerCase()) >= 0);
       };
     },
 
@@ -38,19 +39,26 @@
     },
 
     toggle: function(event) {
-
       var toggleId = 'collapse' + event.model.trainingEvent.entityId;
+      var paperItemId = 'item' + event.model.trainingEvent.entityId;
 
       //close all other toggles
       var openedItems = this.querySelectorAll('.iron-collapse-opened');
       for(var index = 0; index < openedItems.length; index++) {
         var item = openedItems[index];
+        var currentPaperItemId = 'item' + item.getAttribute('data-id');
+
         //do not toggle current item
-        if (item.id.indexOf(toggleId) < 0)
+        if (item.id.indexOf(toggleId) < 0) {
           item.toggle();
+          this.querySelector('#' + currentPaperItemId + ' .up').toggleClass('hidden');
+          this.querySelector('#' + currentPaperItemId + ' .down').toggleClass('hidden');
+        }
       }
 
       this.querySelector('#' + toggleId).toggle();
+      this.querySelector('#' + paperItemId + ' .up').toggleClass('hidden');
+      this.querySelector('#' + paperItemId + ' .down').toggleClass('hidden');
     }
 
   });

@@ -24,25 +24,6 @@
         }
       },
 
-      searchString: {
-        type: String,
-        observer: "_searchStringChanged"
-      },
-
-      searchMonth: {
-        type: String,
-        observer: "_searchMonthChanged"
-      },
-
-      searchCampus: {
-        type: String,
-        observer: "_searchCampusChanged"
-      },
-
-      _trainingEventsByCategory: {
-        type: Array
-      },
-
       /**
        * Autoloads the training links from the API
        * @type {Boolean}
@@ -53,29 +34,19 @@
       },
 
       /**
-       * Prefix for the google analytics category name. For example: "Home page"
-       * @type {String}
-       */
-      gaCategoryPrefix: {
-        type: String,
-        value: '',
-        observer: '_gaCategoryPrefixChanged'
-      },
-
-      /**
        * Google Analytics app name of this component
        * @type {String}
        */
-      _gaAppName: {
+      gaAppName: {
         type: String,
-        value: ''
+        value: 'Training'
       },
 
       /**
        * Value of filter to extract data from career hub
        * @type {Number}
        */
-      filterId: {
+      eventFilterId: {
         type: Number,
         value: 107
       },
@@ -84,9 +55,13 @@
        * Specifies number of items to fetch
        * @type {Number}
        */
-      take: {
+      maxEventCount: {
         type: Number,
         value: 5
+      },
+
+      _trainingEventsByCategory: {
+        type: Array
       },
 
       /**
@@ -107,26 +82,14 @@
 
     },
 
-    _searchStringChanged: function() {
-      this.set('filterCriteria.keyword', this.searchString);
-    },
-
-    _searchMonthChanged: function() {
-      this.set('filterCriteria.month', this.searchMonth);
-    },
-
-    _searchCampusChanged: function() {
-      this.set('filterCriteria.campus', this.searchCampus);
-    },
-
     ready: function () {
       var self = this;
 
       // Fetch hours
       if (this.autoLoad) {
         this.$.trainingApi.get({
-          take: this.take,
-          filterIds: [ this.filterId ]
+          take: this.maxEventCount,
+          filterIds: [ this.eventFilterId ]
         });
       }
     },
@@ -216,14 +179,6 @@
       this._trainingEventsByCategory = processedEvents;
       this.campusList = campuses;
       this.monthList = months;
-    },
-
-    /**
-     * Sets the Google Analytics app name
-     * @private
-     */
-    _gaCategoryPrefixChanged: function () {
-      this._gaAppName = (this.gaCategoryPrefix ? this.gaCategoryPrefix + ' Training' : 'Training');
     },
 
     /**

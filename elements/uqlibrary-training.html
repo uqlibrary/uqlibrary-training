@@ -27,20 +27,20 @@ Example:
 
     <template>
         <uqlibrary-api-training id="trainingApi" on-uqlibrary-api-training="_trainingDataLoaded"></uqlibrary-api-training>
-        <uqlibrary-ga id="ga" app-name="[[_gaAppName]]"></uqlibrary-ga>
+        <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
         <uqlibrary-training-filter
                 month-list="{{monthList}}"
                 campus-list="{{campusList}}"
                 filter-criteria="{{filterCriteria}}"
-                ga-app-name="[[_gaAppName]]"></uqlibrary-training-filter>
+                ga-app-name="[[gaAppName]]"></uqlibrary-training-filter>
 
         <template is="dom-repeat" items="[[_trainingEventsByCategory]]" as="category">
 
         <uqlibrary-training-list-category
             filter-criteria="{{filterCriteria}}"
             category="[[category]]"
-            ga-app-name="[[_gaAppName]]">
+            ga-app-name="[[gaAppName]]">
         </uqlibrary-training-list-category>
 
         </template>

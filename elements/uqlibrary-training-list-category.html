@@ -22,7 +22,8 @@ Example:
       display: block;
       position: relative;
       box-sizing: border-box;
-
+      --paper-item-min-height: 48px;
+      --paper-item-body-two-line-min-height: 72px;
     }
 
     .card-active {
@@ -57,6 +58,31 @@ Example:
       cursor: default;
     }
 
+    paper-icon-item .content-icon {
+      display: none;
+    }
+
+    .event-line {
+      @apply(--layout-horizontal);
+      @apply(--layout-start-justified);
+      min-height: var(--paper-item-min-height);
+      line-height: var(--paper-item-min-height);
+    }
+
+    .event-line div {
+      @apply(--layout-start);
+    }
+
+    @media all and (max-width: 550px) {
+
+      .event-line {
+        @apply(--layout-vertical);
+        min-height: var(--paper-item-body-two-line-min-height);
+        line-height: 24px;
+      }
+
+    }
+
   </style>
 
   <template>
@@ -65,22 +91,33 @@ Example:
 
     <paper-card heading="[[category.displayName]]">
 
+      <template is="dom-if" if="{{renderedCount}}">
+        <div class="card-content">
+          [[renderedCount]] events available
+        </div>
+      </template>
+
       <template is="dom-repeat"
                 items="[[category.events]]"
                 as="trainingEvent"
                 filter="{{filterEvents(filterCriteria.keyword, filterCriteria.month, filterCriteria.campus)}}"
                 rendered-item-count="{{renderedCount}}">
 
-        <paper-item on-click="toggle">
-          <div class="event-date">[[_formatDate(trainingEvent.start)]]</div>
-          <div class="event-link flex"><a>[[trainingEvent.name]] ([[ trainingEvent.categories.campus ]])</a></div>
-          <div class="event-show-indicator">
-            <iron-icon class="down" icon="icons:arrow-drop-down"></iron-icon>
-          </div>
+        <paper-item on-click="toggle" id$="item[[trainingEvent.entityId]]">
+
+          <paper-item-body two-line class="event-line">
+            <div class="event-date">[[_formatDate(trainingEvent.start)]]</div>
+            <div><a>[[trainingEvent.name]] ([[ trainingEvent.categories.campus ]])</a></div>
+          </paper-item-body>
+
+
+          <iron-icon class="down" icon="icons:arrow-drop-down"></iron-icon>
+          <iron-icon class="up hidden" icon="icons:arrow-drop-up"></iron-icon>
+
           <paper-ripple></paper-ripple>
         </paper-item>
 
-        <iron-collapse id$="collapse[[trainingEvent.entityId]]">
+        <iron-collapse id$="collapse[[trainingEvent.entityId]]" data-id$="[[trainingEvent.entityId]]">
           <div class="card-active">
             <div class="card-content">
               <paper-card>
@@ -91,7 +128,6 @@ Example:
           </div>
         </iron-collapse>
       </template>
-
 
       <template is="dom-if" if="{{!renderedCount}}">
         <div class="card-content">

@@ -45,7 +45,7 @@ Example:
 
     <template>
         <uqlibrary-api-training id="trainingApi"></uqlibrary-api-training>
-        <uqlibrary-ga id="ga" app-name="[[_gaAppName]]"></uqlibrary-ga>
+        <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
         <neon-animated-pages
                 id="pages"
@@ -54,7 +54,7 @@ Example:
                 exit-animation="[[_exitAnimation]]">
             <uqlibrary-training-list
                 id="list"
-                ga-app-name="[[_gaAppName]]"
+                ga-app-name="[[gaAppName]]"
                 events="[[_formattedEvents]]"
                 on-event-clicked="_eventClicked">
                 <content>
@@ -64,7 +64,7 @@ Example:
 
             <uqlibrary-training-details
                 id="details"
-                ga-app-name="[[_gaAppName]]"
+                ga-app-name="[[gaAppName]]"
                 event="[[_selectedEvent]]">
                 <content>
                     <paper-item class="header inverse">
