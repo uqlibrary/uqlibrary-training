@@ -5,6 +5,11 @@
 
     properties: {
 
+      compactView: {
+        type: Object,
+        value: false
+      },
+
       /**
        * List of all events (raw)
        */
@@ -60,6 +65,15 @@
         value: 5
       },
 
+      userAccount: {
+        type: Object,
+        value: function() {
+          return {
+            hasSession: false
+          };
+        }
+      },
+
       _trainingEventsByCategory: {
         type: Array
       },
@@ -87,10 +101,32 @@
 
       // Fetch hours
       if (this.autoLoad) {
-        this.$.trainingApi.get({
-          take: this.maxEventCount,
-          filterIds: [ this.eventFilterId ]
-        });
+        this.$.accountApi.get();
+
+        var eventsFilterParameters = {};
+        if (this.maxEventCount > 0) {
+          eventsFilterParameters.take = this.maxEventCount;
+        }
+
+        if (this.eventFilterId > 0) {
+          eventsFilterParameters.filterIds = [ this.eventFilterId ];
+        }
+
+        this.$.trainingApi.get(eventsFilterParameters);
+      }
+    },
+
+    /*
+    * Event handler for user account api call
+    * @private
+    * */
+    _accountLoaded: function(response) {
+      if (response.detail.hasSession !== null && response.detail.hasSession) {
+        this.userAccount = response.detail;
+      } else {
+        this.userAccount = {
+          hasSession: false
+        };
       }
     },
 

@@ -3,26 +3,13 @@
     is: 'uqlibrary-training-list',
     properties: {
       events: {
-        type: Array,
-        observer: '_eventsChanged'
+        type: Array
       },
       gaAppName: {
         type: String
-      },
-      /**
-       * Specifies whether to show the backup links
-       */
-      _showBackupLinks: {
-        type: Boolean,
-        value: false
       }
     },
-    /**
-     * Called when the events array changes
-     */
-    _eventsChanged: function () {
-      this._showBackupLinks = (this.events.length === 0);
-    },
+
     /**
      * Called when a link is clicked
      * @param e
@@ -32,6 +19,7 @@
       this.$.ga.addEvent('Click', e.model.item.title);
       this.fire('event-clicked', e.model.item);
     },
+
     /**
      * Called when a backup link is clicked
      * @param e
@@ -44,6 +32,7 @@
         window.location = item.link;
       }
     },
+
     /**
      * These are the backup links. Saved in the JS to make it easier to minify.
      * @private

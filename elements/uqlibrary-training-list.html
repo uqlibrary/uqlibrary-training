@@ -58,7 +58,7 @@ Example:
     <paper-item class="header">Upcoming training</paper-item>
 
     <!-- Training events list -->
-    <template id="list" is="dom-repeat" items="[[events]]">
+    <template id="list" is="dom-repeat" items="[[events]]" rendered-item-count="{{renderedCount}}">
 
       <!-- Single Item -->
       <paper-icon-item on-click="_linkClicked"
@@ -79,7 +79,7 @@ Example:
 
     <!-- Backup list in case no result are found in the API -->
 
-    <template is="dom-if" if="[[_showBackupLinks]]">
+    <template is="dom-if" if="[[!renderedCount]]">
       <paper-item class="no-classes">
         <span>No classes scheduled, check back soon.</span>
       </paper-item>

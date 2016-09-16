@@ -23,29 +23,52 @@ Example:
         uqlibrary-training-filter {
             margin-bottom: 16px;
         }
+
+        paper-card {
+            width: 100%;
+        }
     </style>
 
     <template>
+        <uqlibrary-api-account id="accountApi" on-uqlibrary-api-account-loaded="_accountLoaded"></uqlibrary-api-account>
         <uqlibrary-api-training id="trainingApi" on-uqlibrary-api-training="_trainingDataLoaded"></uqlibrary-api-training>
         <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
-        <uqlibrary-training-filter
-                month-list="{{monthList}}"
-                campus-list="{{campusList}}"
+        <template is="dom-if" if="{{!compactView}}">
+            <uqlibrary-training-filter
+                    month-list="{{monthList}}"
+                    campus-list="{{campusList}}"
+                    filter-criteria="{{filterCriteria}}"
+                    ga-app-name="[[gaAppName]]"></uqlibrary-training-filter>
+
+            <template is="dom-repeat" items="[[_trainingEventsByCategory]]" as="category" rendered-item-count="{{renderedCount}}">
+
+            <uqlibrary-training-list-category
                 filter-criteria="{{filterCriteria}}"
-                ga-app-name="[[gaAppName]]"></uqlibrary-training-filter>
+                category="[[category]]"
+                ga-app-name="[[gaAppName]]"
+                user-account="[[userAccount]]">
+            </uqlibrary-training-list-category>
 
-        <template is="dom-repeat" items="[[_trainingEventsByCategory]]" as="category">
+            </template>
 
-        <uqlibrary-training-list-category
-            filter-criteria="{{filterCriteria}}"
-            category="[[category]]"
-            ga-app-name="[[gaAppName]]">
-        </uqlibrary-training-list-category>
-
+            <template is="dom-if" if="{{!renderedCount}}">
+                <paper-card>
+                    <div class="card-content">
+                        No events available
+                    </div>
+                </paper-card>
+            </template>
         </template>
 
-    </template>
+        <template is="dom-if" if="{{compactView}}">
+            <uqlibrary-training-compact
+                    ga-app-name="[[gaAppName]]"
+                    user-account="[[userAccount]]"
+                    events="[[events]]"></uqlibrary-training-compact>
+        </template>
+
+        </template>
 
     <script src="uqlibrary-training.js"></script>
 </dom-module>

@@ -10,21 +10,6 @@
         observer: "_eventsChanged"
       },
       /**
-       * List of all formatted events
-       */
-      _formattedEvents: {
-        type: Array,
-        notify: true
-      },
-      /**
-       * Autoloads the training links from the API
-       * @type {Boolean}
-       */
-      autoLoad: {
-        type: Object,
-        value: true
-      },
-      /**
        * Holds the Google Analytics app name of this component
        */
       gaAppName: {
@@ -32,18 +17,22 @@
         value: 'Training'
       },
       /**
-       * Specifies filter id
-       */
-      filterId: {
-        type: Number,
-        value: 107
+      * Holds current user account details
+      * */
+      userAccount: {
+        type: Object,
+        value: function() {
+          return {
+            hasSession: false
+          };
+        }
       },
       /**
-       * Specifies number of items to fetch
+       * List of all formatted events
        */
-      take: {
-        type: Number,
-        value: 5
+      _formattedEvents: {
+        type: Array,
+        notify: true
       },
       /**
        * Entry animation
@@ -74,20 +63,7 @@
       }
     },
     ready: function () {
-      var self = this;
 
-      // Setup event listener for Training
-      this.$.trainingApi.addEventListener('uqlibrary-api-training', function (e) {
-        self.events = e.detail;
-      });
-
-      // Fetch hours
-      if (this.autoLoad) {
-        this.$.trainingApi.get({
-          take: this.take,
-          filterIds: [ this.filterId ]
-        });
-      }
     },
     /**
      * Resets the element to the first tab
@@ -95,9 +71,12 @@
     reset: function () {
       this._selectedPage = 0;
     },
-    /** Parses and formats the JSON array when hours has updated */
+
+    /**
+     * Parses and formats the JSON array when hours has updated
+     * */
     _eventsChanged: function () {
-      events = this.events;
+      var events = this.events;
       for (var i = 0; i < events.length; i++) {
         events[i].startDayWeek = moment(events[i].start).format("ddd");
         events[i].startDay = moment(events[i].start).format("D");
@@ -107,8 +86,8 @@
       }
 
       this._formattedEvents = events;
-      this.fire('uqlibrary-training-loaded');
     },
+
     /**
      * Called when an event is clicked on the list page
      * @param e
@@ -117,12 +96,14 @@
       this._selectedEvent = e.detail;
       this._switchToPage(1);
     },
+
     /**
      * Called when a user closes the details view
      */
     _showList: function () {
       this._switchToPage(0);
     },
+
     /**
      * Changes animation and changes page
      * @param requestedPage
