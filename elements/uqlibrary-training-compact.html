@@ -27,6 +27,11 @@ Example:
             bottom: 0;
         }
 
+        uqlibrary-training-details {
+            --display-event-details: none;
+            --display-event-summary: block;
+        }
+
         uqlibrary-training-details .header {
             background-color: var(--theme-color);
             text-align: left;
@@ -41,6 +46,14 @@ Example:
                 border-radius: 50%;
             };
         }
+
+        uqlibrary-training-list {
+            --paper-item-height: {
+                min-height: 30px;
+                border-bottom: 1px solid #e8e8e8;
+            }
+        }
+
     </style>
 
     <template>

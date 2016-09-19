@@ -82,7 +82,6 @@
         events[i].startDay = moment(events[i].start).format("D");
         events[i].startMonth = moment(events[i].start).format("MMM");
         events[i].startTime = moment(events[i].start).format("h:mma");
-        events[i].link = 'https://careerhub.uq.edu.au/students/events/detail/' + events[i].entityId;
       }
 
       this._formattedEvents = events;
@@ -102,6 +101,7 @@
      */
     _showList: function () {
       this._switchToPage(0);
+      this.fire('show-list');
     },
 
     /**

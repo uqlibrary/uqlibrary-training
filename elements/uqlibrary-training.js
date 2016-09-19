@@ -57,6 +57,15 @@
       },
 
       /**
+      * Specifies url of event in CareerHub/StudentHub
+       * @type {String}
+      * */
+      parentUrl: {
+        type: String,
+        value: 'https://careerhub.uq.edu.au/students/events/detail/'
+      },
+
+      /**
        * Specifies number of items to fetch
        * @type {Number}
        */
@@ -188,7 +197,7 @@
             //create display string for start date
             var startDate = new Date(event.start);
             event.formattedDate = moment(event.start).format('ddd D MMM YYYY');
-            event.link = 'https://careerhub.uq.edu.au/students/events/detail/' + event.entityId;;
+            event.link = this.parentUrl + event.entityId;;
 
             //add this event to the category
             category.events.push(event);

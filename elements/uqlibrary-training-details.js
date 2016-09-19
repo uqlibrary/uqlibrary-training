@@ -13,7 +13,6 @@
         observer: '_eventChanged'
       },
 
-      //TODO: pass user account from parent
       /**
        * userAccount - object of currently logged in user
        *
@@ -23,8 +22,8 @@
           type: Object,
           value: function() {
             return {
-              hasSession: true,
-              id: 'emjmalik'
+              hasSession: false,
+              id: ''
             };
           },
           observer: '_userAccountChanged'
@@ -32,7 +31,7 @@
 
       registrationEmail: {
         type: String,
-        value: 'training-events@library.uq.edu.au'
+        value: 'training@library.uq.edu.au'
       },
 
       showRegistrationForNonUQ: {

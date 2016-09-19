@@ -38,6 +38,14 @@ Example:
       overflow: hidden;
     }
 
+    #summary {
+      display: var(--display-event-summary, none);
+    }
+
+    #details {
+      display: var(--display-event-details, block);
+    }
+
     .training-event {
       font-weight: bold;
     }
@@ -97,6 +105,8 @@ Example:
         <paper-item-body>
           <div class="title">Library member registration</div>
           <div secondary class="body1">
+            Email <a id$="event[[event.entityId]]" href="#" on-click="sendEmail">[[registrationEmail]]</a> with your name, UQ username, and the event name and date to reserve a place. We’ll email you a confirmation within 2 business days.
+
             Non-UQ clients should <a id$="event[[event.entityId]]" href="#" on-click="sendEmail">submit an expression of interest</a> to attend the session, or send an email to <span class="training-event">[[registrationEmail]]</span>.
             Please include the event id ([[event.entityId]]), title, date and time of the session and your name and contact details. We’ll email you a confirmation within 2 business days.
           </div>
