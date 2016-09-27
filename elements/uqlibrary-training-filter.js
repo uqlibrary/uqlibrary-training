@@ -69,14 +69,28 @@
 
     },
 
+    observers: [
+      '_searchKeywordChanged(filterCriteria.keyword)'
+    ],
+
     _searchMonthChanged: function(newValue, oldValue) {
+      this.$.ga.addEvent("filter", 'by month');
+
       if (this._selectedMonthIndex > 0)
         this.set('filterCriteria.month', this.monthList[newValue - 1]);
       else
         this.set('filterCriteria.month', '');
     },
 
+    _searchKeywordChanged: function(newValue, oldValue) {
+      if (newValue !== null && typeof(newValue) !== undefined && newValue !== '') {
+        this.$.ga.addEvent("filter", 'by keyword');
+      }
+    },
+
     _searchCampusChanged: function(newValue, oldValue) {
+      this.$.ga.addEvent("filter", 'by campus');
+
       if (this._selectedCampusIndex > 0)
         this.set('filterCriteria.campus', this.campusList[newValue - 1]);
       else
@@ -84,6 +98,8 @@
     },
 
     _clearFilter: function(event) {
+      this.$.ga.addEvent("filter", 'clear filter');
+
       this.set('filterCriteria.keyword', '');
     },
 

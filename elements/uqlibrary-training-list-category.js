@@ -57,6 +57,11 @@
       }
 
       this.querySelector('#' + toggleId).toggle();
+
+      if (this.querySelector('#' + toggleId).opened) {
+        this.$.ga.addEvent('view event');
+      }
+
       this.querySelector('#' + paperItemId + ' .up').toggleClass('hidden');
       this.querySelector('#' + paperItemId + ' .down').toggleClass('hidden');
     }

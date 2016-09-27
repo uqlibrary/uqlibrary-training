@@ -79,7 +79,7 @@ Example:
                 </div>
 
                 <div>
-                    <paper-dropdown-menu label="By campus" aria-label="filter by campus">
+                    <paper-dropdown-menu label="By campus" aria-label="filter by campus" id="campusDropdown">
                         <paper-listbox class="dropdown-content" selected="{{_selectedCampusIndex}}">
                             <paper-item label="All locations" aria-label="All locations" role="option">All locations</paper-item>
                             <template is="dom-repeat" items="{{campusList}}">
@@ -90,7 +90,7 @@ Example:
                 </div>
 
                 <div>
-                    <paper-dropdown-menu label="By month" aria-label="filter by month">
+                    <paper-dropdown-menu label="By month" aria-label="filter by month" id="monthDropdown">
                         <paper-listbox class="dropdown-content" selected="{{_selectedMonthIndex}}">
                             <paper-item label="All available" aria-label="All available" role="option">All available</paper-item>
                             <template is="dom-repeat" items="{{monthList}}">

@@ -90,7 +90,7 @@ Example:
     </paper-icon-item>
 
     <!-- Registration -->
-    <paper-icon-item>
+    <paper-icon-item id="registrationItem">
       <iron-icon item-icon icon="notification:event-available"></iron-icon>
       <paper-item-body>
         <div class="title">Registration</div>
@@ -113,11 +113,8 @@ Example:
 
     <!-- Display only if user is not logged in or user is UQ user -->
     <template is="dom-if" if="[[showLoginButton]]">
-      <paper-button class="button-colored-accent">
-        <!--TODO: navigate to careerhub - use JS -->
-        <a href$="[[event.link]]">
+      <paper-button id="loginButton" class="button-colored-accent" on-click="navigate">
           Login and book
-        </a>
       </paper-button>
     </template>
 

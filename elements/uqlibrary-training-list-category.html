@@ -92,7 +92,7 @@ Example:
     <paper-card heading="[[category.displayName]]">
 
       <template is="dom-if" if="{{renderedCount}}">
-        <div class="card-content">
+        <div class="card-content count-events">
           [[renderedCount]] events available
         </div>
       </template>
@@ -122,6 +122,7 @@ Example:
             <div class="card-content">
               <paper-card>
                 <uqlibrary-training-details
+                        ga-app-name="[[gaAppName]]"
                         user-account="[[userAccount]]"
                         event="[[trainingEvent]]"
                         show-login-button="true">
@@ -133,7 +134,7 @@ Example:
       </template>
 
       <template is="dom-if" if="{{!renderedCount}}">
-        <div class="card-content">
+        <div class="card-content no-events">
         No events available
         </div>
       </template>

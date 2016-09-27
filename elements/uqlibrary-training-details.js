@@ -101,17 +101,17 @@
      * Navigate to event's page in career hub
      */
     navigate: function () {
-      this.$.ga.addEvent('Library Training link clicked', this.event.name);
+      this.$.ga.addEvent('navigate to studenthub');
       window.open(this.event.link);
     },
-
-
 
     /*
     * sendEmail - prepopulates email body with event details and user details (if available)
     *
     * */
     sendEmail: function(e) {
+      this.$.ga.addEvent('submit EOI');
+
       var mailText = 'mailto:' + this.registrationEmail + '?';
       mailText += '&subject=Expression of interest for event';
       mailText += '&body=Hi, \nI\'d like to participate in the following training event: \n\n';
@@ -124,14 +124,6 @@
       mailText += '\n\nThank you' + ',\n' + (this.userAccount && this.userAccount.name ? this.userAccount.name : '');
 
       window.location = encodeURI(mailText);
-
-      //TODO: if will be required - make user login before sending an email
-      //user is not logged in, redirect to login page
-      // var href = window.location.href;
-      // if (href.indexOf('?') > 0)
-      //   href = href.substr(0, href.indexOf('?'));
-      // this.$.accountApi.login(href + '?eventId=' + trainingEvent.entityId);
-
     }
   });
 })();

@@ -53,7 +53,7 @@
        */
       eventFilterId: {
         type: Number,
-        value: 107
+        value: 104
       },
 
       /**
@@ -62,7 +62,7 @@
       * */
       parentUrl: {
         type: String,
-        value: 'https://careerhub.uq.edu.au/students/events/detail/'
+        value: 'https://studenthub.uq.edu.au/students/events/detail/'
       },
 
       /**
@@ -106,9 +106,7 @@
     },
 
     ready: function () {
-      var self = this;
 
-      // Fetch hours
       if (this.autoLoad) {
         this.$.accountApi.get();
 
@@ -123,6 +121,7 @@
 
         this.$.trainingApi.get(eventsFilterParameters);
       }
+
     },
 
     /*
@@ -222,6 +221,7 @@
       }
 
       this._trainingEventsByCategory = processedEvents;
+      console.log(processedEvents);
       this.campusList = campuses;
       this.monthList = months;
     },

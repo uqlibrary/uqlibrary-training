@@ -6,8 +6,7 @@
        * List of all events (raw)
        */
       events: {
-        type: Array,
-        observer: "_eventsChanged"
+        type: Array
       },
       /**
        * Holds the Google Analytics app name of this component
@@ -26,13 +25,6 @@
             hasSession: false
           };
         }
-      },
-      /**
-       * List of all formatted events
-       */
-      _formattedEvents: {
-        type: Array,
-        notify: true
       },
       /**
        * Entry animation
@@ -70,21 +62,6 @@
      */
     reset: function () {
       this._selectedPage = 0;
-    },
-
-    /**
-     * Parses and formats the JSON array when hours has updated
-     * */
-    _eventsChanged: function () {
-      var events = this.events;
-      for (var i = 0; i < events.length; i++) {
-        events[i].startDayWeek = moment(events[i].start).format("ddd");
-        events[i].startDay = moment(events[i].start).format("D");
-        events[i].startMonth = moment(events[i].start).format("MMM");
-        events[i].startTime = moment(events[i].start).format("h:mma");
-      }
-
-      this._formattedEvents = events;
     },
 
     /**

@@ -62,7 +62,7 @@ Example:
     <paper-item class="header">Upcoming training</paper-item>
 
     <!-- Training events list -->
-    <template id="list" is="dom-repeat" items="[[events]]" rendered-item-count="{{renderedCount}}">
+    <template id="list" is="dom-repeat" items="[[_formattedEvents]]" rendered-item-count="{{renderedCount}}">
 
       <!-- Single Item -->
       <paper-icon-item on-click="_linkClicked"

@@ -3,11 +3,24 @@
     is: 'uqlibrary-training-list',
     properties: {
       events: {
-        type: Array
+        type: Array,
+        observer: "_eventsChanged"
       },
       gaAppName: {
         type: String
       }
+    },
+
+    _eventsChanged: function () {
+      var events = this.events;
+      for (var i = 0; i < events.length; i++) {
+        events[i].startDayWeek = moment(events[i].start).format("ddd");
+        events[i].startDay = moment(events[i].start).format("D");
+        events[i].startMonth = moment(events[i].start).format("MMM");
+        events[i].startTime = moment(events[i].start).format("h:mma");
+      }
+
+      this._formattedEvents = events;
     },
 
     /**
@@ -16,7 +29,7 @@
      * @private
      */
     _linkClicked: function (e) {
-      this.$.ga.addEvent('Click', e.model.item.title);
+      this.$.ga.addEvent('show event details');
       this.fire('event-clicked', e.model.item);
     },
 
@@ -28,7 +41,7 @@
     _backupLinkClicked: function (e) {
       var item = e.model.item || e.model.sub;
       if (item && item.link !== '') {
-        this.$.ga.addEvent('Library Training link clicked', item.name);
+        this.$.ga.addEvent('navigate to backup link');
         window.location = item.link;
       }
     },
@@ -58,28 +71,6 @@
               "name": "Law online tutorial",
               "description": "",
               "link": "https://web.library.uq.edu.au/library-services/training/law-online-tutorial"
-            }
-          ]
-        },
-        {
-          "name": "Library classes",
-          "description": "Book into in person training offered by the Library",
-          "link": "",
-          "items": [
-            {
-              "name": "Research skills",
-              "description": "",
-              "link": "https://www.library.uq.edu.au/training/#Research Skills"
-            },
-            {
-              "name": "EndNote",
-              "description": "",
-              "link": "https://www.library.uq.edu.au/training/#EndNote"
-            },
-            {
-              "name": "IT Training",
-              "description": "",
-              "link": "https://www.library.uq.edu.au/training/#General Classes"
             }
           ]
         },
