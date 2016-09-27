@@ -163,14 +163,14 @@
       setTimeout(function() {
         expect(element.querySelector('uqlibrary-training-filter')).not.to.be.null;
         done();
-      }, 10000000);
+      }, 20);
     });
 
     test('It should display no events message if no data is provided', function (done) {
       setTimeout(function() {
         expect(element.querySelector('.no-events')).not.to.be.null;
         done();
-      }, 10);
+      }, 20);
     });
 
     test('It should populate events if data is provided', function (done) {
@@ -180,7 +180,7 @@
         expect(element.querySelector('.no-events')).to.be.null;
         expect(element.querySelectorAll('uqlibrary-training-list-category').length).to.be.equal(2);
         done();
-      }, 10);
+      }, 20);
     });
 
     test('It should populate filter if data is provided', function (done) {
@@ -190,7 +190,7 @@
       expect(element.monthList.length).not.to.equal(0);
       expect(element.campusList.length).not.to.equal(0);
       done();
-    }, 10);
+    }, 20);
   });
 
   });

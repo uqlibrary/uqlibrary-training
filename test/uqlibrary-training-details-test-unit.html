@@ -66,13 +66,13 @@
     });
 
     test('It should display event title in details view', function (done) {
-//      setTimeout(function() {
-//      }, 100000);
+      setTimeout(function() {
 
-      expect(element.querySelector('.event-name .inverse')).not.to.be.null;
-      expect(element.querySelector('.event-name .inverse').innerHTML).to.be.equal(element.event.name);
+        expect(element.querySelector('.event-name .inverse')).not.to.be.null;
+        expect(element.querySelector('.event-name .inverse').innerHTML).to.be.equal(element.event.name);
 
-      done();
+        done();
+      }, 20);
 
     });
 
@@ -86,12 +86,14 @@
       setTimeout(function() {
         expect(element.querySelector('#loginButton')).not.to.be.null;
         done();
-      }, 10);
+      }, 20);
     });
 
     test('It should display registration text', function (done) {
-      expect(element.querySelector('#registrationItem .body1').innerHTML).to.be.equal(element._bookingText);
+      setTimeout(function() {
+        expect(element.querySelector('#registrationItem .body1').innerHTML).to.be.equal(element._bookingText);
       done();
+      }, 20);
     });
 
 
