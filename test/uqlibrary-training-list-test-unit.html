@@ -1,0 +1,84 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>uql-ia-button</title>
+
+  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
+  <link rel="import" href="../../test-fixture/test-fixture.html">
+
+  <!-- Import the element to test -->
+  <link rel="import" href="../elements/uqlibrary-training-list.html">
+
+</head>
+<body>
+
+<test-fixture id="list">
+  <template>
+    <uqlibrary-training-list></uqlibrary-training-list>
+  </template>
+</test-fixture>
+
+<script>
+
+
+  suite('<uqlibrary-training-list> tests', function () {
+    var element;
+
+    setup(function () {
+      element = fixture('list');
+      element.events = [];
+    });
+
+    test('It should display default events when there are no upcoming events', function (done) {
+      setTimeout(function() {
+        expect(element.querySelector('.header')).not.to.be.null;
+        expect(element.querySelector('.header').innerText).to.be.equal('Upcoming training');
+        expect(element.querySelector('.no-classes')).not.to.be.null;
+        expect(element.querySelector('#backuplist')).not.to.be.null;
+        done();
+      }, 10);
+    });
+
+    test('It should display events', function (done) {
+      element.events = [
+              {
+                "entityId": 460367,
+                "created": "2016-07-05T12:40:27.387+10:00",
+                "updated": "2016-07-05T12:40:27.387+10:00",
+                "name": "The Assignment Writing Process",
+                "start": "2016-07-25T13:00:00+10:00",
+                "end": "2016-07-25T14:00:00+10:00",
+                "publish": "2016-06-17T00:00:00+10:00",
+                "expire": "2016-07-25T14:00:00+10:00",
+                "summary": "Gain a better understanding of the assignment writing process, as well as strategies to conduct research and write assignments that are well structured and clearly organised.",
+                "details": "Gain a better understanding of the assignment writing process, as well as strategies to conduct research and write assignments that are well structured and clearly organised.",
+                "venue": "Building 12, Lvl 4, Room 401",
+                "categories": {
+                  "eventType": "Undergraduate Student Events",
+                  "campus": [
+                    "St Lucia"
+                  ]
+                }
+      }];
+
+      setTimeout(function() {
+
+        expect(element.querySelectorAll('paper-icon-item').length).to.be.equal(1);
+        expect(element.querySelector('.no-classes')).to.be.null;
+        expect(element.querySelector('#backuplist')).to.be.null;
+
+        done();
+
+      }, 10);
+
+    });
+
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-training-details>` is a simple element that displays the details of a training event
+
+Example:
+
+    <uqlibrary-training-details event="{{event}}"></uqlibrary-training-details>
+
+@demo
+
+@demo demo/index.html Demo of the Full view
+-->
+<dom-module id="uqlibrary-training-details">
+
+  <style is="custom-style" include="common-styles">
+    :host {
+      font-family: var(--font-family);
+      font-size: var(--body-font-size);
+    }
+
+    .event-name {
+      background-color: var(--theme-color-lighter);
+      padding: 16px;
+    }
+
+    paper-icon-item {
+      font-size: var(--body-font-size);
+      padding: 16px;
+
+      --paper-item-icon: {
+        min-width: 56px;
+      }
+    }
+
+    .details {
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    #summary {
+      display: var(--display-event-summary, none);
+    }
+
+    #details {
+      display: var(--display-event-details, block);
+    }
+
+    .training-event {
+      font-weight: bold;
+    }
+
+    paper-button {
+      margin: 16px;
+      float: right;
+    }
+
+  </style>
+
+  <template>
+    <content></content>
+
+    <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
+
+    <div class="event-name">
+      <h3 class="inverse">[[ event.name ]]</h3>
+    </div>
+
+    <div id="summary" class="details body1"></div>
+    <div id="details" class="details body1"></div>
+
+    <!-- Date Range -->
+    <paper-icon-item>
+      <iron-icon item-icon icon="date-range"></iron-icon>
+      <paper-item-body two-line>
+        <div class="title">Date</div>
+        <div secondary class="body1">[[ _fullDate ]]</div>
+        <div secondary class="body1">[[_startTime]] - [[_endTime]]</div>
+      </paper-item-body>
+    </paper-icon-item>
+
+    <!-- Location -->
+    <paper-icon-item>
+      <iron-icon item-icon icon="communication:location-on"></iron-icon>
+      <paper-item-body>
+        <div class="title">Location</div>
+        <div secondary class="body1">[[ event.venue ]]</div>
+        <div secondary class="body1">[[ event.categories.campus ]]</div>
+      </paper-item-body>
+    </paper-icon-item>
+
+    <!-- Registration -->
+    <paper-icon-item id="registrationItem">
+      <iron-icon item-icon icon="notification:event-available"></iron-icon>
+      <paper-item-body>
+        <div class="title">Registration</div>
+        <div secondary class="body1">[[_bookingText]]</div>
+      </paper-item-body>
+    </paper-icon-item>
+
+    <!-- Display only if user is not logged in or user is non-UQ user -->
+    <template is="dom-if" if="[[showRegistrationForNonUQ]]">
+      <paper-icon-item>
+        <iron-icon item-icon icon="info-outline"></iron-icon>
+        <paper-item-body>
+          <div class="title">Library member registration (for non-UQ staff and students)</div>
+          <div secondary class="body1">
+            Email <a id$="event[[event.entityId]]" href="#" on-click="sendEmail">[[registrationEmail]]</a> with your name, UQ username, and the event name and date to reserve a place. We’ll email you a confirmation within 2 business days.
+          </div>
+        </paper-item-body>
+      </paper-icon-item>
+    </template>
+
+    <!-- Display only if user is not logged in or user is UQ user -->
+    <template is="dom-if" if="[[showLoginButton]]">
+      <paper-button id="loginButton" class="button-colored-accent" on-click="navigate">
+          Login and book
+      </paper-button>
+    </template>
+
+  </template>
+  <script src="uqlibrary-training-details.js"></script>
+</dom-module>

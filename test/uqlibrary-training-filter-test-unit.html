@@ -1,0 +1,77 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>uql-ia-button</title>
+
+  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
+  <link rel="import" href="../../test-fixture/test-fixture.html">
+
+  <!-- Import the element to test -->
+  <link rel="import" href="../elements/uqlibrary-training-filter.html">
+
+</head>
+<body>
+
+<test-fixture id="filter">
+  <template>
+    <uqlibrary-training-filter></uqlibrary-training-filter>
+  </template>
+</test-fixture>
+
+<script>
+
+
+  suite('<uqlibrary-training-filter> tests', function () {
+    var element;
+
+    setup(function () {
+      element = fixture('filter');
+    });
+
+    test('It should display filter form', function (done) {
+//      setTimeout(function() {
+//      }, 100000);
+
+      expect(element.querySelector('#inputKeyword')).not.to.be.null;
+      expect(element.querySelector('#campusDropdown')).not.to.be.null;
+      expect(element.querySelector('#monthDropdown')).not.to.be.null;
+
+      done();
+
+    });
+
+    test('It should 4 load months in filter drowpdown', function (done) {
+      element.monthList = ['January', 'February', 'March'];
+      setTimeout(function() {
+        expect(element.querySelector('#monthDropdown').querySelectorAll('paper-item').length).to.be.equal(4);
+        done();
+      }, 10);
+    });
+
+
+    test('It should 3 load campuses in filter drowpdown', function (done) {
+      element.campusList = ['St Lucia', 'Herston'];
+      setTimeout(function() {
+        expect(element.querySelector('#campusDropdown').querySelectorAll('paper-item').length).to.be.equal(3);
+        done();
+      }, 10);
+    });
+
+    test('It should set filter criteria', function (done) {
+      element.querySelector('#inputKeyword').value = 'search keyword';
+
+      setTimeout(function() {
+        expect(element.filterCriteria.keyword).to.be.equal('search keyword');
+        done();
+      }, 10);
+    });
+
+  });
+</script>
+
+</body>
+</html>

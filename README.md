@@ -10,6 +10,22 @@ Install Node.JS and run the following oneliner in the project directory:
 npm install -g bower && bower install
 ```
 
+### Running with live data locally
+Add dev-app.library.uq.edu.au to your /etc/hosts or equivalent file
+
+```
+gulp live
+```
+
+This comments out the calls to create the Mock cookies in index.html.  Note the browser often caches the html so 
+check the source for the calls and do a hard refresh if they aren't commented out.
+
+If you still have the mock cookies in your browser, delete them via your browser.
+
+Use the Masquerading function at app.library.uq.edu.au/v1/home to masquerade as a user with data you are interested in.
+
+Return to your demo page, refresh and you should be getting live data.
+
 ### Developing
 - Please adhere to the Polymer code style guide provided at [Style Guide](http://polymerelements.github.io/style-guide/). 
 - Colors and common styles are imported (bower install) from [uqlibrary-styles](http://github.com/uqlibrary/uqlibrary-styles).
@@ -20,3 +36,4 @@ Tests are run using the Web Component Tester. Either navigate to /tests/index.ht
 ```sh
 wct --local all
 ```
+

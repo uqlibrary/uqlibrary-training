@@ -1,0 +1,142 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>uql-ia-button</title>
+
+  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
+  <link rel="import" href="../../test-fixture/test-fixture.html">
+
+  <!-- Import the element to test -->
+  <link rel="import" href="../elements/uqlibrary-training-list-category.html">
+
+</head>
+<body>
+
+<test-fixture id="list">
+  <template>
+    <uqlibrary-training-list-category></uqlibrary-training-list-category>
+  </template>
+</test-fixture>
+
+<script>
+
+
+  suite('<uqlibrary-training-list-category> tests', function () {
+    var element;
+
+    setup(function () {
+      element = fixture('list');
+      element.category =
+        {
+          id: "0",
+          name: 'category 01',
+          displayName: "category 01",
+          events: []
+        };
+
+    });
+
+    test('It should display category with no events', function (done) {
+      setTimeout(function() {
+        expect(element.querySelector('.title-text')).not.to.be.null;
+        expect(element.querySelector('.title-text').innerText).to.be.equal('category 01');
+        expect(element.querySelector('.no-events')).not.to.be.null;
+        done();
+      }, 10);
+    });
+
+    test('It should display category with events', function (done) {
+      element.category =
+      {
+        id: "0",
+        name: 'category 01',
+        displayName: "category 01",
+        events: [
+          {
+            "entityId": 460367,
+            "created": "2016-07-05T12:40:27.387+10:00",
+            "updated": "2016-07-05T12:40:27.387+10:00",
+            "name": "The Assignment Writing Process",
+            "start": "2016-07-25T13:00:00+10:00",
+            "end": "2016-07-25T14:00:00+10:00",
+            "publish": "2016-06-17T00:00:00+10:00",
+            "expire": "2016-07-25T14:00:00+10:00",
+            "summary": "Gain a better understanding of the assignment writing process, as well as strategies to conduct research and write assignments that are well structured and clearly organised.",
+            "details": "Gain a better understanding of the assignment writing process, as well as strategies to conduct research and write assignments that are well structured and clearly organised.",
+            "venue": "Building 12, Lvl 4, Room 401",
+            "bookingType": 0,
+            "bookingSettings": null,
+            "workGroupId": null,
+            "providers": {
+              "organisations": [],
+              "administrators": []
+            },
+            "attendance": {
+              "total": 0,
+              "unspecified": 0,
+              "absent": 0,
+              "attended": 0
+            },
+            "categories": {
+              "eventType": "Undergraduate Student Events",
+              "campus": [
+                "St Lucia"
+              ]
+            }
+          },
+          {
+            "entityId": 460362,
+            "created": "2016-07-05T12:40:27.387+10:00",
+            "updated": "2016-07-05T12:40:27.387+10:00",
+            "name": "The Assignment Writing Process",
+            "start": "2016-07-25T13:00:00+10:00",
+            "end": "2016-07-25T14:00:00+10:00",
+            "publish": "2016-06-17T00:00:00+10:00",
+            "expire": "2016-07-25T14:00:00+10:00",
+            "summary": "Gain a better understanding of the assignment writing process, as well as strategies to conduct research and write assignments that are well structured and clearly organised.",
+            "details": "Gain a better understanding of the assignment writing process, as well as strategies to conduct research and write assignments that are well structured and clearly organised.",
+            "venue": "Building 12, Lvl 4, Room 401",
+            "bookingType": 0,
+            "bookingSettings": null,
+            "workGroupId": null,
+            "providers": {
+              "organisations": [],
+              "administrators": []
+            },
+            "attendance": {
+              "total": 0,
+              "unspecified": 0,
+              "absent": 0,
+              "attended": 0
+            },
+            "categories": {
+              "eventType": "Undergraduate Student Events",
+              "campus": [
+                "St Lucia"
+              ]
+            }
+          }
+        ]
+      };
+
+      setTimeout(function() {
+
+        expect(element.querySelector('.title-text')).not.to.be.null;
+        expect(element.querySelector('.title-text').innerText).to.be.equal('category 01');
+        expect(element.querySelector('.no-events')).to.be.null;
+        expect(element.querySelector('.count-events')).not.to.be.null;
+        expect(element.querySelectorAll('paper-item').length).to.be.equal(2);
+        expect(element.querySelectorAll('uqlibrary-training-details').length).to.be.equal(2);
+
+        done();
+      }, 10);
+    });
+  });
+</script>
+
+</body>
+</html>

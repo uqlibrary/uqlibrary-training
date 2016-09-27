@@ -1,0 +1,148 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-training-list>` is a simple element that displays a list of training events
+
+Example:
+
+    <uqlibrary-training-list events="{{events}}"></uqlibrary-training>
+
+@demo
+
+@demo demo/index.html Demo of the Full view
+-->
+<dom-module id="uqlibrary-training-list-category">
+
+  <style is="custom-style" include="common-styles">
+
+    :host {
+      font-family: var(--font-family);
+      font-size: var(--body-font-size);
+
+      display: block;
+      position: relative;
+      box-sizing: border-box;
+      --paper-item-min-height: 48px;
+      --paper-item-body-two-line-min-height: 72px;
+    }
+
+    .card-active {
+      background: var(--menu-hover-background-color);
+    }
+    paper-card {
+      width: 100%;
+    }
+
+    paper-item {
+
+      --paper-item: {
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      --paper-item-focused: {
+        background: var(--menu-hover-background-color);
+      }
+
+      --paper-item-focused-before: {
+        opacity: 0;
+      }
+
+    }
+
+    .event-date {
+      min-width: 140px;
+      cursor: default;
+    }
+
+    a {
+      cursor: default;
+    }
+
+    paper-icon-item .content-icon {
+      display: none;
+    }
+
+    .event-line {
+      @apply(--layout-horizontal);
+      @apply(--layout-start-justified);
+      min-height: var(--paper-item-min-height);
+      line-height: var(--paper-item-min-height);
+    }
+
+    .event-line div {
+      @apply(--layout-start);
+    }
+
+    @media all and (max-width: 550px) {
+
+      .event-line {
+        @apply(--layout-vertical);
+        min-height: var(--paper-item-body-two-line-min-height);
+        line-height: 24px;
+      }
+
+    }
+
+  </style>
+
+  <template>
+
+    <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
+
+    <paper-card heading="[[category.displayName]]">
+
+      <template is="dom-if" if="{{renderedCount}}">
+        <div class="card-content count-events">
+          [[renderedCount]] events available
+        </div>
+      </template>
+
+      <template is="dom-repeat"
+                items="[[category.events]]"
+                as="trainingEvent"
+                filter="{{filterEvents(filterCriteria.keyword, filterCriteria.month, filterCriteria.campus)}}"
+                rendered-item-count="{{renderedCount}}">
+
+        <paper-item on-click="toggle" id$="item[[trainingEvent.entityId]]">
+
+          <paper-item-body two-line class="event-line">
+            <div class="event-date">[[_formatDate(trainingEvent.start)]]</div>
+            <div><a>[[trainingEvent.name]] ([[ trainingEvent.categories.campus ]])</a></div>
+          </paper-item-body>
+
+
+          <iron-icon class="down" icon="icons:arrow-drop-down"></iron-icon>
+          <iron-icon class="up hidden" icon="icons:arrow-drop-up"></iron-icon>
+
+          <paper-ripple></paper-ripple>
+        </paper-item>
+
+        <iron-collapse id$="collapse[[trainingEvent.entityId]]" data-id$="[[trainingEvent.entityId]]">
+          <div class="card-active">
+            <div class="card-content">
+              <paper-card>
+                <uqlibrary-training-details
+                        ga-app-name="[[gaAppName]]"
+                        user-account="[[userAccount]]"
+                        event="[[trainingEvent]]"
+                        show-login-button="true">
+                </uqlibrary-training-details>
+              </paper-card>
+            </div>
+          </div>
+        </iron-collapse>
+      </template>
+
+      <template is="dom-if" if="{{!renderedCount}}">
+        <div class="card-content no-events">
+        No events available
+        </div>
+      </template>
+
+    </paper-card>
+
+  </template>
+
+  <script src="uqlibrary-training-list-category.js"></script>
+
+</dom-module>

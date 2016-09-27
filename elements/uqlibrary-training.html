@@ -1,7 +1,7 @@
 <link rel="import" href="elements.html">
 
 <!--
-`<uqlibrary-training>` is a simple element that displays the opening hours for each of the libraries
+`<uqlibrary-training>` is a simple element that displays training events for a given filter ID
 
 Example:
 
@@ -19,51 +19,57 @@ Example:
             font-size: var(--body-font-size);
         }
 
-        paper-item.item {
-            border-bottom: 1px solid var(--border-color);
+        uqlibrary-training-list-category,
+        uqlibrary-training-filter {
+            margin-bottom: 16px;
         }
 
+        paper-card {
+            width: 100%;
+        }
     </style>
 
     <template>
-        <uqlibrary-api-training id="trainingApi"></uqlibrary-api-training>
-        <uqlibrary-ga id="ga" app-name="[[_gaAppName]]"></uqlibrary-ga>
 
-        <!-- Category Repeat -->
-        <template id="list" is="dom-repeat" items="{{links}}">
-            <!-- Single Category -->
-            <div class="category-container">
-                <paper-item
-                        class$="header {{ _itemClass(item) }}"
-                        role$="{{_itemRole(item)}}"
-                        aria-label$="{{item.name}}"
-                        title$="{{item.name}}"
-                        on-click="_linkClicked">
-                    {{ item.name }}
-                    <paper-ripple></paper-ripple>
-                </paper-item>
+        <uqlibrary-api-account id="accountApi" on-uqlibrary-api-account-loaded="_accountLoaded"></uqlibrary-api-account>
+        <uqlibrary-api-training id="trainingApi" on-uqlibrary-api-training="_trainingDataLoaded"></uqlibrary-api-training>
+        <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
-                <div class="item-container">
-                    <!-- Sub item repeat -->
-                    <template is="dom-repeat" items="{{item.items}}" as="sub">
-                        <!-- Single Item -->
-                        <paper-item
-                                class$="compact detail-item {{ _itemClass(sub) }}"
-                                role$="{{_itemRole(sub)}}"
-                                aria-label$="{{sub.name}}"
-                                title$="{{sub.name}}"
-                                on-click="_linkClicked">
-                            <div class="bullet"></div>
-                            <div class="linked-item item-name body1">
-                                {{sub.name}}
-                            </div>
-                            <paper-ripple></paper-ripple>
-                        </paper-item>
-                    </template>
-                </div>
-            </div>
+        <template is="dom-if" if="{{!compactView}}">
+            <uqlibrary-training-filter
+                    month-list="{{monthList}}"
+                    campus-list="{{campusList}}"
+                    filter-criteria="{{filterCriteria}}"
+                    ga-app-name="[[gaAppName]]"></uqlibrary-training-filter>
+
+            <template is="dom-repeat" items="[[_trainingEventsByCategory]]" as="category" rendered-item-count="{{renderedCount}}">
+
+            <uqlibrary-training-list-category
+                filter-criteria="{{filterCriteria}}"
+                category="[[category]]"
+                ga-app-name="[[gaAppName]]"
+                user-account="[[userAccount]]">
+            </uqlibrary-training-list-category>
+
+            </template>
+
+            <template is="dom-if" if="{{!renderedCount}}">
+                <paper-card>
+                    <div class="card-content no-events">
+                        No events available
+                    </div>
+                </paper-card>
+            </template>
         </template>
 
-    </template>
+        <template is="dom-if" if="{{compactView}}">
+            <uqlibrary-training-compact
+                    ga-app-name="[[gaAppName]]"
+                    user-account="[[userAccount]]"
+                    events="[[events]]"></uqlibrary-training-compact>
+        </template>
+
+        </template>
+
     <script src="uqlibrary-training.js"></script>
 </dom-module>

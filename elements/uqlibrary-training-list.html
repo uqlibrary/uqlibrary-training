@@ -1,0 +1,125 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-training-list>` is a simple element that displays a list of training events
+
+Example:
+
+    <uqlibrary-training-list events="{{events}}"></uqlibrary-training>
+
+@demo
+
+@demo demo/index.html Demo of the Full view
+-->
+<dom-module id="uqlibrary-training-list">
+
+  <style is="custom-style" include="common-styles">
+    :host {
+      font-family: var(--font-family);
+      font-size: var(--body-font-size);
+    }
+
+    paper-item {
+      font-size: var(--body-font-size);
+      cursor: pointer;
+      @apply(--paper-item-height);
+    }
+
+    paper-icon-item {
+      font-size: var(--body-font-size);
+      cursor: pointer;
+
+      border-bottom: 1px solid var(--border-color);
+      --paper-item-icon: {
+        padding-right: 16px;
+      };
+    }
+
+    paper-item-body {
+      line-height: 1.4em;
+    }
+
+    .no-classes span {
+      text-align: center;
+      @apply(--layout-flex);
+    }
+
+    .date {
+      text-align: center;
+      @apply(--layout-vertical);
+      @apply(--layout-center-justified);
+      width: 100%;
+    }
+
+    .date span {
+      color: var(--accent-color);
+    }
+
+  </style>
+
+  <template>
+    <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
+    <paper-item class="header">Upcoming training</paper-item>
+
+    <!-- Training events list -->
+    <template id="list" is="dom-repeat" items="[[_formattedEvents]]" rendered-item-count="{{renderedCount}}">
+
+      <!-- Single Item -->
+      <paper-icon-item on-click="_linkClicked"
+                       aria-label$="[[item.name]]"
+                       title$="[[item.name]]">
+        <div class="date" item-icon>
+          <span class="body1">[[item.startDayWeek]]</span>
+          <span class="headline">[[ item.startDay ]]</span>
+          <span class="body1">[[ item.startMonth ]]</span>
+        </div>
+        <paper-item-body two-line>
+          <div class="body1">[[item.name]]</div>
+          <div secondary>[[item.startTime]], [[item.categories.campus]] </div>
+        </paper-item-body>
+      </paper-icon-item>
+
+    </template>
+
+    <!-- Backup list in case no result are found in the API -->
+
+    <template is="dom-if" if="[[!renderedCount]]">
+      <paper-item class="no-classes">
+        <span>No classes scheduled, check back soon.</span>
+      </paper-item>
+
+      <!-- Category Repeat -->
+      <template id="backuplist" is="dom-repeat" items="{{_backupLinks()}}">
+        <!-- Single Category -->
+        <paper-item
+              class="header"
+              role="link"
+              aria-label$="{{item.name}}"
+              title$="{{item.name}}"
+              on-click="_backupLinkClicked">
+            {{ item.name }}
+            <paper-ripple></paper-ripple>
+          </paper-item>
+
+        <!-- Sub item repeat -->
+        <template is="dom-repeat" items="{{item.items}}" as="sub">
+              <!-- Single Item -->
+              <paper-item
+                  class="linked-item"
+                  role="link"
+                  aria-label$="{{sub.name}}"
+                  title$="{{sub.name}}"
+                  on-click="_backupLinkClicked">
+                <span class="linked-item">
+                  {{sub.name}}
+                </span>
+                <paper-ripple></paper-ripple>
+              </paper-item>
+            </template>
+      </template>
+
+    </template>
+  </template>
+
+  <script src="uqlibrary-training-list.js"></script>
+</dom-module>

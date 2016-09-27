@@ -1,12 +1,34 @@
 (function () {
   Polymer({
+
     is: 'uqlibrary-training',
+
     properties: {
-      /** Opening hours of all libraries in JSON format */
-      links: {
-        type: Array,
-        observer: "_linksChanged"
+
+      compactView: {
+        type: Object,
+        value: false
       },
+
+      /**
+       * List of all events (raw)
+       */
+      events: {
+        type: Array,
+        observer: "_eventsChanged"
+      },
+
+      filterCriteria: {
+        type: Object,
+        value: function () {
+          return {
+            keyword: '',
+            month: '',
+            campus: ''
+          };
+        }
+      },
+
       /**
        * Autoloads the training links from the API
        * @type {Boolean}
@@ -15,80 +37,200 @@
         type: Object,
         value: true
       },
+
       /**
-       * Prefix for the google analytics category name. For example: "Home page"
+       * Google Analytics app name of this component
+       * @type {String}
        */
-      gaCategoryPrefix: {
+      gaAppName: {
         type: String,
-        value: '',
-        observer: '_gaCategoryPrefixChanged'
+        value: 'Training'
       },
+
       /**
-       * Holds the Google Analytics app name of this component
+       * Value of filter to extract data from career hub
+       * @type {Number}
        */
-      _gaAppName: {
+      eventFilterId: {
+        type: Number,
+        value: 104
+      },
+
+      /**
+      * Specifies url of event in CareerHub/StudentHub
+       * @type {String}
+      * */
+      parentUrl: {
         type: String,
-        value: ''
+        value: 'https://studenthub.uq.edu.au/students/events/detail/'
+      },
+
+      /**
+       * Specifies number of items to fetch
+       * @type {Number}
+       */
+      maxEventCount: {
+        type: Number,
+        value: 5
+      },
+
+      userAccount: {
+        type: Object,
+        value: function() {
+          return {
+            hasSession: false
+          };
+        }
+      },
+
+      _trainingEventsByCategory: {
+        type: Array
+      },
+
+      /**
+       * Specifies list of campuses, auto populated from api
+       * @type {Array}
+       */
+      campusList: {
+        type: Array
+      },
+
+      /**
+       * Specifies list of event months, auto populated from api
+       * @type {Array}
+       */
+      monthList : {
+        type: Array
       }
+
     },
+
     ready: function () {
-      var self = this;
 
-      // Setup event listener for Training
-      this.$.trainingApi.addEventListener('uqlibrary-api-training', function (e) {
-        self.setTrainingLinks(e.detail);
-      });
-
-      // Fetch hours
       if (this.autoLoad) {
-        this.$.trainingApi.get();
+        this.$.accountApi.get();
+
+        var eventsFilterParameters = {};
+        if (this.maxEventCount > 0) {
+          eventsFilterParameters.take = this.maxEventCount;
+        }
+
+        if (this.eventFilterId > 0) {
+          eventsFilterParameters.filterIds = [ this.eventFilterId ];
+        }
+
+        this.$.trainingApi.get(eventsFilterParameters);
+      }
+
+    },
+
+    /*
+    * Event handler for user account api call
+    * @private
+    * */
+    _accountLoaded: function(response) {
+      if (response.detail.hasSession !== null && response.detail.hasSession) {
+        this.userAccount = response.detail;
+      } else {
+        this.userAccount = {
+          hasSession: false
+        };
       }
     },
+
     /**
-     * Sets the "links" variable
-     * @param links
+     * Event handler for training api call
+     * @private
      */
-    setTrainingLinks: function (links) {
-      this.links = links;
+    _trainingDataLoaded: function(event) {
+      this.events = event.detail;
     },
-    /** Parses and formats the JSON array when hours has updated */
-    _linksChanged: function () {
-      this.fire('uqlibrary-training-loaded');
-    },
+
     /**
-     * Returns the dynamic CSS class for this item
-     * @param item
-     * @returns {string}
+     * Observer handler for events array
+     * @private
      */
-    _itemClass: function (item) {
-      return (item.link !== '' ? 'link' : '');
+    _eventsChanged: function() {
+      this._processData(this.events);
     },
+
     /**
-     * Returns the ARIA role for this item
-     * @param item
-     * @returns {string}
+     * Processes raw data from events, extracts months/campuses/categories(labels)
+     * @private
      */
-    _itemRole: function (item) {
-      return (item.link !== '' ? 'link' : 'any');
+    _processData: function (events) {
+
+      var processedEvents = [];
+      var categories = [];
+      var campuses = [];
+      var months = [];
+
+      for(var eventIndex = 0; eventIndex < events.length; eventIndex++){
+        var event = events[eventIndex];
+
+        //if event doesn't have a category, put it into category 'Other'
+        if (!event.labels) {
+          event.labels = [{ id: '0', name: 'Other'}];
+        }
+
+        //set up all categories
+        if (event.labels) {
+          for(var labelIndex = 0; labelIndex < event.labels.length; labelIndex++) {
+            var category = event.labels[labelIndex];
+
+            var catIndex = categories.indexOf(category.id);
+
+            if (catIndex < 0) {
+              category.events = [];
+              category.displayName = category.name.replace(/.*\./ , '');
+              processedEvents.push(category);
+
+              categories.push(category.id);
+              catIndex = categories.length - 1;
+            }
+
+            if (!category.events) {
+              category = processedEvents[catIndex];
+            }
+
+            //create display string for start date
+            var startDate = new Date(event.start);
+            event.formattedDate = moment(event.start).format('ddd D MMM YYYY');
+            event.link = this.parentUrl + event.entityId;;
+
+            //add this event to the category
+            category.events.push(event);
+          }
+        }
+
+        //setup all campuses
+        if (event.categories && event.categories.campus) {
+          for(var index=0; index < event.categories.campus.length; index++) {
+            var campus = event.categories.campus[index];
+            if (campuses.indexOf(campus) < 0) {
+              campuses.push(campus);
+            }
+          }
+        }
+
+        //setup all event months
+        var monthName = moment(event.start).format('MMMM');
+        if (months.indexOf(monthName) < 0) {
+          months.push(monthName);
+        }
+      }
+
+      this._trainingEventsByCategory = processedEvents;
+      console.log(processedEvents);
+      this.campusList = campuses;
+      this.monthList = months;
     },
-		/**
-     * Called when a link is clicked
+
+    /**
+     * Called when an event is clicked on the list page
      * @param e
-     * @private
      */
-    _linkClicked: function (e) {
-      var item = e.model.item || e.model.sub;
-      if (item && item.link !== '') {
-        this.$.ga.addEvent('Click', item.name);
-        window.location = item.link;
-      }
-    },
-    /**
-     * Sets the Google Analytics app name
-     * @private
-     */
-    _gaCategoryPrefixChanged: function () {
-      this._gaAppName = (this.gaCategoryPrefix ? this.gaCategoryPrefix + ' Training' : 'Training');
+    _eventClicked: function (e) {
     }
   });
 })();

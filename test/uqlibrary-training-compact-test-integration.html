@@ -18,7 +18,7 @@
 
 <test-fixture id="list">
   <template>
-    <uqlibrary-training auto-load="false" events="[]"></uqlibrary-training>
+    <uqlibrary-training auto-load="false" compact-view="true" events="[]"></uqlibrary-training>
   </template>
 </test-fixture>
 
@@ -163,7 +163,7 @@
       setTimeout(function() {
         expect(element.querySelector('uqlibrary-training-filter')).not.to.be.null;
         done();
-      }, 10);
+      }, 10000000);
     });
 
     test('It should display no events message if no data is provided', function (done) {
@@ -190,29 +190,8 @@
       expect(element.monthList.length).not.to.equal(0);
       expect(element.campusList.length).not.to.equal(0);
       done();
-      }, 10);
-    });
-
-    test('It should display compact display', function (done) {
-      element.compactView = true;
-
-      setTimeout(function() {
-        expect(element.querySelector('uqlibrary-training-filter')).to.be.null;
-        expect(element.querySelector('uqlibrary-training-compact')).not.to.be.null;
-        done();
-      }, 10);
-    });
-
-    test('It should display compact display', function (done) {
-      element.compactView = true;
-      element.events = data;
-
-      setTimeout(function() {
-        expect(element.querySelector('uqlibrary-training-filter')).to.be.null;
-        expect(element.querySelector('uqlibrary-training-compact')).not.to.be.null;
-        done();
-      }, 10);
-    });
+    }, 10);
+  });
 
   });
 </script>
