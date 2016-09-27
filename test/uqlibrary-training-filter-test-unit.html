@@ -34,7 +34,7 @@
 
     test('It should display filter form', function (done) {
 //      setTimeout(function() {
-//      }, 100000);
+//      }, 200000);
 
       expect(element.querySelector('#inputKeyword')).not.to.be.null;
       expect(element.querySelector('#campusDropdown')).not.to.be.null;
@@ -49,7 +49,7 @@
       setTimeout(function() {
         expect(element.querySelector('#monthDropdown').querySelectorAll('paper-item').length).to.be.equal(4);
         done();
-      }, 10);
+      }, 20);
     });
 
 
@@ -58,7 +58,7 @@
       setTimeout(function() {
         expect(element.querySelector('#campusDropdown').querySelectorAll('paper-item').length).to.be.equal(3);
         done();
-      }, 10);
+      }, 20);
     });
 
     test('It should set filter criteria', function (done) {
@@ -67,7 +67,7 @@
       setTimeout(function() {
         expect(element.filterCriteria.keyword).to.be.equal('search keyword');
         done();
-      }, 10);
+      }, 20);
     });
 
   });
