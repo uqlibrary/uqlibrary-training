@@ -72,7 +72,7 @@
         expect(element.querySelector('.event-name .inverse').innerHTML).to.be.equal(element.event.name);
 
         done();
-      }, 20);
+      }, 50);
 
     });
 
@@ -86,14 +86,14 @@
       setTimeout(function() {
         expect(element.querySelector('#loginButton')).not.to.be.null;
         done();
-      }, 20);
+      }, 50);
     });
 
     test('It should display registration text', function (done) {
       setTimeout(function() {
         expect(element.querySelector('#registrationItem .body1').innerHTML).to.be.equal(element._bookingText);
       done();
-      }, 20);
+      }, 50);
     });
 
 
