@@ -221,7 +221,6 @@
       }
 
       this._trainingEventsByCategory = processedEvents;
-      console.log(processedEvents);
       this.campusList = campuses;
       this.monthList = months;
     },
