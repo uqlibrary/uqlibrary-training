@@ -43,7 +43,7 @@
     test('It should display category with no events', function (done) {
       setTimeout(function() {
         expect(element.querySelector('.title-text')).not.to.be.null;
-        expect(element.querySelector('.title-text').innerText).to.be.equal('category 01');
+        expect(element.querySelector('.title-text').textContent).to.contain('category 01');
         expect(element.querySelector('.no-events')).not.to.be.null;
         done();
       }, 50);
@@ -126,7 +126,7 @@
       setTimeout(function() {
 
         expect(element.querySelector('.title-text')).not.to.be.null;
-        expect(element.querySelector('.title-text').innerText).to.be.equal('category 01');
+        expect(element.querySelector('.title-text').textContent).to.contain('category 01');
         expect(element.querySelector('.no-events')).to.be.null;
         expect(element.querySelector('.count-events')).not.to.be.null;
         expect(element.querySelectorAll('paper-item').length).to.be.equal(2);

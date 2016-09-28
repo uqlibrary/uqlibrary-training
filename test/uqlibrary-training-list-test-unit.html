@@ -36,7 +36,7 @@
     test('It should display default events when there are no upcoming events', function (done) {
       setTimeout(function() {
         expect(element.querySelector('.header')).not.to.be.null;
-        expect(element.querySelector('.header').innerText).to.be.equal('Upcoming training');
+        expect(element.querySelector('.header').textContent).to.contain('Upcoming training');
         expect(element.querySelector('.no-classes')).not.to.be.null;
         expect(element.querySelector('#backuplist')).not.to.be.null;
         done();
