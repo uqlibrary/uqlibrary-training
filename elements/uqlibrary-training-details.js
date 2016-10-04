@@ -82,7 +82,7 @@
       this._bookingText = "Booking is not required";
 
       if (this.event.bookingSettings !== null) {
-        this._bookingText = 'Places sill available';
+        this._bookingText = 'Places still available';
 
         if (this.event.bookingSettings.placesRemaining == 0) {
             this._bookingText = 'Class is full. Register for waitlist.';
