@@ -28,7 +28,8 @@
     filterEvents: function(keyword, month, campus) {
       return function(trainingEvent) {
 
-        return (!keyword || trainingEvent.name.toLowerCase().indexOf(keyword) >= 0 || trainingEvent.details.toLowerCase().indexOf(keyword) >= 0)
+        //return (!keyword || trainingEvent.name.toLowerCase().indexOf(keyword) >= 0 || trainingEvent.details.toLowerCase().indexOf(keyword) >= 0)
+        return (!keyword || trainingEvent.name.indexOf(keyword) >= 0 || trainingEvent.details.indexOf(keyword) >= 0)
             && (!month || moment(trainingEvent.start).format("MMMM").toLowerCase().indexOf(month.toLowerCase()) >= 0)
             && (!campus || trainingEvent.categories.campus.join(',').toLowerCase().indexOf(campus.toLowerCase()) >= 0);
       };
