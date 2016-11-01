@@ -15,15 +15,12 @@
 
     filterEventsByKeyword: function(filterCriteria) {
       return function(trainingEvent) {
-        if (!filterCriteria)
+        if (!filterCriteria) {
           return true;
+        }
 
-          var filterCriteriaRegExp = new RegExp(filterCriteria, 'i');
-
-          var fitsCriteria =  trainingEvent.name.match(filterCriteriaRegExp)
-              || trainingEvent.details.match(filterCriteriaRegExp);
-
-        return fitsCriteria;
+        var filterCriteriaRegExp = new RegExp(filterCriteria, 'i');
+        return trainingEvent.name.match(filterCriteriaRegExp) || trainingEvent.details.match(filterCriteriaRegExp);
       };
     },
 
@@ -31,7 +28,6 @@
       return function(trainingEvent) {
 
         // Convert the input keyword to a case-insensitive regular expression then test against event name and detail
-
         var keywordRegExp = new RegExp(keyword, 'i');
 
         return (!keyword || trainingEvent.name.match(keywordRegExp) || trainingEvent.details.match(keywordRegExp))
