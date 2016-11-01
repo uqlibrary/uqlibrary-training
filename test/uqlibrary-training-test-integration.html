@@ -214,6 +214,41 @@
       }, 30);
     });
 
+    test('It should show 3 events' , function (done) {
+      element.events = data;
+      setTimeout(function() {
+        expect(element.querySelectorAll('a.uqlibrary-training-list-category').length).to.be.equal(3);
+        done();
+      }, 50);
+    });
+
+    test('It should show 1 event when the search keyword "tank" is used' , function (done) {
+      element.events = data;
+      element.filterCriteria.keyword = "tank";
+      setTimeout(function() {
+        expect(element.querySelectorAll('a.uqlibrary-training-list-category').length).to.be.equal(1);
+        done();
+      }, 50);
+    });
+
+      test('It should show 1 event when the search keyword "TANK" is used' , function (done) {
+          element.events = data;
+          element.filterCriteria.keyword = "TANK";
+          setTimeout(function() {
+              expect(element.querySelectorAll('a.uqlibrary-training-list-category').length).to.be.equal(1);
+              done();
+          }, 50);
+      });
+
+      test('It should show 1 event when the search keyword "TaNk" is used' , function (done) {
+          element.events = data;
+          element.filterCriteria.keyword = "TaNk";
+          setTimeout(function() {
+              expect(element.querySelectorAll('a.uqlibrary-training-list-category').length).to.be.equal(1);
+              done();
+          }, 50);
+      });
+
   });
 </script>
 
