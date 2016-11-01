@@ -18,8 +18,10 @@
         if (!filterCriteria)
           return true;
 
-          var fitsCriteria =  trainingEvent.name.toLowerCase().indexOf(filterCriteria) >= 0
-              || trainingEvent.details.toLowerCase().indexOf(filterCriteria) >= 0;
+          var filterCriteriaRegExp = new RegExp(filterCriteria, 'i');
+
+          var fitsCriteria =  trainingEvent.name.match(filterCriteriaRegExp)
+              || trainingEvent.details.match(filterCriteriaRegExp);
 
         return fitsCriteria;
       };
@@ -28,8 +30,11 @@
     filterEvents: function(keyword, month, campus) {
       return function(trainingEvent) {
 
-        //return (!keyword || trainingEvent.name.toLowerCase().indexOf(keyword) >= 0 || trainingEvent.details.toLowerCase().indexOf(keyword) >= 0)
-        return (!keyword || trainingEvent.name.indexOf(keyword) >= 0 || trainingEvent.details.indexOf(keyword) >= 0)
+        // Convert the input keyword to a case-insensitive regular expression then test against event name and detail
+
+        var keywordRegExp = new RegExp(keyword, 'i');
+
+        return (!keyword || trainingEvent.name.match(keywordRegExp) || trainingEvent.details.match(keywordRegExp))
             && (!month || moment(trainingEvent.start).format("MMMM").toLowerCase().indexOf(month.toLowerCase()) >= 0)
             && (!campus || trainingEvent.categories.campus.join(',').toLowerCase().indexOf(campus.toLowerCase()) >= 0);
       };
