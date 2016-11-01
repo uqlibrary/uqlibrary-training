@@ -1,6 +1,6 @@
 {
   "name": "uqlibrary-training",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Web component to display UQlibrary training events",
   "main": "index.html",
   "directories": {
