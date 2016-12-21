@@ -252,7 +252,7 @@
     test('It should display the category titles when hideCategoryTitle is not set', function (done) {
       element.events = data;
       setTimeout(function() {
-        expect(element.querySelector('uqlibrary-training-list-category .title-text')).to.not.be.empty;
+        expect(element.querySelector('uqlibrary-training-list-category .title-text').textContent).to.not.be.empty;
         done();
       }, 30);
     });
@@ -261,7 +261,7 @@
       element.events = data;
       element.hideCategoryTitle = false;
       setTimeout(function() {
-        expect(element.querySelector('uqlibrary-training-list-category .title-text')).to.not.be.empty;
+        expect(element.querySelector('uqlibrary-training-list-category .title-text').textContent).to.not.be.empty;
         done();
       }, 30);
     });
