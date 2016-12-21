@@ -23,8 +23,6 @@
 </test-fixture>
 
 <script>
-
-
   suite('<uqlibrary-training> tests', function () {
     var element;
     var data = [
@@ -248,6 +246,60 @@
               done();
           }, 50);
       });
+
+
+
+    test('It should display the category titles when hideCategoryTitle is not set', function (done) {
+      element.events = data;
+      setTimeout(function() {
+        expect(element.querySelector('uqlibrary-training-list-category .title-text')).to.not.be.empty;
+        done();
+      }, 30);
+    });
+
+    test('It should display the category titles when hideCategoryTitle = false', function (done) {
+      element.events = data;
+      element.hideCategoryTitle = false;
+      setTimeout(function() {
+        expect(element.querySelector('uqlibrary-training-list-category .title-text')).to.not.be.empty;
+        done();
+      }, 30);
+    });
+
+    test('It should not display the category titles when hideCategoryTitle = true', function (done) {
+      element.events = data;
+      element.hideCategoryTitle = true;
+      setTimeout(function() {
+        expect(element.querySelector('uqlibrary-training-list-category .title-text')).to.be.hidden;
+        done();
+      }, 30);
+    });
+
+    test('It should display the filter when hideFilter is not set', function (done) {
+      element.events = data;
+      setTimeout(function() {
+        expect(element.querySelector('uqlibrary-training-filter')).to.exist;
+        done();
+      }, 30);
+    });
+
+    test('It should display the filter when hideFilter = false', function (done) {
+      element.events = data;
+      element.hideFilter = false;
+      setTimeout(function() {
+        expect(element.querySelector('uqlibrary-training-filter')).to.exist;
+        done();
+      }, 30);
+    });
+
+    test('It should not display the filter when hideFilter = true', function (done) {
+      element.events = data;
+      element.hideFilter = true;
+      setTimeout(function() {
+        expect(element.querySelector('uqlibrary-training-filter')).to.not.exist;
+        done();
+      }, 30);
+    });
 
   });
 </script>

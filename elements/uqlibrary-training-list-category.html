@@ -89,8 +89,7 @@ Example:
 
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
-    <paper-card heading="[[category.displayName]]">
-
+    <paper-card heading="[[_getCategoryTitle(category.displayName, hideCategoryTitle)]]">
       <template is="dom-if" if="{{renderedCount}}">
         <div class="card-content count-events">
           [[renderedCount]] events available

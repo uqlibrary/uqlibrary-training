@@ -36,19 +36,23 @@ Example:
         <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
         <template is="dom-if" if="{{!compactView}}">
-            <uqlibrary-training-filter
-                    month-list="{{monthList}}"
-                    campus-list="{{campusList}}"
-                    filter-criteria="{{filterCriteria}}"
-                    ga-app-name="[[gaAppName]]"></uqlibrary-training-filter>
+
+            <template is="dom-if" if="{{!hideFilter}}">
+                <uqlibrary-training-filter
+                        month-list="{{monthList}}"
+                        campus-list="{{campusList}}"
+                        filter-criteria="{{filterCriteria}}"
+                        ga-app-name="[[gaAppName]]"></uqlibrary-training-filter>
+            </template>
 
             <template is="dom-repeat" items="[[_trainingEventsByCategory]]" as="category" rendered-item-count="{{renderedCount}}">
 
             <uqlibrary-training-list-category
-                filter-criteria="{{filterCriteria}}"
-                category="[[category]]"
-                ga-app-name="[[gaAppName]]"
-                user-account="[[userAccount]]">
+                    hide-category-title="{{hideCategoryTitle}}"
+                    filter-criteria="{{filterCriteria}}"
+                    category="[[category]]"
+                    ga-app-name="[[gaAppName]]"
+                    user-account="[[userAccount]]">
             </uqlibrary-training-list-category>
 
             </template>

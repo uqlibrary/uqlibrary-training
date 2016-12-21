@@ -10,7 +10,11 @@
       },
       category: {
         type: Object
-      }
+      },
+      hideCategoryTitle: {
+        type: Object,
+        value: false
+      },
     },
 
     filterEventsByKeyword: function(filterCriteria) {
@@ -39,6 +43,14 @@
     _formatDate: function(date) {
       return moment(date).format("ddd D MMM YYYY");
     },
+
+    _getCategoryTitle: function(title, hideTitle){
+      if(hideTitle) {
+        return '';
+      }else{
+        return title;
+      }
+  },
 
     toggle: function(event) {
       var toggleId = 'collapse' + event.model.trainingEvent.entityId;

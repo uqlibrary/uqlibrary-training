@@ -11,6 +11,24 @@
       },
 
       /**
+       * Parameter to hide the filter
+       * @type {Boolean}
+       */
+      hideFilter: {
+        type: Object,
+        value: false
+      },
+      /**
+       * Parameter to hide the unwanted category titles
+       * @type {Boolean}
+       */
+      hideCategoryTitle: {
+        type: Object,
+        value: false
+      },
+
+
+      /**
        * List of all events (raw)
        */
       events: {
