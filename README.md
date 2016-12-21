@@ -1,7 +1,7 @@
 # uqlibrary-training
 
-[![Codeship Status for uqlibrary/uqlibrary-mylibrary](https://codeship.com/projects/f0334440-bdaa-0133-87bd-2a1d867cc1c8/status?branch=master)](https://codeship.com/projects/f0334440-bdaa-0133-87bd-2a1d867cc1c8)
-[![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-training.svg)](https://david-dm.org/uqlibrary/uqlibrary-training.svg)
+[![Codeship Status for uqlibrary/uqlibrary-mylibrary](https://codeship.com/projects/f0334440-bdaa-0133-87bd-2a1d867cc1c8/status?branch=master)](https://codeship.com/projects/136640)
+[![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-training.svg)](https://david-dm.org/uqlibrary/uqlibrary-training)
 [![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-training/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-training?type=dev)
 
 uqlibrary-training is a simple list view showing training links for the Library at the University of Queensland.

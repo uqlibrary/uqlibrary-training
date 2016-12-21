@@ -270,7 +270,7 @@
       element.events = data;
       element.hideCategoryTitle = true;
       setTimeout(function() {
-        expect(element.querySelector('uqlibrary-training-list-category .title-text')).to.be.hidden;
+        expect(element.querySelector('uqlibrary-training-list-category .title-text')).to.have.property('hidden');
         done();
       }, 30);
     });
