@@ -11,7 +11,7 @@ Full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uql
 ### Getting Started
 Install Node.JS and run the following oneliner in the project directory:
 ```sh
-npm install -g bower && bower install
+npm install -g bower && npm install && bower install
 ```
 
 ### Running with live data locally
