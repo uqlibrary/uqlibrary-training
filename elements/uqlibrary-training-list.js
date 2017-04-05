@@ -2,6 +2,10 @@
   Polymer({
     is: 'uqlibrary-training-list',
     properties: {
+      compactView: {
+          type: Object,
+          value: false
+      },
       events: {
         type: Array,
         observer: "_eventsChanged"

@@ -8,6 +8,12 @@
       events: {
         type: Array
       },
+
+      compactView: {
+          type: Object,
+          value: true
+      },
+
       /**
        * Holds the Google Analytics app name of this component
        */
