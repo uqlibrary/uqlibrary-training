@@ -59,7 +59,7 @@ Example:
 
   <template>
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
-    <paper-item class="header">Upcoming training</paper-item>
+    <!-- <paper-item class="header" is="dom-if" if="{{!compactView}}">Upcoming training</paper-item> -->
 
     <!-- Training events list -->
     <template id="list" is="dom-repeat" items="[[_formattedEvents]]" rendered-item-count="{{renderedCount}}">
