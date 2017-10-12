@@ -13,51 +13,51 @@ Example:
 -->
 <dom-module id="uqlibrary-training-details">
 
-  <style is="custom-style" include="common-styles">
-    :host {
-      font-family: var(--font-family);
-      font-size: var(--body-font-size);
-    }
-
-    .event-name {
-      background-color: var(--theme-color-lighter);
-      padding: 16px;
-    }
-
-    paper-icon-item {
-      font-size: var(--body-font-size);
-      padding: 16px;
-
-      --paper-item-icon: {
-        min-width: 56px;
-      }
-    }
-
-    .details {
-      padding: 16px;
-      overflow: hidden;
-    }
-
-    #summary {
-      display: var(--display-event-summary, none);
-    }
-
-    #details {
-      display: var(--display-event-details, block);
-    }
-
-    .training-event {
-      font-weight: bold;
-    }
-
-    paper-button {
-      margin: 16px;
-      float: right;
-    }
-
-  </style>
-
   <template>
+    <style is="custom-style" include="common-styles">
+      :host {
+        font-family: var(--font-family);
+        font-size: var(--body-font-size);
+      }
+
+      .event-name {
+        background-color: var(--theme-color-lighter);
+        padding: 16px;
+      }
+
+      paper-icon-item {
+        font-size: var(--body-font-size);
+        padding: 16px;
+
+        --paper-item-icon: {
+          min-width: 56px;
+        }
+      }
+
+      .details {
+        padding: 16px;
+        overflow: hidden;
+      }
+
+      #summary {
+        display: var(--display-event-summary, none);
+      }
+
+      #details {
+        display: var(--display-event-details, block);
+      }
+
+      .training-event {
+        font-weight: bold;
+      }
+
+      #loginButton {
+        margin: 16px;
+        float: right;
+      }
+
+    </style>
+
     <content></content>
 
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
