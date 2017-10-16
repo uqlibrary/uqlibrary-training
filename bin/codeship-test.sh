@@ -50,8 +50,6 @@ if [ {$CI_BRANCH} != 'gh-pages' ]; then
     mv -v bower.json bower-wct.json
     mv -v bower.json.orig bower.json
     mv -v .bowerrc.orig .bowerrc
-    rm bower.json.orig
-    rm .bowerrc.orig
 
     wct
 fi

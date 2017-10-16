@@ -13,50 +13,50 @@ Example:
 -->
 <dom-module id="uqlibrary-training-list">
 
-  <style is="custom-style" include="common-styles">
-    :host {
-      font-family: var(--font-family);
-      font-size: var(--body-font-size);
-    }
-
-    paper-item {
-      font-size: var(--body-font-size);
-      cursor: pointer;
-      @apply(--paper-item-height);
-    }
-
-    paper-icon-item {
-      font-size: var(--body-font-size);
-      cursor: pointer;
-
-      border-bottom: 1px solid var(--border-color);
-      --paper-item-icon: {
-        padding-right: 16px;
-      };
-    }
-
-    paper-item-body {
-      line-height: 1.4em;
-    }
-
-    .no-classes span {
-      text-align: center;
-      @apply(--layout-flex);
-    }
-
-    .date {
-      text-align: center;
-      @apply(--layout-vertical);
-      @apply(--layout-center-justified);
-      width: 100%;
-    }
-
-    .date span {
-      color: var(--accent-color);
-    }
-  </style>
-
   <template>
+    <style is="custom-style" include="common-styles">
+      :host {
+        font-family: var(--font-family);
+        font-size: var(--body-font-size);
+      }
+
+      paper-item {
+        font-size: var(--body-font-size);
+        cursor: pointer;
+        @apply(--paper-item-height);
+      }
+
+      paper-icon-item {
+        font-size: var(--body-font-size);
+        cursor: pointer;
+
+        border-bottom: 1px solid var(--border-color);
+        --paper-item-icon: {
+          padding-right: 16px;
+        };
+      }
+
+      paper-item-body {
+        line-height: 1.4em;
+      }
+
+      .no-classes span {
+        text-align: center;
+        @apply(--layout-flex);
+      }
+
+      .date {
+        text-align: center;
+        @apply(--layout-vertical);
+        @apply(--layout-center-justified);
+        width: 100%;
+      }
+
+      .date span {
+        color: var(--accent-color);
+      }
+    </style>
+
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
       <template is="dom-if" if="{{!compactView}}">
           <paper-item class="header" >Upcoming training</paper-item>

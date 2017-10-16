@@ -13,58 +13,58 @@ Example:
 -->
 <dom-module id="uqlibrary-training-filter">
 
-    <style is="custom-style" include="common-styles">
-        :host {
-            font-family: var(--font-family);
-            font-size: var(--body-font-size);
+    <template>
+        <style is="custom-style" include="common-styles">
+            :host {
+                font-family: var(--font-family);
+                font-size: var(--body-font-size);
 
-            display: block;
-            position: relative;
-            box-sizing: border-box;
-        }
+                display: block;
+                position: relative;
+                box-sizing: border-box;
+            }
 
-        paper-card {
-            width: 100%;
-        }
-
-        .card-content {
-            @apply(--layout-horizontal);
-        }
-
-        paper-dropdown-menu {
-            width: 100%;
-        }
-
-        .card-content > div {
-            padding-left: 16px;
-            @apply(--layout-flex);
-        }
-
-        @media all and (max-width: 650px) {
+            paper-card {
+                width: 100%;
+            }
 
             .card-content {
-                @apply(--layout-vertical);
-                overflow: hidden;
+                @apply(--layout-horizontal);
+            }
+
+            paper-dropdown-menu {
+                width: 100%;
             }
 
             .card-content > div {
-                @apply(--layout-flex-none);
-                padding: 0px;
+                padding-left: 16px;
+                @apply(--layout-flex);
             }
-        }
 
-        paper-input paper-icon-button{
-            --paper-icon-button: {
-                padding: 0px;
-                width: 24px;
-                height: 24px;
-                color: #9b9b9b;
+            @media all and (max-width: 650px) {
+
+                .card-content {
+                    @apply(--layout-vertical);
+                    overflow: hidden;
+                }
+
+                .card-content > div {
+                    @apply(--layout-flex-none);
+                    padding: 0px;
+                }
             }
-        }
 
-    </style>
+            paper-input paper-icon-button{
+                --paper-icon-button: {
+                    padding: 0px;
+                    width: 24px;
+                    height: 24px;
+                    color: #9b9b9b;
+                }
+            }
 
-    <template>
+        </style>
+
         <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
         <paper-card heading="Filter events">

@@ -13,50 +13,50 @@ Example:
 -->
 <dom-module id="uqlibrary-training-compact">
 
-    <style is="custom-style" include="common-styles">
-        :host {
-            font-family: var(--font-family);
-            font-size: var(--body-font-size);
-        }
-
-        #pages {
-            position: absolute;
-            top: 0;
-            right:0;
-            left:0;
-            bottom: 0;
-        }
-
-        uqlibrary-training-details {
-            --display-event-details: none;
-            --display-event-summary: block;
-        }
-
-        uqlibrary-training-details .header {
-            background-color: var(--theme-color);
-            text-align: left;
-        }
-
-        uqlibrary-training-details .header span {
-            vertical-align: middle;
-        }
-
-        .arrow-back {
-            --paper-icon-button: {
-                border-radius: 50%;
-            };
-        }
-
-        uqlibrary-training-list {
-            --paper-item-height: {
-                min-height: 30px;
-                border-bottom: 1px solid #e8e8e8;
-            }
-        }
-
-    </style>
-
     <template>
+        <style is="custom-style" include="common-styles">
+            :host {
+                font-family: var(--font-family);
+                font-size: var(--body-font-size);
+            }
+
+            #pages {
+                position: absolute;
+                top: 0;
+                right:0;
+                left:0;
+                bottom: 0;
+            }
+
+            uqlibrary-training-details {
+                --display-event-details: none;
+                --display-event-summary: block;
+            }
+
+            uqlibrary-training-details .header {
+                background-color: var(--theme-color);
+                text-align: left;
+            }
+
+            uqlibrary-training-details .header span {
+                vertical-align: middle;
+            }
+
+            .arrow-back {
+                --paper-icon-button: {
+                    border-radius: 50%;
+                };
+            }
+
+            uqlibrary-training-list {
+                --paper-item-height: {
+                    min-height: 30px;
+                    border-bottom: 1px solid #e8e8e8;
+                }
+            }
+
+        </style>
+
         <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
         <neon-animated-pages

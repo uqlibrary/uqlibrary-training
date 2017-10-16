@@ -13,23 +13,23 @@ Example:
 -->
 <dom-module id="uqlibrary-training">
 
-    <style is="custom-style" include="common-styles">
-        :host {
-            font-family: var(--font-family);
-            font-size: var(--body-font-size);
-        }
-
-        uqlibrary-training-list-category,
-        uqlibrary-training-filter {
-            margin-bottom: 16px;
-        }
-
-        paper-card {
-            width: 100%;
-        }
-    </style>
-
     <template>
+
+        <style is="custom-style" include="common-styles">
+            :host {
+                font-family: var(--font-family);
+                font-size: var(--body-font-size);
+            }
+
+            uqlibrary-training-list-category,
+            uqlibrary-training-filter {
+                margin-bottom: 16px;
+            }
+
+            paper-card {
+                width: 100%;
+            }
+        </style>
 
         <uqlibrary-api-account id="accountApi" on-uqlibrary-api-account-loaded="_accountLoaded"></uqlibrary-api-account>
         <uqlibrary-api-training id="trainingApi" on-uqlibrary-api-training="_trainingDataLoaded"></uqlibrary-api-training>

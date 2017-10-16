@@ -13,79 +13,79 @@ Example:
 -->
 <dom-module id="uqlibrary-training-list-category">
 
-  <style is="custom-style" include="common-styles">
+  <template>
 
-    :host {
-      font-family: var(--font-family);
-      font-size: var(--body-font-size);
+    <style is="custom-style" include="common-styles">
 
-      display: block;
-      position: relative;
-      box-sizing: border-box;
-      --paper-item-min-height: 48px;
-      --paper-item-body-two-line-min-height: 72px;
-    }
+      :host {
+        font-family: var(--font-family);
+        font-size: var(--body-font-size);
 
-    .card-active {
-      background: var(--menu-hover-background-color);
-    }
-    paper-card {
-      width: 100%;
-    }
-
-    paper-item {
-
-      --paper-item: {
-        border-bottom: 1px solid var(--border-color);
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        --paper-item-min-height: 48px;
+        --paper-item-body-two-line-min-height: 72px;
       }
 
-      --paper-item-focused: {
+      .card-active {
         background: var(--menu-hover-background-color);
       }
-
-      --paper-item-focused-before: {
-        opacity: 0;
+      paper-card {
+        width: 100%;
       }
 
-    }
+      paper-item {
 
-    .event-date {
-      min-width: 140px;
-      cursor: default;
-    }
+        --paper-item: {
+          border-bottom: 1px solid var(--border-color);
+        }
 
-    a {
-      cursor: default;
-    }
+        --paper-item-focused: {
+          background: var(--menu-hover-background-color);
+        }
 
-    paper-icon-item .content-icon {
-      display: none;
-    }
+        --paper-item-focused-before: {
+          opacity: 0;
+        }
 
-    .event-line {
-      @apply(--layout-horizontal);
-      @apply(--layout-start-justified);
-      min-height: var(--paper-item-min-height);
-      line-height: var(--paper-item-min-height);
-    }
+      }
 
-    .event-line div {
-      @apply(--layout-start);
-    }
+      .event-date {
+        min-width: 140px;
+        cursor: default;
+      }
 
-    @media all and (max-width: 550px) {
+      a {
+        cursor: default;
+      }
+
+      paper-icon-item .content-icon {
+        display: none;
+      }
 
       .event-line {
-        @apply(--layout-vertical);
-        min-height: var(--paper-item-body-two-line-min-height);
-        line-height: 24px;
+        @apply(--layout-horizontal);
+        @apply(--layout-start-justified);
+        min-height: var(--paper-item-min-height);
+        line-height: var(--paper-item-min-height);
       }
 
-    }
+      .event-line div {
+        @apply(--layout-start);
+      }
 
-  </style>
+      @media all and (max-width: 550px) {
 
-  <template>
+        .event-line {
+          @apply(--layout-vertical);
+          min-height: var(--paper-item-body-two-line-min-height);
+          line-height: 24px;
+        }
+
+      }
+
+    </style>
 
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
