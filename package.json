@@ -1,6 +1,7 @@
 {
   "name": "uqlibrary-training",
   "version": "1.0.9",
+  "license": "MIT",
   "description": "Web component to display UQlibrary training events",
   "main": "index.html",
   "directories": {

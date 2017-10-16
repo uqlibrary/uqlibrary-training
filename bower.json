@@ -17,9 +17,5 @@
     "uqlibrary-ga": "uqlibrary/uqlibrary-ga#v1.0.5",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.1.0",
     "moment": "^2.14.1"
-  },
-  "devDependencies": {
-    "web-component-tester": "^5.0.0",
-    "test-fixture": "PolymerElements/test-fixture#^1.0.0"
   }
 }
