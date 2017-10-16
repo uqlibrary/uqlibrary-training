@@ -24,10 +24,10 @@ if [ {$CI_BRANCH} != 'gh-pages' ]; then
 
     bower install
 
-    rm bower.json
-    rm .bowerrc
-    mv bower-wct.json bower.json
-    bower install
+#    rm bower.json
+#    rm .bowerrc
+#    mv bower-wct.json bower.json
+#    bower install
 
     wct
 fi

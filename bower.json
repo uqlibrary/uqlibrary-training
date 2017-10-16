@@ -10,12 +10,17 @@
   "private": true,
   "main": "elements/uqlibrary-training.html",
   "dependencies": {
-    "iron-elements": "PolymerElements/iron-elements#^1.0.0",
-    "paper-elements": "PolymerElements/paper-elements#^1.0.0",
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "polymer": "Polymer/polymer#1.8.1",
+    "iron-elements": "PolymerElements/iron-elements#1.0.10",
+    "paper-elements": "PolymerElements/paper-elements#1.0.7",
+    "iron-component-page": "PolymerElements/iron-component-page#1.1.8",
     "uqlibrary-api": "uqlibrary/uqlibrary-api#v1.3.3",
     "uqlibrary-ga": "uqlibrary/uqlibrary-ga#v1.0.5",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles#v1.1.0",
-    "moment": "^2.14.1"
+    "moment": "2.18.1"
+  },
+  "devDependencies": {
+    "web-component-tester": "5.0.1",
+    "test-fixture": "PolymerElements/test-fixture#1.1.2"
   }
 }
