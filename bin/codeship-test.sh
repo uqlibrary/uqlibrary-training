@@ -3,8 +3,6 @@
 if [ {$CI_BRANCH} != 'gh-pages' ]; then
     echo "Testing branch: ${CI_BRANCH}"
 
-    bower install
-
     # this error is being produced for wct v6:
 #    Error:
 #The web-component-tester Bower package is not installed as a dependency of this project (uqlibrary-training).
@@ -16,11 +14,20 @@ if [ {$CI_BRANCH} != 'gh-pages' ]; then
 #
 #Expected to find a package.json or bower.json or .bower.json at: /home/rof/src/github.com/uqlibrary/uqlibrary-training/bower_components/web-component-tester/
 
-    # this kludge creates a symlinked copy of wct in the required place
+    # kludge:
+    # * create a bower-wct.json which is a bower.json file that tells it how to install wct
+    # in test:
+    # * run the regular bower.json
+    # * delete .bowerrc & rename bower-wct.json to bower.json
+    # run (the new) bower.json
+    # this will put prod files into the ../ location and wct files into bower_components
 
-    echo "make ${PWD}/bower_components/web-component-tester reference original files at ${PWD}/../web-component-tester "
-    mkdir ${PWD}/bower_components/
-    ln -sf "${PWD}/../web-component-tester" "${PWD}/bower_components/web-component-tester"
+    bower install
+
+    rm bower.json
+    rm .bowerrc
+    mv bower-wct.json bower.json
+    bower install
 
     wct
 fi
