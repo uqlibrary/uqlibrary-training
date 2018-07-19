@@ -18,26 +18,24 @@
 
 <test-fixture id="list">
   <template>
-    <uqlibrary-training-list></uqlibrary-training-list>
+    <uqlibrary-training compact-view="true"></uqlibrary-training>
   </template>
 </test-fixture>
 
 <script>
 
 
-  suite('<uqlibrary-training-list> tests', function () {
+  suite('<uqlibrary-training> tests', function () {
     var element;
 
     setup(function () {
       element = fixture('list');
-      element.events = [];
     });
 
     test('It should display default events when there are no upcoming events', function (done) {
+      element.events = [];
       setTimeout(function() {
-        expect(element.querySelector('.header')).not.to.be.null;
-        expect(element.querySelector('.header').textContent).to.contain('Upcoming training');
-        expect(element.querySelector('.no-classes')).not.to.be.null;
+        expect(element.querySelector('.no-classes.missing')).not.to.be.null;
         expect(element.querySelector('#backuplist')).not.to.be.null;
         done();
       }, 50);
@@ -66,17 +64,29 @@
       }];
 
       setTimeout(function() {
-
-        expect(element.querySelectorAll('paper-icon-item').length).to.be.equal(1);
-        expect(element.querySelector('.no-classes')).to.be.null;
+        expect(element.querySelectorAll('#eventList').length).to.be.equal(1);
         expect(element.querySelector('#backuplist')).to.be.null;
 
         done();
-
       }, 50);
 
     });
 
+      test('It should display a friendly message when the api fails', function (done) {
+          element.events = {
+              "response": true,
+              "responseText": "An unknown error occurred"
+          };
+
+          setTimeout(function() {
+
+              expect(element.querySelector('.no-classes.error')).not.to.be.null;
+              expect(element.querySelector('#backuplist')).not.to.be.null;
+
+              done();
+          }, 50);
+
+      });
   });
 </script>
 

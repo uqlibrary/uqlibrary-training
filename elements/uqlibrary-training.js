@@ -33,7 +33,7 @@
        */
       events: {
         type: Array,
-        observer: "_eventsChanged"
+        observer: "_eventsChangedMain"
       },
 
       filterCriteria: {
@@ -166,6 +166,7 @@
      */
     _trainingDataLoaded: function(event) {
         if (Object.prototype.toString.call( event.detail ) !== '[object Array]') {
+            this.events = [];
             this.errorsFound = true;
         } else {
             this.events = event.detail;
@@ -175,9 +176,8 @@
 
     /**
      * Observer handler for events array
-     * @private
      */
-    _eventsChanged: function() {
+    _eventsChangedMain: function() {
       this._processData(this.events);
     },
 

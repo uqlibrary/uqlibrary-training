@@ -44,7 +44,7 @@
 
     });
 
-    test('It should 4 load months in filter drowpdown', function (done) {
+    test('It should 4 load months in filter dropdown', function (done) {
       element.monthList = ['January', 'February', 'March'];
       setTimeout(function() {
         expect(element.querySelector('#monthDropdown').querySelectorAll('paper-item').length).to.be.equal(4);
@@ -53,7 +53,7 @@
     });
 
 
-    test('It should 3 load campuses in filter drowpdown', function (done) {
+    test('It should 3 load campuses in filter dropdown', function (done) {
       element.campusList = ['St Lucia', 'Herston'];
       setTimeout(function() {
         expect(element.querySelector('#campusDropdown').querySelectorAll('paper-item').length).to.be.equal(3);

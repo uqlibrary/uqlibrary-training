@@ -8,14 +8,14 @@
       },
       events: {
         type: Array,
-        observer: "_eventsChanged"
+        observer: "_eventsChangedList"
       },
       gaAppName: {
         type: String
       }
     },
 
-    _eventsChanged: function () {
+      _eventsChangedList: function () {
       var events = this.events;
       for (var i = 0; i < events.length; i++) {
         events[i].startDayWeek = moment(events[i].start).format("ddd");

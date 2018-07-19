@@ -64,7 +64,7 @@ Example:
     </template>
 
     <!-- Training events list -->
-    <template id="list" is="dom-repeat" items="[[_formattedEvents]]" rendered-item-count="{{renderedCount}}">
+    <template id="eventList" is="dom-repeat" items="[[_formattedEvents]]" rendered-item-count="{{renderedCount}}">
 
       <!-- Single Item -->
       <paper-icon-item on-click="_linkClicked"
@@ -87,13 +87,13 @@ Example:
 
     <template is="dom-if" if="[[!renderedCount]]">
       <template is="dom-if" if="[[errorsFound]]">
-        <paper-item class="no-classes">
+        <paper-item class="no-classes error">
           <span>Something went wrong. Please refresh the page to see upcoming courses.</span>
         </paper-item>
       </template>
 
       <template is="dom-if" if="[[!errorsFound]]">
-        <paper-item class="no-classes">
+        <paper-item class="no-classes missing">
           <span>No classes scheduled, check back soon.</span>
         </paper-item>
       </template>
