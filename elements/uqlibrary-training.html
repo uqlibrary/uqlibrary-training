@@ -36,7 +36,7 @@ Example:
         <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
         <template is="dom-if" if="{{!compactView}}">
-
+          <template is="dom-if" if="{{!errorsFound}}">
             <template is="dom-if" if="{{!hideFilter}}">
                 <uqlibrary-training-filter
                         month-list="{{monthList}}"
@@ -64,16 +64,34 @@ Example:
                     </div>
                 </paper-card>
             </template>
+          </template>
+
+          <template is="dom-if" if="[[errorsFound]]">
+            <paper-item class="no-classes">
+              <span>Something went wrong. Please refresh the page to see upcoming courses.</span>
+            </paper-item>
+          </template>
         </template>
 
         <template is="dom-if" if="{{compactView}}">
-            <uqlibrary-training-compact
-                    ga-app-name="[[gaAppName]]"
-                    user-account="[[userAccount]]"
-                    events="[[events]]"></uqlibrary-training-compact>
+          <template is="dom-if" if="{{errorsFound}}">
+              <uqlibrary-training-compact
+                      ga-app-name="[[gaAppName]]"
+                      user-account="[[userAccount]]"
+                      events="[]"
+                      errors-found="[[errorsFound]]"></uqlibrary-training-compact>
+          </template>
+
+          <template is="dom-if" if="{{!errorsFound}}">
+              <uqlibrary-training-compact
+                      ga-app-name="[[gaAppName]]"
+                      user-account="[[userAccount]]"
+                      events="[[events]]"
+                      errors-found="[[errorsFound]]"></uqlibrary-training-compact>
+          </template>
         </template>
 
-        </template>
+    </template>
 
     <script src="uqlibrary-training.js"></script>
 </dom-module>

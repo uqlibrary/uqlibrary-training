@@ -1,11 +1,11 @@
 <link rel="import" href="elements.html">
 
 <!--
-`<uqlibrary-training>` is a simple element that displays training events for a given filter ID
+`<uqlibrary-training-compact>` is a simple element that displays training events for a given filter ID
 
 Example:
 
-    <uqlibrary-training auto-load="true"></uqlibrary-training>
+    <uqlibrary-training-compact auto-load="true"></uqlibrary-training-compact>
 
 @demo
 
@@ -66,6 +66,7 @@ Example:
                 exit-animation="[[_exitAnimation]]">
 
             <uqlibrary-training-list
+                errors-found="[[errorsFound]]"
                 compact-view="[[compactView]]"
                 id="list"
                 ga-app-name="[[gaAppName]]"

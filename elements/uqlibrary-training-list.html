@@ -58,9 +58,11 @@ Example:
     </style>
 
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
-      <template is="dom-if" if="{{!compactView}}">
-          <paper-item class="header" >Upcoming training</paper-item>
-      </template>
+
+    <template is="dom-if" if="{{!compactView}}">
+        <paper-item class="header" >Upcoming training</paper-item>
+    </template>
+
     <!-- Training events list -->
     <template id="list" is="dom-repeat" items="[[_formattedEvents]]" rendered-item-count="{{renderedCount}}">
 
@@ -84,9 +86,17 @@ Example:
     <!-- Backup list in case no result are found in the API -->
 
     <template is="dom-if" if="[[!renderedCount]]">
-      <paper-item class="no-classes">
-        <span>No classes scheduled, check back soon.</span>
-      </paper-item>
+      <template is="dom-if" if="[[errorsFound]]">
+        <paper-item class="no-classes">
+          <span>Something went wrong. Please refresh the page to see upcoming courses.</span>
+        </paper-item>
+      </template>
+
+      <template is="dom-if" if="[[!errorsFound]]">
+        <paper-item class="no-classes">
+          <span>No classes scheduled, check back soon.</span>
+        </paper-item>
+      </template>
 
       <!-- Category Repeat -->
       <template id="backuplist" is="dom-repeat" items="{{_backupLinks()}}">
@@ -115,7 +125,7 @@ Example:
                 </span>
                 <paper-ripple></paper-ripple>
               </paper-item>
-            </template>
+        </template>
       </template>
 
     </template>

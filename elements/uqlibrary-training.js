@@ -119,8 +119,12 @@
        */
       monthList : {
         type: Array
-      }
+      },
 
+      errorsFound: {
+          type: Boolean,
+          value: false
+      }
     },
 
     ready: function () {
@@ -161,7 +165,12 @@
      * @private
      */
     _trainingDataLoaded: function(event) {
-      this.events = event.detail;
+        if (Object.prototype.toString.call( event.detail ) !== '[object Array]') {
+            this.errorsFound = true;
+        } else {
+            this.events = event.detail;
+            this.errorsFound = false;
+        }
     },
 
     /**
