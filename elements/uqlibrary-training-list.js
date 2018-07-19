@@ -2,8 +2,8 @@
   Polymer({
     is: 'uqlibrary-training-list',
     properties: {
-      compactView: {
-          type: Object,
+      errorsFound: {
+          type: Boolean,
           value: false
       },
       events: {
@@ -15,13 +15,16 @@
       }
     },
 
-      _eventsChangedList: function () {
-      var events = this.events;
-      for (var i = 0; i < events.length; i++) {
-        events[i].startDayWeek = moment(events[i].start).format("ddd");
-        events[i].startDay = moment(events[i].start).format("D");
-        events[i].startMonth = moment(events[i].start).format("MMM");
-        events[i].startTime = moment(events[i].start).format("h:mma");
+    _eventsChangedList: function () {
+      var events = [];
+      if (!this.errorsFound && Object.prototype.toString.call( this.events ) === '[object Array]') {
+          events = this.events;
+          for (var i = 0; i < events.length; i++) {
+              events[i].startDayWeek = moment(events[i].start).format("ddd");
+              events[i].startDay = moment(events[i].start).format("D");
+              events[i].startMonth = moment(events[i].start).format("MMM");
+              events[i].startTime = moment(events[i].start).format("h:mma");
+          }
       }
 
       this._formattedEvents = events;
