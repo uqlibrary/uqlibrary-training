@@ -158,6 +158,7 @@
     });
 
     test('It should display filter', function (done) {
+      element.events = data;
       setTimeout(function() {
         expect(element.querySelector('uqlibrary-training-filter')).not.to.be.null;
         done();

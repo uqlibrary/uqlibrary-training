@@ -38,23 +38,23 @@ Example:
         <template is="dom-if" if="{{!compactView}}">
           <template is="dom-if" if="{{!errorsFound}}">
             <template is="dom-if" if="{{!hideFilter}}">
+              <template is="dom-if" if="{{renderedCount}}">
                 <uqlibrary-training-filter
                         month-list="{{monthList}}"
                         campus-list="{{campusList}}"
                         filter-criteria="{{filterCriteria}}"
                         ga-app-name="[[gaAppName]]"></uqlibrary-training-filter>
+              </template>
             </template>
 
             <template is="dom-repeat" items="[[_trainingEventsByCategory]]" as="category" rendered-item-count="{{renderedCount}}">
-
-            <uqlibrary-training-list-category
+              <uqlibrary-training-list-category
                     hide-category-title="{{hideCategoryTitle}}"
                     filter-criteria="{{filterCriteria}}"
                     category="[[category]]"
                     ga-app-name="[[gaAppName]]"
                     user-account="[[userAccount]]">
-            </uqlibrary-training-list-category>
-
+              </uqlibrary-training-list-category>
             </template>
 
             <template is="dom-if" if="{{!renderedCount}}">
