@@ -18,14 +18,14 @@
 
 <test-fixture id="list">
   <template>
-    <uqlibrary-training compact-view="true"></uqlibrary-training>
+    <uqlibrary-training-list></uqlibrary-training-list>
   </template>
 </test-fixture>
 
 <script>
 
 
-  suite('<uqlibrary-training> tests', function () {
+  suite('<uqlibrary-training-list> tests', function () {
     var element;
 
     setup(function () {
@@ -35,7 +35,6 @@
     test('It should display default events when there are no upcoming events', function (done) {
       element.events = [];
       setTimeout(function() {
-        expect(element.querySelector('.no-classes.missing')).not.to.be.null;
         expect(element.querySelector('#backuplist')).not.to.be.null;
         done();
       }, 50);
@@ -72,21 +71,6 @@
 
     });
 
-      test('It should display a friendly message when the api fails', function (done) {
-          element.events = {
-              "response": true,
-              "responseText": "An unknown error occurred"
-          };
-
-          setTimeout(function() {
-
-              expect(element.querySelector('.no-classes.error')).not.to.be.null;
-              expect(element.querySelector('#backuplist')).not.to.be.null;
-
-              done();
-          }, 50);
-
-      });
   });
 </script>
 
