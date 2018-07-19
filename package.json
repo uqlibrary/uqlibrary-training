@@ -22,7 +22,7 @@
     "url": "https://github.com/uqlibrary/uqlibrary-training/issues"
   },
   "devDependencies": {
-    "browser-sync": "~2.18.5",
+    "browser-sync": "^2.24.5",
     "growl": "^1.10.5",
     "gulp": "~3.9.1",
     "hoek": "^5.0.3",
