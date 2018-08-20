@@ -113,10 +113,10 @@
             { "locationHint": "Duhig Tower", "fragment": "/Duhig+Tower/@-27.4966135,153.0140748" },
             { "locationHint": "Duhig B", "fragment": "/Duhig+Tower/@-27.4966135,153.0140748" },
             { "locationHint": "Forgan Smith B", "fragment": "/Forgan+Smith+Building,+St+Lucia+QLD+4072/@-27.496937,153.0128046" },
-            { "locationHint": "Hawken B", "fragment": "/Hawken+Engineering+Building/@-27.4999946,153.0134022" },
+            { "locationHint": "Hawken B", "fragment": "/Dorothy+Hill+Engineering+and+Sciences+Library/@-27.5000086,153.0132045" },
             { "locationHint": "Sir Llew Edwards B", "fragment": "/Sir+Llew+Edwards+Building/@-27.4957145,153.0132919" },
             { "locationHint": "Zelman Cowan B", "fragment": "/Zelman+Cowen+Building,+St+Lucia+QLD+4067/@-27.4990138,153.0144133" },
-            { "locationHint": "Gatton Library", "fragment": "/UQ+Gatton+J.K.+Murray+Library/@-27.5562132,152.3353425" },
+            { "locationHint": "Gatton Library", "fragment": "/UQ+Gatton+J.K.+Murray+Library/@-27.5550302,152.3355262" },
             { "locationHint": "Herston B", "fragment": "/Herston+Health+Sciences+Library/@-27.448831,153.0271885" },
             { "locationHint": "School of Public Health B", "fragment": "/Herston+Health+Sciences+Library/@-27.448831,153.0271885" },
             { "locationHint": "UQCCR Building", "fragment": "/UQCCR/@-27.4486758,153.028019" },
@@ -129,9 +129,7 @@
         ];
         var url = false;
         for (var i = 0; i < listKnownLocations.length; i++) {
-console.log(listKnownLocations[i].locationHint);
             var trainRegExp = new RegExp(listKnownLocations[i].locationHint, 'i');
-console.log(trainRegExp);
             if (venue.match(trainRegExp)) {
               url = 'https://www.google.com.au/maps/place' + listKnownLocations[i].fragment + ',20z';
               break;
