@@ -84,7 +84,12 @@ Example:
       <iron-icon item-icon icon="communication:location-on"></iron-icon>
       <paper-item-body>
         <div class="title">Location</div>
-        <div secondary class="body1">[[ event.venue ]]</div>
+        <template is="dom-if" if="[[_showMapLink]]">
+          <div secondary class="body1 maplink"><a href="[[ _maplink]]" target="_blank">[[ event.venue ]]</a></div>
+        </template>
+        <template is="dom-if" if="[[_hideMapLink]]">
+          <div secondary class="body1">[[ event.venue ]]</div>
+        </template>
       </paper-item-body>
     </paper-icon-item>
 

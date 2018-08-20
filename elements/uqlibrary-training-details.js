@@ -62,6 +62,10 @@
 
       _bookingText: {
         type: String
+      },
+
+      _maplink: {
+        type: String
       }
     },
 
@@ -88,6 +92,54 @@
             this._bookingText = 'Class is full. Register for waitlist.';
           }
       }
+
+      var mapUrl = this._findKnownLocationinVenue(this.event.venue);
+      this._maplink = mapUrl !== false ? mapUrl : '';
+      this._showMapLink = mapUrl !== false;
+      this._hideMapLink = !this._showMapLink;
+    },
+
+      /**
+       * determine which of the list of buildings the venue is in
+       * the fragment is cut out of a google map link
+       * @param venue String
+       * @returns {boolean}
+       * @private
+       */
+    _findKnownLocationinVenue: function(venue) {
+        var listKnownLocations = [
+            { "locationHint": "Biological Sciences Library", "fragment": "/Biological+Sciences+Library/@-27.4969854,153.0111289" },
+            { "locationHint": "Colin Clark B", "fragment": "/Colin+Clark+Building/@-27.4947559,153.0135628" },
+            { "locationHint": "Duhig Tower", "fragment": "/Duhig+Tower/@-27.4966135,153.0140748" },
+            { "locationHint": "Duhig B", "fragment": "/Duhig+Tower/@-27.4966135,153.0140748" },
+            { "locationHint": "Forgan Smith B", "fragment": "/Forgan+Smith+Building,+St+Lucia+QLD+4072/@-27.496937,153.0128046" },
+            { "locationHint": "Hawken B", "fragment": "/Hawken+Engineering+Building/@-27.4999946,153.0134022" },
+            { "locationHint": "Sir Llew Edwards B", "fragment": "/Sir+Llew+Edwards+Building/@-27.4957145,153.0132919" },
+            { "locationHint": "Zelman Cowan B", "fragment": "/Zelman+Cowen+Building,+St+Lucia+QLD+4067/@-27.4990138,153.0144133" },
+            { "locationHint": "Gatton Library", "fragment": "/UQ+Gatton+J.K.+Murray+Library/@-27.5562132,152.3353425" },
+            { "locationHint": "Herston B", "fragment": "/Herston+Health+Sciences+Library/@-27.448831,153.0271885" },
+            { "locationHint": "School of Public Health B", "fragment": "/Herston+Health+Sciences+Library/@-27.448831,153.0271885" },
+            { "locationHint": "UQCCR Building", "fragment": "/UQCCR/@-27.4486758,153.028019" },
+            { "locationHint": "Aubigny Place B", "fragment": "/Aubigny+Place+-+Mater+Hospital+Brisbane/@-27.4865039,153.0271426" },
+            { "locationHint": "PACE Health Sciences Library", "fragment": "/UQ+School+Of+Public+Health/@-27.4487066,153.0226777" }
+//          ,{ "locationHint": "Bundaberg", "latlong": "tba" },
+//          { "locationHint": "Hervey Bay", "latlong": "tba" },
+//          { "locationHint": "Rockhampton", "latlong": "tba" },
+//          { "locationHint": "Toowoomba", "latlong": "tba" }
+        ];
+        var url = false;
+        for (var i = 0; i < listKnownLocations.length; i++) {
+console.log(listKnownLocations[i].locationHint);
+            var trainRegExp = new RegExp(listKnownLocations[i].locationHint, 'i');
+console.log(trainRegExp);
+            if (venue.match(trainRegExp)) {
+              url = 'https://www.google.com.au/maps/place' + listKnownLocations[i].fragment + ',20z';
+              break;
+            }
+        }
+        return url;
+// var doiRegexp = /https?:\/\/dx.doi.org\//i;
+// dest = dest.replace(doiRegexp, '');
     },
 
     /**

@@ -42,7 +42,7 @@
         "expire": "2016-07-25T14:00:00+10:00",
         "summary": "Gain a better understanding of the assignment writing process, as well as strategies to conduct research and write assignments that are well structured and clearly organised.",
         "details": "Gain a better understanding of the assignment writing process, as well as strategies to conduct research and write assignments that are well structured and clearly organised.",
-        "venue": "Building 12, Lvl 4, Room 401",
+        "venue": "Centre for Digital Scholarship - Room 501, Level 5, Duhig tower (Bldg 2), St Lucia (above Merlo Cafe)",
         "bookingType": 0,
         "bookingSettings": null,
         "workGroupId": null,
@@ -96,8 +96,12 @@
       }, 50);
     });
 
-
-
+    test('It should choose a correct url for map display', function (done) {
+        setTimeout(function() {
+            expect(element.querySelector('.maplink a').innerHTML).to.be.equal(element.event.venue);
+            done();
+        }, 50);
+    });
   });
 </script>
 
