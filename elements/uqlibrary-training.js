@@ -268,6 +268,13 @@
         }
       }
 
+      // sort the events by section name to give constancy of section ordering
+      if (processedEvents) {
+          processedEvents.sort(function (a, b) {
+              return a.displayName > b.displayName;
+          });
+      }
+
       this._trainingEventsByCategory = processedEvents;
       this.campusList = campuses;
       this.weekList = weeks;
