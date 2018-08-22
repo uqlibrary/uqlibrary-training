@@ -5,28 +5,12 @@
 
     properties: {
 
-      /**
-       * Specifies list of campuses, auto populated from api
-       * @type {Array}
-       */
-      campusList: {
-        type: Array
-      },
-
-      /**
-       * Specifies list of event months, auto populated from api
-       * @type {Array}
-       */
-      monthList : {
-        type: Array
-      },
-
       filterCriteria: {
         type: Object,
         value: function () {
           return {
             keyword: '',
-            month: '',
+            week: '',
             campus: ''
           };
         }
@@ -37,9 +21,9 @@
         observer: "_searchCampusChanged"
       },
 
-      _selectedMonthIndex: {
+        _selectedWeekIndex: {
         type: Number,
-        observer: "_searchMonthChanged"
+        observer: "_searchWeekChanged"
       },
 
       /**
@@ -63,7 +47,7 @@
        * Specifies list of event months, auto populated from api
        * @type {Array}
        */
-      monthList : {
+      weekList : {
         type: Array
       }
 
@@ -71,15 +55,14 @@
 
     observers: [
       '_searchKeywordChanged(filterCriteria.keyword)'
-    ],
+      ],
 
-    _searchMonthChanged: function(newValue, oldValue) {
-      this.$.ga.addEvent("filter", 'by month');
-
-      if (this._selectedMonthIndex > 0)
-        this.set('filterCriteria.month', this.monthList[newValue - 1]);
+      _searchWeekChanged: function(newValue, oldValue) {
+      this.$.ga.addEvent("filter", 'by period');
+      if (this._selectedWeekIndex > 0)
+        this.set('filterCriteria.week', this.weekList[newValue - 1]);
       else
-        this.set('filterCriteria.month', '');
+        this.set('filterCriteria.week', '');
     },
 
     _searchKeywordChanged: function(newValue, oldValue) {

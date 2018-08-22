@@ -90,11 +90,11 @@ Example:
                 </div>
 
                 <div>
-                    <paper-dropdown-menu label="By month" aria-label="filter by month" id="monthDropdown">
-                        <paper-listbox class="dropdown-content" selected="{{_selectedMonthIndex}}">
+                    <paper-dropdown-menu label="By week" aria-label="filter by week" id="weekDropdown">
+                        <paper-listbox class="dropdown-content" selected="{{_selectedWeekIndex}}">
                             <paper-item label="All available" aria-label="All available" role="option">All available</paper-item>
-                            <template is="dom-repeat" items="{{monthList}}">
-                                <paper-item label="[[item]]" aria-label="[[item]]" role="option">[[item]]</paper-item>
+                            <template is="dom-repeat" items="{{weekList}}">
+                                <paper-item label="[[item.label]]" aria-label="[[item.label]]" role="option">[[item.label]]</paper-item>
                             </template>
                         </paper-listbox>
                     </paper-dropdown-menu>

@@ -99,7 +99,7 @@ Example:
       <template is="dom-repeat"
                 items="[[category.events]]"
                 as="trainingEvent"
-                filter="{{filterEvents(filterCriteria.keyword, filterCriteria.month, filterCriteria.campus)}}"
+                filter="{{filterEvents(filterCriteria.keyword, filterCriteria.week, filterCriteria.campus)}}"
                 rendered-item-count="{{renderedCount}}">
 
         <paper-item on-click="toggle" id$="item[[trainingEvent.entityId]]">

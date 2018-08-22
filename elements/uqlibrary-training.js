@@ -41,7 +41,7 @@
         value: function () {
           return {
             keyword: '',
-            month: '',
+            week: '',
             campus: ''
           };
         }
@@ -114,10 +114,10 @@
       },
 
       /**
-       * Specifies list of event months, auto populated from api
+       * Specifies list of event week, auto populated from api
        * @type {Array}
        */
-      monthList : {
+      weekList : {
         type: Array
       },
 
@@ -182,7 +182,7 @@
     },
 
     /**
-     * Processes raw data from events, extracts months/campuses/categories(labels)
+     * Processes raw data from events, extracts weeks/campuses/categories(labels)
      * @private
      */
     _processData: function (events) {
@@ -190,7 +190,13 @@
       var processedEvents = [];
       var categories = [];
       var campuses = [];
-      var months = [];
+      var weeks = [];
+
+      var startOfWeek;
+      var endOfWeek;
+      var weekLabel;
+      var weekData;
+      var found;
 
       for(var eventIndex = 0; eventIndex < events.length; eventIndex++){
         var event = events[eventIndex];
@@ -223,7 +229,7 @@
             //create display string for start date
             var startDate = new Date(event.start);
             event.formattedDate = moment(event.start).format('ddd D MMM YYYY');
-            event.link = this.parentUrl + event.entityId;;
+            event.link = this.parentUrl + event.entityId;
 
             //add this event to the category
             category.events.push(event);
@@ -240,16 +246,31 @@
           }
         }
 
-        //setup all event months
-        var monthName = moment(event.start).format('MMMM');
-        if (months.indexOf(monthName) < 0) {
-          months.push(monthName);
+        //setup all event weeks
+        startOfWeek = moment(event.start).startOf('week');
+        endOfWeek = moment(event.start).endOf('week');
+        weekLabel = startOfWeek.format('MMM D') + ' - ' + endOfWeek.format('MMM D');
+        weekData = {
+          "label": weekLabel,
+          "startData": startOfWeek.format('YYYY-MM-DD'),
+          "endData": endOfWeek.format('YYYY-MM-DD')
+        };
+
+        found = false;
+        for (var ii = 0; ii < weeks.length; ii++) {
+          if (weeks[ii].label === weekLabel) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+            weeks.push(weekData);
         }
       }
 
       this._trainingEventsByCategory = processedEvents;
       this.campusList = campuses;
-      this.monthList = months;
+      this.weekList = weeks;
     },
 
     /**

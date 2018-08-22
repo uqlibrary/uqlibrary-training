@@ -37,17 +37,17 @@
 
         expect(element.querySelector('#inputKeyword')).not.to.be.null;
         expect(element.querySelector('#campusDropdown')).not.to.be.null;
-        expect(element.querySelector('#monthDropdown')).not.to.be.null;
+        expect(element.querySelector('#weekDropdown')).not.to.be.null;
 
       done();
       }, 50);
 
     });
 
-    test('It should 4 load months in filter dropdown', function (done) {
-      element.monthList = ['January', 'February', 'March'];
+    test('It should 4 load weeks in filter dropdown', function (done) {
+      element.weekList = ['Jan 1 - Jan 5', 'Jan 8 - Jan 12', 'Jan 15 - Jan 19'];
       setTimeout(function() {
-        expect(element.querySelector('#monthDropdown').querySelectorAll('paper-item').length).to.be.equal(4);
+        expect(element.querySelector('#weekDropdown').querySelectorAll('paper-item').length).to.be.equal(4);
         done();
       }, 50);
     });

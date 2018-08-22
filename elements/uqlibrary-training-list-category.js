@@ -14,7 +14,7 @@
       hideCategoryTitle: {
         type: Object,
         value: false
-      },
+      }
     },
 
     filterEventsByKeyword: function(filterCriteria) {
@@ -28,14 +28,13 @@
       };
     },
 
-    filterEvents: function(keyword, month, campus) {
+    filterEvents: function(keyword, week, campus) {
       return function(trainingEvent) {
 
         // Convert the input keyword to a case-insensitive regular expression then test against event name and detail
         var keywordRegExp = new RegExp(keyword, 'i');
-
         return (!keyword || trainingEvent.name.match(keywordRegExp) || trainingEvent.details.match(keywordRegExp))
-            && (!month || moment(trainingEvent.start).format("MMMM").toLowerCase().indexOf(month.toLowerCase()) >= 0)
+             && (!week || (moment(trainingEvent.start) >= moment(week.startData) && moment(trainingEvent.start) <= moment(week.endData)))
             && (!campus || trainingEvent.categories.campus.join(',').toLowerCase().indexOf(campus.toLowerCase()) >= 0);
       };
     },
