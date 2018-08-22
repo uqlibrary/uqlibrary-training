@@ -17,17 +17,6 @@
       }
     },
 
-    filterEventsByKeyword: function(filterCriteria) {
-      return function(trainingEvent) {
-        if (!filterCriteria) {
-          return true;
-        }
-
-        var filterCriteriaRegExp = new RegExp(filterCriteria, 'i');
-        return trainingEvent.name.match(filterCriteriaRegExp) || trainingEvent.details.match(filterCriteriaRegExp);
-      };
-    },
-
     filterEvents: function(keyword, week, campus) {
       return function(trainingEvent) {
 
