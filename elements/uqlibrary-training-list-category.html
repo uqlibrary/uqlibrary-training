@@ -52,8 +52,16 @@ Example:
       }
 
       .event-date {
-        min-width: 140px;
+        min-width: 48px;
+        min-width: 3rem;
+        margin-right: 0;
         cursor: default;
+        display: inline-flex;
+      }
+
+      /* right align the date */
+      .event-date span {
+        margin-left: auto;
       }
 
       a {
@@ -69,10 +77,19 @@ Example:
         @apply(--layout-start-justified);
         min-height: var(--paper-item-min-height);
         line-height: var(--paper-item-min-height);
+        flex-direction: column;
       }
 
       .event-line div {
         @apply(--layout-start);
+        height: 2rem;
+      }
+
+      .event-title {
+        margin-top: 12px;
+        margin-top: 0.75rem;
+        padding-bottom: 4px;
+        padding-bottom: 0.25rem;
       }
 
       @media all and (max-width: 550px) {
@@ -80,11 +97,32 @@ Example:
         .event-line {
           @apply(--layout-vertical);
           min-height: var(--paper-item-body-two-line-min-height);
-          line-height: 24px;
         }
 
       }
 
+      .an-entry {
+        justify-content: space-between;
+        margin-top: -16px;
+        margin-top: -1rem;
+      }
+
+      .body1 {
+        font-size: 12px;
+        font-size: 0.75rem;
+        color: #676767;
+        background-color: inherit;
+        display: block;
+        margin-top: -16px;
+        margin-top: -1rem;
+        margin-bottom: 12px;
+        margin-bottom: 0.75rem;
+      }
+
+      .count-events {
+        color: #5b5b5b;
+        background-color: inherit;
+      }
     </style>
 
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
@@ -102,16 +140,20 @@ Example:
                 filter="{{filterEvents(filterCriteria.keyword, filterCriteria.week, filterCriteria.campus)}}"
                 rendered-item-count="{{renderedCount}}">
 
-        <paper-item on-click="toggle" id$="item[[trainingEvent.entityId]]">
+        <paper-item class="an-entry" on-click="toggle" id$="item[[trainingEvent.entityId]]">
 
-          <paper-item-body two-line class="event-line">
-            <div class="event-date">[[_formatDate(trainingEvent.start)]]</div>
-            <div><a>[[trainingEvent.name]] ([[ trainingEvent.categories.campus ]])</a></div>
+          <paper-item-body class="event-line">
+              <div class="event-title"><a>[[trainingEvent.name]]</a></div>
+              <div class="body1">[[ trainingEvent.venue ]]</div>
           </paper-item-body>
 
-
-          <iron-icon class="down" icon="icons:arrow-drop-down"></iron-icon>
-          <iron-icon class="up hidden" icon="icons:arrow-drop-up"></iron-icon>
+          <div>
+            <div class="event-date">
+              <span>[[_formatDate(trainingEvent.start)]]</span>
+            </div>
+            <iron-icon class="down" icon="icons:arrow-drop-down"></iron-icon>
+            <iron-icon class="up hidden" icon="icons:arrow-drop-up"></iron-icon>
+          </div>
 
           <paper-ripple></paper-ripple>
         </paper-item>

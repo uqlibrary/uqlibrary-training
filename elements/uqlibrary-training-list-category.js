@@ -29,7 +29,7 @@
     },
 
     _formatDate: function(date) {
-      return moment(date).format("ddd D MMM YYYY");
+      return moment(date).format("D MMM");
     },
 
     _getCategoryTitle: function(title, hideTitle){
