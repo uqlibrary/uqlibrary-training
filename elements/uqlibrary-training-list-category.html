@@ -48,7 +48,14 @@ Example:
         --paper-item-focused-before: {
           opacity: 0;
         }
+      }
 
+      paper-item {
+        min-height: auto;
+      }
+
+      .control-block {
+        white-space: nowrap;
       }
 
       .event-date {
@@ -59,7 +66,7 @@ Example:
         display: inline-flex;
       }
 
-      /* right align the date */
+      /* right align the date within its space */
       .event-date span {
         margin-left: auto;
       }
@@ -74,22 +81,19 @@ Example:
 
       .event-line {
         @apply(--layout-horizontal);
-        @apply(--layout-start-justified);
-        min-height: var(--paper-item-min-height);
-        line-height: var(--paper-item-min-height);
         flex-direction: column;
       }
 
       .event-line div {
         @apply(--layout-start);
-        height: 2rem;
       }
 
       .event-title {
-        margin-top: 12px;
-        margin-top: 0.75rem;
-        padding-bottom: 4px;
-        padding-bottom: 0.25rem;
+        margin-top: 10px;
+        margin-top: 0.625rem;
+        line-height: normal;
+        padding-right: 8px;
+        padding-right: 0.5rem;
       }
 
       @media all and (max-width: 550px) {
@@ -103,8 +107,6 @@ Example:
 
       .an-entry {
         justify-content: space-between;
-        margin-top: -16px;
-        margin-top: -1rem;
       }
 
       .body1 {
@@ -113,10 +115,15 @@ Example:
         color: #676767;
         background-color: inherit;
         display: block;
-        margin-top: -16px;
-        margin-top: -1rem;
-        margin-bottom: 12px;
-        margin-bottom: 0.75rem;
+        margin-bottom: 8px;
+        margin-bottom: 0.5rem;
+        margin-top: -4px;
+        margin-top: -0.25rem;
+        line-height: normal;
+        padding-top: 4px;
+        padding-top: 0.25rem;
+        padding-bottom: 4px;
+        padding-bottom: 0.25rem;
       }
 
       .count-events {
@@ -142,12 +149,12 @@ Example:
 
         <paper-item class="an-entry" on-click="toggle" id$="item[[trainingEvent.entityId]]">
 
-          <paper-item-body class="event-line">
+          <div class="event-line">
               <div class="event-title"><a>[[trainingEvent.name]]</a></div>
               <div class="body1">[[ trainingEvent.venue ]]</div>
-          </paper-item-body>
+          </div>
 
-          <div>
+          <div class="control-block">
             <div class="event-date">
               <span>[[_formatDate(trainingEvent.start)]]</span>
             </div>
