@@ -138,12 +138,22 @@ Example:
         padding-bottom: 8px;
         padding-bottom: 0.5rem;
       }
+
+      h2 {
+        padding: 0 16px;
+        padding: 0 1rem;
+        font-size: 24px;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #000;
+      }
     </style>
 
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
-    <paper-card heading="[[_getCategoryTitle(category.displayName, hideCategoryTitle)]]">
+    <paper-card>
       <template is="dom-if" if="{{renderedCount}}">
+        <h2>[[_getCategoryTitle(category.displayName, hideCategoryTitle)]]</h2>
         <div class="card-content count-events">
           [[renderedCount]] events available
         </div>
@@ -188,12 +198,6 @@ Example:
             </div>
           </div>
         </iron-collapse>
-      </template>
-
-      <template is="dom-if" if="{{!renderedCount}}">
-        <div class="card-content no-events">
-        No events available
-        </div>
       </template>
 
       <template is="dom-if" if="{{renderedCount}}">
