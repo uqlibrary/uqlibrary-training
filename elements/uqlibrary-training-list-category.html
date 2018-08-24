@@ -130,6 +130,14 @@ Example:
         color: #5b5b5b;
         background-color: inherit;
       }
+
+      .show-more {
+        text-align: right;
+        padding-right: 6px;
+        padding-right: 0.5rem;
+        padding-bottom: 8px;
+        padding-bottom: 0.5rem;
+      }
     </style>
 
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
@@ -142,9 +150,10 @@ Example:
       </template>
 
       <template is="dom-repeat"
+                id="categoriesList"
                 items="[[category.events]]"
                 as="trainingEvent"
-                filter="{{filterEvents(filterCriteria.keyword, filterCriteria.week, filterCriteria.campus)}}"
+                filter="{{filterEvents(category, filterCriteria.keyword, filterCriteria.week, filterCriteria.campus)}}"
                 rendered-item-count="{{renderedCount}}">
 
         <paper-item class="an-entry" on-click="toggle" id$="item[[trainingEvent.entityId]]">
@@ -187,6 +196,21 @@ Example:
         </div>
       </template>
 
+      <template is="dom-if" if="{{renderedCount}}">
+        <div class="card-content show-more">
+          <template is="dom-if"  if="[[showMoreButton]]" -->
+            <paper-button id="moreButton" class="button-colored-secondary" on-click="showMoreEntries">
+              Show more
+            </paper-button>
+          </template>
+
+          <template is="dom-if" if="[[showLessButton]]">
+            <paper-button id="lessButton" class="button-colored-secondary" on-click="showLessEntries">
+              Show less
+            </paper-button>
+          </template>
+        </div>
+      </template>
     </paper-card>
 
   </template>

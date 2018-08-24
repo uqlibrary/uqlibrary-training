@@ -44,7 +44,7 @@
 
     });
 
-    test('It should 4 load weeks in filter dropdown', function (done) {
+    test('It should load 4 weeks in filter dropdown', function (done) {
       element.weekList = ['Jan 1 - Jan 5', 'Jan 8 - Jan 12', 'Jan 15 - Jan 19'];
       setTimeout(function() {
         expect(element.querySelector('#weekDropdown').querySelectorAll('paper-item').length).to.be.equal(4);
@@ -53,7 +53,7 @@
     });
 
 
-    test('It should 3 load campuses in filter dropdown', function (done) {
+    test('It should load 3 campuses in filter dropdown', function (done) {
       element.campusList = ['St Lucia', 'Herston'];
       setTimeout(function() {
         expect(element.querySelector('#campusDropdown').querySelectorAll('paper-item').length).to.be.equal(3);

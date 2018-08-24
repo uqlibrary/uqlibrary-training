@@ -216,6 +216,7 @@
             if (catIndex < 0) {
               category.events = [];
               category.displayName = category.name.replace(/.*\./ , '');
+              category.firstEventId = event.entityId;
               processedEvents.push(category);
 
               categories.push(category.id);
