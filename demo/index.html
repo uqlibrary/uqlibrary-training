@@ -14,19 +14,28 @@
         .layout {
             padding: 16px;
         }
+        .layout>h2 {
+            text-transform: uppercase;
+            color: #202020;
+        }
+        .layout>hr {
+            height: 20px; background-color: #202020;
+        }
     </style>
 
 </head>
 <body class="fullbleed">
 
 <div class="layout">
-    <p>Example 1: has filter and headers on section</p>
+    <h2>Example 1: has filter and headers on section</h2>
+    <p>Usage:</p>
     <p>&lt;uqlibrary-training event-filter-id="" max-event-count="100" ga-app-name="UQL Drupal Training" compact-view="false"&gt;&lt;/uqlibrary-training&gt;</p>
     <uqlibrary-training event-filter-id="" max-event-count="100" ga-app-name="UQL Drupal Training" compact-view="false"></uqlibrary-training>
 
     <hr>
 
-    <p>Example 2: no filter, no section headings</p>
+    <h2>Example 2: no filter, no section headings</h2>
+    <p>Usage:</p>
     &lt;uqlibrary-training event-filter-id="" max-event-count="100" ga-app-name="UQL Drupal Training" compact-view="false" hide-filter="true" hide-category-title="true"&gt;&lt;/uqlibrary-training&gt;
     <uqlibrary-training event-filter-id="" max-event-count="100" ga-app-name="UQL Drupal Training" compact-view="false" hide-filter="true" hide-category-title="true"></uqlibrary-training>
 </div>
