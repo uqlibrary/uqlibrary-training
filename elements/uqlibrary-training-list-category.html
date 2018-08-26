@@ -97,10 +97,25 @@ Example:
       }
 
       @media all and (max-width: 550px) {
+        .event-line div {
+          overflow: hidden;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+        }
 
-        .event-line {
-          @apply(--layout-vertical);
-          min-height: var(--paper-item-body-two-line-min-height);
+        /* the location line should not wrap on mobile - we only want the building name really anyway */
+        .event-venue {
+          text-overflow: ellipsis;
+          max-height: 12px;
+          max-height: 1rem;
+          width: 250px;
+          white-space: nowrap;
+        }
+
+        /* restrict title to 2 lines - cant do ellipsis with more than one line :( */
+        .event-title {
+          max-height: 42px;
+          max-height: 2.625rem;
         }
 
       }
@@ -109,7 +124,7 @@ Example:
         justify-content: space-between;
       }
 
-      .body1 {
+      .event-venue {
         font-size: 12px;
         font-size: 0.75rem;
         color: #676767;
@@ -129,6 +144,7 @@ Example:
       .count-events {
         color: #5b5b5b;
         background-color: inherit;
+        padding-top: 0;
       }
 
       .show-more {
@@ -147,6 +163,17 @@ Example:
         font-weight: 400;
         color: #000;
       }
+
+      div.divider {
+        margin-bottom: 16px;
+        height: 0;
+      }
+
+      /* otherwise we get a yucky space for every filtered out block */
+      div.no-events {
+        margin-bottom: -16px;
+      }
+
     </style>
 
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
@@ -170,7 +197,7 @@ Example:
 
           <div class="event-line">
               <div class="event-title"><a>[[trainingEvent.name]]</a></div>
-              <div class="body1">[[ trainingEvent.venue ]]</div>
+            <div class="event-venue">[[ trainingEvent.venue ]]</div>
           </div>
 
           <div class="control-block">
@@ -216,6 +243,14 @@ Example:
         </div>
       </template>
     </paper-card>
+
+    <template is="dom-if" if="{{!renderedCount}}">
+      <div class="card-content no-events"></div>
+    </template>
+
+    <template class="tempclass2" is="dom-if" if="{{renderedCount}}">
+      <div class="divider">&nbsp;</div>
+    </template>
 
   </template>
 
