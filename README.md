@@ -41,3 +41,16 @@ Tests are run using the Web Component Tester. Either navigate to /tests/index.ht
 wct --local all
 ```
 
+#### UAT testing
+
+We have a testing branch on Drupal at https://library.stage.drupal.uq.edu.au/library-services/training
+
+If you:
+- commit to master brnanch of uqlibrary-training
+- make a new release on github for repo uqlibrary-training
+- update bower.json on branch master of repo uqlibrary-reusable-components
+- wait for the invalidation on AWS
+
+then you will be able to preview a change on this page of drupal
+
+Bear in mind master branches of both uqlibrary-training and uqlibrary-reusable-components will be 'locked' until these changes are approved or rolledback as any pushes form master to prod of reusable will take the changes you are testing live :(
