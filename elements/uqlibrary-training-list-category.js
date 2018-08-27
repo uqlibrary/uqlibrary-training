@@ -136,8 +136,8 @@
       return moment(date).format("D MMM");
     },
 
-    _getCategoryTitle: function(title, hideTitle){
-      if(hideTitle) {
+    _getCategoryTitle: function(title, hideTitle, renderedCount){
+      if(hideTitle || !renderedCount) {
         return '';
       } else {
         return title;

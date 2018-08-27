@@ -144,7 +144,6 @@ Example:
       .count-events {
         color: #5b5b5b;
         background-color: inherit;
-        padding-top: 0;
       }
 
       .show-more {
@@ -178,9 +177,8 @@ Example:
 
     <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
 
-    <paper-card>
+    <paper-card heading="[[_getCategoryTitle(category.displayName, hideCategoryTitle, renderedCount)]]">
       <template is="dom-if" if="{{renderedCount}}">
-        <h2>[[_getCategoryTitle(category.displayName, hideCategoryTitle)]]</h2>
         <div class="card-content count-events">
           [[renderedCount]] events available
         </div>
