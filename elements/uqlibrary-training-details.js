@@ -118,14 +118,14 @@
             { "locationHint": "Zelman Cowan B", "fragment": "/Zelman+Cowen+Building,+St+Lucia+QLD+4067/@-27.4990138,153.0144133" },
             { "locationHint": "Gatton Library", "fragment": "/UQ+Gatton+J.K.+Murray+Library/@-27.5550302,152.3355262" },
             { "locationHint": "Herston B", "fragment": "/Herston+Health+Sciences+Library/@-27.448831,153.0271885" },
-            { "locationHint": "School of Public Health B", "fragment": "/Herston+Health+Sciences+Library/@-27.448831,153.0271885" },
+            { "locationHint": "School of Public Health B", "fragment": "/Herston+Health+Sciences+Library/@-27.4487572,153.0229345" },
             { "locationHint": "UQCCR Building", "fragment": "/UQCCR/@-27.4486758,153.028019" },
             { "locationHint": "Aubigny Place B", "fragment": "/Aubigny+Place+-+Mater+Hospital+Brisbane/@-27.4865039,153.0271426" },
-            { "locationHint": "PACE Health Sciences Library", "fragment": "/UQ+School+Of+Public+Health/@-27.4487066,153.0226777" }
-//          ,{ "locationHint": "Bundaberg", "latlong": "tba" },
-//          { "locationHint": "Hervey Bay", "latlong": "tba" },
-//          { "locationHint": "Rockhampton", "latlong": "tba" },
-//          { "locationHint": "Toowoomba", "latlong": "tba" }
+            { "locationHint": "PACE Health Sciences Library", "fragment": "/UQ+School+Of+Public+Health/@-27.4999636,153.0284143" },
+            { "locationHint": "Bundaberg", "fragment": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre/-24.870152,152.332057" },
+            { "locationHint": "Hervey Bay", "fragment": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre/@-25.298911,152.8212355" },
+            { "locationHint": "Rockhampton", "fragment": "/The+University+of+Queensland,+Rural+Clinical+School,+Rockhampton/@-23.3810434,150.4938467" },
+            { "locationHint": "Toowoomba", "fragment": "/School's+Teaching+and+Learning+Centre+South+Toowoomba/@-27.5683715,151.9417366" }
         ];
         var url = false;
         for (var i = 0; i < listKnownLocations.length; i++) {
