@@ -56,6 +56,7 @@ Example:
 
       .control-block {
         white-space: nowrap;
+
       }
 
       .event-date {
@@ -106,8 +107,6 @@ Example:
         /* the location line should not wrap on mobile - we only want the building name really anyway */
         .event-venue {
           text-overflow: ellipsis;
-          max-height: 12px;
-          max-height: 1rem;
           width: 250px;
           white-space: nowrap;
         }
@@ -118,6 +117,14 @@ Example:
           max-height: 2.625rem;
         }
 
+      }
+
+      @media all and (max-width: 400px) {
+        .card-content,
+        .an-entry {
+          padding-right: 4px;
+          padding-left: 4px;
+        }
       }
 
       .an-entry {
@@ -180,7 +187,7 @@ Example:
     <paper-card heading="[[_getCategoryTitle(category.displayName, hideCategoryTitle, renderedCount)]]">
       <template is="dom-if" if="{{renderedCount}}">
         <div class="card-content count-events">
-          [[renderedCount]] events available
+          [[totalCount]] events available
         </div>
       </template>
 

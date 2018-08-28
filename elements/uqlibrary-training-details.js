@@ -99,9 +99,19 @@
       this._hideMapLink = !this._showMapLink;
     },
 
+    /**
+     * from https://medium.com/@colinlord/opening-native-map-apps-from-the-mobile-browser-afd66fbbb8a4
+     * @returns {boolean}
+     */
+    isOperatingSystemIOS: function () {
+      return (navigator.platform.indexOf("iPhone") !== -1) ||
+              (navigator.platform.indexOf("iPad") !== -1) ||
+              (navigator.platform.indexOf("iPod") !== -1);
+    },
+
       /**
        * determine which of the list of buildings the venue is in
-       * the fragment is cut out of a google map link
+       * the fragment is used to build a map link
        * @param venue String
        * @returns {boolean}
        * @private
@@ -131,13 +141,14 @@
         for (var i = 0; i < listKnownLocations.length; i++) {
             var trainRegExp = new RegExp(listKnownLocations[i].locationHint, 'i');
             if (venue.match(trainRegExp)) {
-              url = 'https://www.google.com.au/maps/place' + listKnownLocations[i].fragment + ',20z';
+              /* if we're on iOS, reconfigure url so it will work in an app */
+              var protocol = this.isOperatingSystemIOS() ? 'maps' : 'https';
+
+              url = protocol  + '://www.google.com.au/maps/place' + listKnownLocations[i].fragment + ',20z';
               break;
             }
         }
         return url;
-// var doiRegexp = /https?:\/\/dx.doi.org\//i;
-// dest = dest.replace(doiRegexp, '');
     },
 
     /**

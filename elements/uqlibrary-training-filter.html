@@ -98,7 +98,7 @@ Example:
                         <paper-listbox class="dropdown-content" selected="{{_selectedWeekIndex}}">
                             <paper-item label="All available" aria-label="All available" role="option">All available</paper-item>
                             <template is="dom-repeat" items="{{weekList}}">
-                                <paper-item label="[[item.label]]" aria-label="[[item.label]]" role="option">[[item.label]]</paper-item>
+                                <paper-item class="filter-date-item" label="[[item.label]]" aria-label="[[item.label]]" role="option">[[item.label]]</paper-item>
                             </template>
                         </paper-listbox>
                     </paper-dropdown-menu>

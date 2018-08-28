@@ -250,7 +250,7 @@
         //setup all event weeks
         startOfWeek = moment(event.start).startOf('week');
         endOfWeek = moment(event.start).endOf('week');
-        weekLabel = startOfWeek.format('MMM D') + ' - ' + endOfWeek.format('MMM D');
+        weekLabel = startOfWeek.format('MMM D') + ' - ' + endOfWeek.format('MMM D') + ' ';
         weekData = {
           "label": weekLabel,
           "startData": startOfWeek.format('YYYY-MM-DD'),
@@ -274,6 +274,10 @@
           processedEvents.sort(function (a, b) {
               return a.displayName > b.displayName;
           });
+      }
+
+      for(var ii=0; ii < processedEvents.length; ii++) {
+          processedEvents[ii].numRecordsCategory = processedEvents[ii].events.length;
       }
 
       this._trainingEventsByCategory = processedEvents;
