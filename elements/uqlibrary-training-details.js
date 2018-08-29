@@ -156,7 +156,7 @@
             var trainRegExp = new RegExp(listKnownLocations[i].locationHint, 'i');
             if (venue.match(trainRegExp)) {
               /* if we're on iOS, reconfigure url so it will work when it redirects to an app */
-              var iosLink = 'https://www.google.com/maps/dir/?api=1&destination=' + listKnownLocations[i].latlong;
+              var iosLink = 'https://www.google.com/maps/search/?api=1&destination=' + listKnownLocations[i].display + '&query=' + listKnownLocations[i].latlong;
               var httpLink = 'https://www.google.com.au/maps/place' + listKnownLocations[i].display + '/@' + listKnownLocations[i].latlong + ',20z';
               url = this.isOperatingSystemIOS() ? iosLink : httpLink;
 
