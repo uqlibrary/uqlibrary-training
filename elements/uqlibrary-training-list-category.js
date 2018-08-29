@@ -53,7 +53,6 @@
 
     ready: function() {
       this.numDisplayedRequired = this.numRecordsMinimum;
-console.log(this);
     },
 
     // when they click the more or less

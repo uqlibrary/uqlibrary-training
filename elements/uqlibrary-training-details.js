@@ -100,13 +100,25 @@
     },
 
     /**
-     * from https://medium.com/@colinlord/opening-native-map-apps-from-the-mobile-browser-afd66fbbb8a4
      * @returns {boolean}
      */
     isOperatingSystemIOS: function () {
-      return (navigator.platform.indexOf("iPhone") !== -1) ||
-              (navigator.platform.indexOf("iPad") !== -1) ||
-              (navigator.platform.indexOf("iPod") !== -1);
+        var iDevices = [
+            'iPad Simulator',
+            'iPhone Simulator',
+            'iPod Simulator',
+            'iPad',
+            'iPhone',
+            'iPod'
+        ];
+
+        if (!!navigator.platform) {
+            while (iDevices.length) {
+                if (navigator.platform === iDevices.pop()){ return true; }
+            }
+        }
+
+        return false;
     },
 
       /**
@@ -134,7 +146,7 @@
             { "locationHint": "School of Public Health B", "fragment": "/Herston+Health+Sciences+Library", "latlong": "-27.4487572,153.0229345" },
             { "locationHint": "UQCCR Building", "fragment": "/UQCCR", "latlong": "-27.4486758,153.028019" },
             { "locationHint": "Aubigny Place B", "fragment": "/Aubigny+Place+-+Mater+Hospital+Brisbane", "latlong": "-27.4865039,153.0271426" },
-            { "locationHint": "PACE Health Sciences Library", "fragment": "/UQ+School+Of+Public+Health", "latlong": "-27.4999636,153.0284143" },
+            { "locationHint": "PACE Health Sciences Library", "fragment": "/UQ+School+Of+Public+Health", "latlong": "-27.4487114,153.0210362" },
             { "locationHint": "Bundaberg", "fragment": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-24.870152,152.332057" },
             { "locationHint": "Hervey Bay", "fragment": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-25.298911,152.8212355" },
             { "locationHint": "Rockhampton", "fragment": "/The+University+of+Queensland,+Rural+Clinical+School,+Rockhampton", "latlong": "-23.3810434,150.4938467" },

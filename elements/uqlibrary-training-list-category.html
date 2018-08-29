@@ -97,6 +97,15 @@ Example:
         padding-right: 0.5rem;
       }
 
+
+      @media all and (min-width: 450px) {
+        .event-date span {
+          padding-right: 8px;
+          padding-right: 0.5rem;
+        }
+      }
+
+
       @media all and (max-width: 550px) {
         .event-line div {
           overflow: hidden;
@@ -187,7 +196,7 @@ Example:
     <paper-card heading="[[_getCategoryTitle(category.displayName, hideCategoryTitle, renderedCount)]]">
       <template is="dom-if" if="{{renderedCount}}">
         <div class="card-content count-events">
-          [[totalCount]] events available
+          [[renderedCount]] of [[totalCount]] events available
         </div>
       </template>
 
