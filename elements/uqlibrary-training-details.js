@@ -123,49 +123,48 @@
 
       /**
        * determine which of the list of buildings the venue is in
-       * the fragment is used to build a map link
        * @param venue String
        * @returns {boolean}
        * @private
        */
     _findKnownLocationinVenue: function(venue) {
         // locationHint: look for this string in the supplied venue
-        // fragment: ask maps to display this as text for the location
+        // display: ask maps to display this as text for the location
         // latlong: latitude & longitude for the map url
         var listKnownLocations = [
-            { "locationHint": "Biological Sciences Library", "fragment": "/Biological+Sciences+Library/", "latlong": "-27.4969854,153.0111289" },
-            { "locationHint": "Colin Clark B", "fragment": "/Colin+Clark+Building", "latlong": "-27.4947559,153.0135628" },
-            { "locationHint": "Duhig Tower", "fragment": "/Duhig+Tower", "latlong": "-27.4966135,153.0140748" },
-            { "locationHint": "Duhig B", "fragment": "/Duhig+Tower", "latlong": "-27.4966135,153.0140748" },
-            { "locationHint": "Forgan Smith B", "fragment": "/Forgan+Smith+Building,+St+Lucia+QLD+4072", "latlong": "-27.496937,153.0128046" },
-            { "locationHint": "Hawken B", "fragment": "/Dorothy+Hill+Engineering+and+Sciences+Library", "latlong": "-27.5000086,153.0132045" },
-            { "locationHint": "Sir Llew Edwards B", "fragment": "/Sir+Llew+Edwards+Building", "latlong": "-27.4957145,153.0132919" },
-            { "locationHint": "Zelman Cowan B", "fragment": "/Zelman+Cowen+Building,+St+Lucia+QLD+4067", "latlong": "-27.4990138,153.0144133" },
-            { "locationHint": "Gatton Library", "fragment": "/UQ+Gatton+J.K.+Murray+Library", "latlong": "-27.5550302,152.3355262" },
-            { "locationHint": "Herston B", "fragment": "/Herston+Health+Sciences+Library", "latlong": "-27.448831,153.0271885" },
-            { "locationHint": "School of Public Health B", "fragment": "/Herston+Health+Sciences+Library", "latlong": "-27.4487572,153.0229345" },
-            { "locationHint": "UQCCR Building", "fragment": "/UQCCR", "latlong": "-27.4486758,153.028019" },
-            { "locationHint": "Aubigny Place B", "fragment": "/Aubigny+Place+-+Mater+Hospital+Brisbane", "latlong": "-27.4865039,153.0271426" },
-            { "locationHint": "PACE Health Sciences Library", "fragment": "/UQ+School+Of+Public+Health", "latlong": "-27.4487114,153.0210362" },
-            { "locationHint": "Bundaberg", "fragment": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-24.870152,152.332057" },
-            { "locationHint": "Hervey Bay", "fragment": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-25.298911,152.8212355" },
-            { "locationHint": "Rockhampton", "fragment": "/The+University+of+Queensland,+Rural+Clinical+School,+Rockhampton", "latlong": "-23.3810434,150.4938467" },
-            { "locationHint": "Toowoomba", "fragment": "/School's+Teaching+and+Learning+Centre+South+Toowoomba", "latlong": "-27.5683715,151.9417366" }
+            { "locationHint": "Biological Sciences Library", "display": "/Biological+Sciences+Library/", "latlong": "-27.4969854,153.0111289" },
+            { "locationHint": "Colin Clark B", "display": "/Colin+Clark+Building", "latlong": "-27.4947559,153.0135628" },
+            { "locationHint": "Duhig Tower", "display": "/Duhig+Tower", "latlong": "-27.4966135,153.0140748" },
+            { "locationHint": "Duhig B", "display": "/Duhig+Tower", "latlong": "-27.4966135,153.0140748" },
+            { "locationHint": "Forgan Smith B", "display": "/Forgan+Smith+Building,+St+Lucia+QLD+4072", "latlong": "-27.496937,153.0128046" },
+            { "locationHint": "Hawken B", "display": "/Dorothy+Hill+Engineering+and+Sciences+Library", "latlong": "-27.5000086,153.0132045" },
+            { "locationHint": "Sir Llew Edwards B", "display": "/Sir+Llew+Edwards+Building", "latlong": "-27.4957145,153.0132919" },
+            { "locationHint": "Zelman Cowan B", "display": "/Zelman+Cowen+Building,+St+Lucia+QLD+4067", "latlong": "-27.4990138,153.0144133" },
+            { "locationHint": "Gatton Library", "display": "/UQ+Gatton+J.K.+Murray+Library", "latlong": "-27.5550302,152.3355262" },
+            { "locationHint": "Herston B", "display": "/Herston+Health+Sciences+Library", "latlong": "-27.448831,153.0271885" },
+            { "locationHint": "School of Public Health B", "display": "/Herston+Health+Sciences+Library", "latlong": "-27.4487572,153.0229345" },
+            { "locationHint": "UQCCR Building", "display": "/UQCCR", "latlong": "-27.4486758,153.028019" },
+            { "locationHint": "Aubigny Place B", "display": "/Aubigny+Place+-+Mater+Hospital+Brisbane", "latlong": "-27.4865039,153.0271426" },
+            { "locationHint": "PACE Health Sciences Library", "display": "/UQ+School+Of+Public+Health", "latlong": "-27.4487114,153.0210362" },
+            { "locationHint": "Bundaberg", "display": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-24.870152,152.332057" },
+            { "locationHint": "Hervey Bay", "display": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-25.298911,152.8212355" },
+            { "locationHint": "Rockhampton", "display": "/The+University+of+Queensland,+Rural+Clinical+School,+Rockhampton", "latlong": "-23.3810434,150.4938467" },
+            { "locationHint": "Toowoomba", "display": "/School's+Teaching+and+Learning+Centre+South+Toowoomba", "latlong": "-27.5683715,151.9417366" }
         ];
         var url = false;
         for (var i = 0; i < listKnownLocations.length; i++) {
             var trainRegExp = new RegExp(listKnownLocations[i].locationHint, 'i');
             if (venue.match(trainRegExp)) {
               /* if we're on iOS, reconfigure url so it will work when it redirects to an app */
-              url = this.isOperatingSystemIOS()
-                            ? 'maps://maps.google.com/maps?daddr=' + listKnownLocations[i].latlong + '&ll='
-                            : 'https://www.google.com.au/maps/place' + listKnownLocations[i].fragment + '@' + listKnownLocations[i].latlong + '&amp;ll=';
+              var iosLink = 'maps://maps.google.com/maps?daddr=' + listKnownLocations[i].latlong + '&ll=';
+              var httpLink = 'https://www.google.com.au/maps/place' + listKnownLocations[i].display + '/@' + listKnownLocations[i].latlong + ',20z';
+              url = this.isOperatingSystemIOS() ? iosLink : httpLink;
+
               break;
             }
         }
         return url;
     },
-
     /**
     * Observer handler for userAccount object
     * */

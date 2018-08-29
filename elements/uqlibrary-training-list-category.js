@@ -44,10 +44,6 @@
       numRecordsMinimum: {
         type: Number,
         value: 5
-      },
-      totalCount: {
-        type: Number,
-        value: 0
       }
     },
 
@@ -61,7 +57,6 @@
     },
 
     filterEvents: function(category, keyword, week, campus) {
-      this.totalCount = category.numRecordsCategory;
       var that = this;
       return function(trainingEvent) {
         if (typeof(category.firstEventId) !== undefined && trainingEvent.entityId === category.firstEventId) {
