@@ -5,6 +5,30 @@
 
     properties: {
 
+      quicklinks: {
+          type: Array,
+          // term should be a single word - it is what we will search for in the training events
+          // label is what will appear in the 'chip' on the page for the user to click on
+          value: [
+              {
+                  term: "endnote",
+                  label: "EndNote"
+              },
+              {
+                  term: "Excel",
+                  label: "Excel"
+              },
+              {
+                  term: "NVivo",
+                  label: "NVivo"
+              },
+              {
+                  term: "cast",
+                  label: "Creating a Structure Thesis (CaST)"
+              }
+          ]
+      },
+
       filterCriteria: {
         type: Object,
         value: function () {
@@ -50,7 +74,6 @@
       weekList : {
         type: Array
       }
-
     },
 
     observers: [
@@ -69,6 +92,12 @@
       if (newValue !== null && typeof(newValue) !== undefined && newValue !== '') {
         this.$.ga.addEvent("filter", 'by keyword');
       }
+    },
+
+    _quickLinkClicked: function(e) {
+      this.$.ga.addEvent("filter", 'quicklink ' + e.model.item.label);
+
+      this.set('filterCriteria.keyword', e.model.item.term);
     },
 
     _searchCampusChanged: function(newValue, oldValue) {

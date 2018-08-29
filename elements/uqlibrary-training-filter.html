@@ -67,6 +67,40 @@ Example:
             paper-item {
                 white-space: nowrap;
             }
+
+            .quicklinks {
+                padding-left: 32px;
+                padding-left: 2rem;
+                padding-bottom: 16px;
+                padding-bottom: 1rem;
+            }
+
+            .quicklinks h4 {
+                font-size: 12px;
+                font-size: 0.75rem;
+                color: #1d1d1d;
+                background-color: inherit;
+                display: inline;
+                padding-right: 32px;
+                padding-right: 2rem;
+            }
+
+            .quicklinks paper-button {
+                display: inline;
+                background-color: #e0e0e0;
+                color: #1d1d1d;
+                border-radius: 32px;
+                border-radius: 1rem;
+                padding: 6px 16px;
+                padding: 0.375rem 1rem;
+                margin-right: 4px;
+                margin-right: 0.25rem;
+                line-height: 2.5;
+                text-transform: none;
+                font-size: 13px;
+                font-size: 0.8125rem;
+                white-space: nowrap;
+            }
         </style>
 
         <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
@@ -103,6 +137,13 @@ Example:
                         </paper-listbox>
                     </paper-dropdown-menu>
                 </div>
+            </div>
+
+            <div class="quicklinks">
+                <h4>Popular courses</h4>
+                <template is="dom-repeat" items="{{quicklinks}}">
+                    <paper-button on-click="_quickLinkClicked">[[item.label]]</paper-button>
+                </template>
             </div>
         </paper-card>
 
