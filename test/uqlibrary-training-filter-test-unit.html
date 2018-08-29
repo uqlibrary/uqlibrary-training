@@ -70,6 +70,26 @@
       }, 50);
     });
 
+      test('It should show the correct number of quicklink chips', function (done) {
+          element.quicklinkList = [
+              {
+                  term: "endnote",
+                  label: "EndNote"
+              },
+              {
+                  term: "Excel",
+                  label: "Excel"
+              }
+          ];
+          setTimeout(function() {
+
+              var expectedNumberOfQuicklinks = element.quicklinkList.length;
+
+              expect(element.querySelector('.quicklinks')).to.exist;
+              expect(element.querySelector('.quicklinks').querySelectorAll('paper-button').length).to.be.equal(expectedNumberOfQuicklinks);
+              done();
+          }, 30);
+      });
   });
 </script>
 
