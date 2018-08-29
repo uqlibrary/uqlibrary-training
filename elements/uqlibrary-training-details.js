@@ -100,33 +100,11 @@
     },
 
     /**
+     * determine which of the list of buildings the venue is in
+     * @param venue String
      * @returns {boolean}
+     * @private
      */
-    isOperatingSystemIOS: function () {
-        var iDevices = [
-            'iPad Simulator',
-            'iPhone Simulator',
-            'iPod Simulator',
-            'iPad',
-            'iPhone',
-            'iPod'
-        ];
-
-        if (!!navigator.platform) {
-            while (iDevices.length) {
-                if (navigator.platform === iDevices.pop()){ return true; }
-            }
-        }
-
-        return false;
-    },
-
-      /**
-       * determine which of the list of buildings the venue is in
-       * @param venue String
-       * @returns {boolean}
-       * @private
-       */
     _findKnownLocationinVenue: function(venue) {
         // locationHint: look for this string in the supplied venue
         // display: ask maps to display this as text for the location
@@ -145,7 +123,7 @@
             { "locationHint": "School of Public Health B", "display": "/Herston+Health+Sciences+Library", "latlong": "-27.4487572,153.0229345" },
             { "locationHint": "UQCCR Building", "display": "/UQCCR", "latlong": "-27.4486758,153.028019" },
             { "locationHint": "Aubigny Place B", "display": "/Aubigny+Place+-+Mater+Hospital+Brisbane", "latlong": "-27.4865039,153.0271426" },
-            { "locationHint": "PACE Health Sciences Library", "display": "/UQ+School+Of+Public+Health", "latlong": "-27.4487114,153.0210362" },
+            { "locationHint": "PACE Health Sciences Library", "display": "/UQ+School+Of+Public+Health", "latlong": "-27.500135,153.0281077" },
             { "locationHint": "Bundaberg", "display": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-24.870152,152.332057" },
             { "locationHint": "Hervey Bay", "display": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-25.298911,152.8212355" },
             { "locationHint": "Rockhampton", "display": "/The+University+of+Queensland,+Rural+Clinical+School,+Rockhampton", "latlong": "-23.3810434,150.4938467" },
@@ -155,11 +133,8 @@
         for (var i = 0; i < listKnownLocations.length; i++) {
             var trainRegExp = new RegExp(listKnownLocations[i].locationHint, 'i');
             if (venue.match(trainRegExp)) {
-              /* if we're on iOS, reconfigure url so it will work when it redirects to an app */
-              var iosLink = 'https://www.google.com/maps/search/?api=1&destination=' + listKnownLocations[i].display + '&query=' + listKnownLocations[i].latlong;
-              var httpLink = 'https://www.google.com.au/maps/place' + listKnownLocations[i].display + '/@' + listKnownLocations[i].latlong + ',20z';
-              url = this.isOperatingSystemIOS() ? iosLink : httpLink;
-
+              // after much experimentation, this format currently works on desktop AND ios AND android!
+              url = 'https://www.google.com/maps/search/?api=1&destination=' + listKnownLocations[i].display + '&query=' + listKnownLocations[i].latlong;
               break;
             }
         }
