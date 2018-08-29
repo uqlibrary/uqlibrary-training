@@ -32,6 +32,10 @@ Example:
             .card-content {
                 @apply(--layout-horizontal);
             }
+            paper-card .card-content {
+                padding-top: 0;
+                margin-top: -16px;
+            }
 
             paper-dropdown-menu {
                 width: 100%;
@@ -86,7 +90,7 @@ Example:
             }
 
             .quicklinks paper-button {
-                display: inline;
+                display: inline-flex;
                 background-color: #e0e0e0;
                 color: #1d1d1d;
                 border-radius: 32px;
