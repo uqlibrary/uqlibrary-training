@@ -26,17 +26,12 @@
       },
       showMoreButton: {
         type: Boolean,
-        value: false//,
-        // observer: '_showHideCount'
+        value: false
       },
       showLessButton: {
         type: Boolean,
         value: false
       },
-      // showCount: {
-      //     type: Boolean,
-      //     value: false
-      // },
       numRecordsAll: {
         type: Number,
         value: 999 // 999 is > than the possible number of records, so will show all

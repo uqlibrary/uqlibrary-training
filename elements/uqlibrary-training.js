@@ -5,33 +5,33 @@
 
     properties: {
 
-        quicklinkList: {
-            type: Array,
-            // term should be a single word - it is what we will search for in the training events
-            // label is what will appear in the 'chip' on the page for the user to click on
-            // if you have a long label (eg 4+ words) its advisable to preview the demo in mobile view before saving to make sure
-            // it appears acceptable.
-            value: [
-                {
-                    term: "endnote",
-                    label: "EndNote"
-                },
-                {
-                    term: "Excel",
-                    label: "Excel"
-                },
-                {
-                    term: "cast",
-                    label: "Creating a Structure Thesis (CaST)"
-                },
-                {
-                    term: "NVivo",
-                    label: "NVivo"
-                }
-            ]
-        },
+      quicklinkList: {
+        type: Array,
+        // term should be a single word - it is what we will search for in the training events
+        // label is what will appear in the 'chip' on the page for the user to click on
+        // if you have a long label (eg 4+ words) its advisable to preview the demo in mobile view before saving to make sure
+        // it appears acceptable.
+        value: [
+            {
+                term: "endnote",
+                label: "EndNote"
+            },
+            {
+                term: "Excel",
+                label: "Excel"
+            },
+            {
+                term: "cast",
+                label: "Creating a Structure Thesis (CaST)"
+            },
+            {
+                term: "NVivo",
+                label: "NVivo"
+            }
+        ]
+      },
 
-        compactView: {
+      compactView: {
         type: Object,
         value: false
       },

@@ -43,16 +43,16 @@
         type: Array
       },
 
-      quicklinkList: {
-          type: Array
-      },
-
       /**
        * Specifies list of event months, auto populated from api
        * @type {Array}
        */
       weekList : {
         type: Array
+      },
+
+      quicklinkList: {
+            type: Array
       }
     },
 

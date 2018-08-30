@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <title>uql-ia-button</title>
+  <title>uqlibrary-training-filter-test-unit</title>
 
   <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
   <script src="../bower_components/web-component-tester/browser.js"></script>
@@ -44,7 +44,7 @@
 
     });
 
-    test('It should load 4 weeks in filter dropdown', function (done) {
+    test('It should show expected weeks in filter dropdown', function (done) {
       element.weekList = ['Jan 1 - Jan 5', 'Jan 8 - Jan 12', 'Jan 15 - Jan 19'];
       setTimeout(function() {
         expect(element.querySelector('#weekDropdown').querySelectorAll('paper-item').length).to.be.equal(4);
@@ -53,7 +53,7 @@
     });
 
 
-    test('It should load 3 campuses in filter dropdown', function (done) {
+    test('It should show expected campuses in filter dropdown', function (done) {
       element.campusList = ['St Lucia', 'Herston'];
       setTimeout(function() {
         expect(element.querySelector('#campusDropdown').querySelectorAll('paper-item').length).to.be.equal(3);
@@ -70,26 +70,26 @@
       }, 50);
     });
 
-      test('It should show the correct number of quicklink chips', function (done) {
-          element.quicklinkList = [
-              {
-                  term: "endnote",
-                  label: "EndNote"
-              },
-              {
-                  term: "Excel",
-                  label: "Excel"
-              }
-          ];
-          setTimeout(function() {
+    test('It should show the expected number of quicklink chips', function (done) {
+        element.quicklinkList = [
+            {
+                term: "endnote",
+                label: "EndNote"
+            },
+            {
+                term: "Excel",
+                label: "Excel"
+            }
+        ];
+        setTimeout(function() {
 
-              var expectedNumberOfQuicklinks = element.quicklinkList.length;
+            var expectedNumberOfQuicklinks = element.quicklinkList.length;
 
-              expect(element.querySelector('.quicklinks')).to.exist;
-              expect(element.querySelector('.quicklinks').querySelectorAll('paper-button').length).to.be.equal(expectedNumberOfQuicklinks);
-              done();
-          }, 30);
-      });
+            expect(element.querySelector('.quicklinks')).to.exist;
+            expect(element.querySelector('.quicklinks').querySelectorAll('paper-button').length).to.be.equal(expectedNumberOfQuicklinks);
+            done();
+        }, 30);
+    });
   });
 </script>
 
