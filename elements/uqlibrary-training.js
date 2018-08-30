@@ -302,8 +302,8 @@
           });
       }
 
-      for(var ii=0; ii < processedEvents.length; ii++) {
-          processedEvents[ii].numRecordsCategory = processedEvents[ii].events.length;
+      for(var jj=0; jj < processedEvents.length; jj++) {
+          processedEvents[jj].numRecordsCategory = processedEvents[jj].events.length;
       }
 
       this._trainingEventsByCategory = processedEvents;

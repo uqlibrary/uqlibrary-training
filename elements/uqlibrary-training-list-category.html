@@ -180,7 +180,7 @@ Example:
       }
 
       /* otherwise we get a yucky space for every filtered out block */
-      div.no-events {
+      div.no-events-in-category {
         margin-bottom: -16px;
       }
 
@@ -232,7 +232,7 @@ Example:
 
       <template is="dom-if" if="{{renderedCount}}">
         <div class="card-content show-more">
-          <template is="dom-if"  if="[[showMoreButton]]" -->
+          <template is="dom-if"  if="[[showMoreButton]]">
             <paper-button id="moreButton" class="button-colored-secondary" on-click="showMoreEntries">
               Show more
             </paper-button>
@@ -248,10 +248,10 @@ Example:
     </paper-card>
 
     <template is="dom-if" if="{{!renderedCount}}">
-      <div class="card-content no-events"></div>
+      <div class="card-content no-events-in-category"></div>
     </template>
 
-    <template class="tempclass2" is="dom-if" if="{{renderedCount}}">
+    <template is="dom-if" if="{{renderedCount}}">
       <div class="divider">&nbsp;</div>
     </template>
 
