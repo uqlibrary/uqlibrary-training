@@ -276,7 +276,7 @@
         //setup all event weeks
         startOfWeek = moment(event.start).startOf('week');
         endOfWeek = moment(event.start).endOf('week');
-        weekLabel = startOfWeek.format('MMM D') + ' - ' + endOfWeek.format('MMM D') + ' ';
+        weekLabel = startOfWeek.format('D MMM') + ' - ' + endOfWeek.format('D MMM') + ' ';
         weekData = {
           "label": weekLabel,
           "startData": startOfWeek.format('YYYY-MM-DD'),
