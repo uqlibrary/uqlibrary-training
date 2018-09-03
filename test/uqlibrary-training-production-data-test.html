@@ -1,0 +1,54 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>uqlibrary-training-test-integration</title>
+
+  <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
+  <script src="../bower_components/test-fixture/test-fixture-mocha.js"></script>
+  <link rel="import" href="../bower_components/test-fixture/test-fixture.html">
+
+  <!-- Import the element to test -->
+  <link rel="import" href="../elements/uqlibrary-training.html">
+
+</head>
+<body>
+
+<test-fixture id="list">
+  <template>
+    <uqlibrary-training auto-load="false" events="[]"></uqlibrary-training>
+  </template>
+</test-fixture>
+
+<script>
+    suite('<uqlibrary-training> tests', function () {
+        var element;
+
+        setup(function () {
+            element = fixture('list');
+        });
+
+        // each quicklink item must have a search Term and a display Label
+        test('Admin should have provided a valid quicklink list', function (done) {
+            element.hideFilter = false;
+            setTimeout(function() {
+                expect(element.quicklinkList.length).not.to.equal(0);
+
+                for(ii = 0; ii < element.quicklinkList.length; ii++) {
+                    expect(element.quicklinkList[ii].term).to.exist;
+                    expect(element.quicklinkList[ii].term.length).not.to.equal(0);
+                    expect(element.quicklinkList[ii].label).to.exist;
+                    expect(element.quicklinkList[ii].label.length).not.to.equal(0);
+                }
+
+                done();
+            }, 30);
+        });
+
+    });
+</script>
+
+</body>
+</html>
