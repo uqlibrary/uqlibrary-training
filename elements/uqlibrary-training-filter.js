@@ -49,10 +49,6 @@
        */
       weekList : {
         type: Array
-      },
-
-      quicklinkList: {
-            type: Array
       }
     },
 
