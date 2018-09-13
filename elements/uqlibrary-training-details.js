@@ -109,32 +109,34 @@
         // locationHint: look for this string in the supplied venue
         // display: ask maps to display this as text for the location
         // latlong: latitude & longitude for the map url
+
         var listKnownLocations = [
-            { "locationHint": "Biological Sciences Library", "display": "/Biological+Sciences+Library/", "latlong": "-27.4969854,153.0111289" },
-            { "locationHint": "Colin Clark B", "display": "/Colin+Clark+Building", "latlong": "-27.4947559,153.0135628" },
-            { "locationHint": "Duhig Tower", "display": "/Duhig+Tower", "latlong": "-27.4966135,153.0140748" },
-            { "locationHint": "Duhig B", "display": "/Duhig+Tower", "latlong": "-27.4966135,153.0140748" },
-            { "locationHint": "Forgan Smith B", "display": "/Forgan+Smith+Building,+St+Lucia+QLD+4072", "latlong": "-27.496937,153.0128046" },
-            { "locationHint": "Hawken B", "display": "/Dorothy+Hill+Engineering+and+Sciences+Library", "latlong": "-27.5000086,153.0132045" },
-            { "locationHint": "Sir Llew Edwards B", "display": "/Sir+Llew+Edwards+Building", "latlong": "-27.4957145,153.0132919" },
-            { "locationHint": "Zelman Cowan B", "display": "/Zelman+Cowen+Building,+St+Lucia+QLD+4067", "latlong": "-27.4990138,153.0144133" },
-            { "locationHint": "Gatton Library", "display": "/UQ+Gatton+J.K.+Murray+Library", "latlong": "-27.5550302,152.3355262" },
-            { "locationHint": "Herston B", "display": "/Herston+Health+Sciences+Library", "latlong": "-27.448831,153.0271885" },
-            { "locationHint": "School of Public Health B", "display": "/Herston+Health+Sciences+Library", "latlong": "-27.4487572,153.0229345" },
-            { "locationHint": "UQCCR Building", "display": "/UQCCR", "latlong": "-27.4486758,153.028019" },
-            { "locationHint": "Aubigny Place B", "display": "/Aubigny+Place+-+Mater+Hospital+Brisbane", "latlong": "-27.4865039,153.0271426" },
-            { "locationHint": "PACE Health Sciences Library", "display": "/UQ+School+Of+Public+Health", "latlong": "-27.500135,153.0281077" },
-            { "locationHint": "Bundaberg", "display": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-24.870152,152.332057" },
-            { "locationHint": "Hervey Bay", "display": "/UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-25.298911,152.8212355" },
-            { "locationHint": "Rockhampton", "display": "/The+University+of+Queensland,+Rural+Clinical+School,+Rockhampton", "latlong": "-23.3810434,150.4938467" },
-            { "locationHint": "Toowoomba", "display": "/School's+Teaching+and+Learning+Centre+South+Toowoomba", "latlong": "-27.5683715,151.9417366" }
+            { "locationHint": "Biological Sciences Library", "display": "Biological+Sciences+Library", "latlong": "-27.4969967,153.0113495", "zoom": 20 },
+            { "locationHint": "Colin Clark B", "display": "Colin+Clark+Building", "latlong": "-27.4947559,153.0140859", "zoom": 20 },
+            { "locationHint": "Duhig Tower", "display": "Duhig+Tower", "latlong": "-27.4966319,153.0144148", "zoom": 20 },
+            { "locationHint": "Duhig B", "display": "Duhig+Tower", "latlong": "-27.4966319,153.0144148", "zoom": 20 },
+            { "locationHint": "Forgan Smith B", "display": "Forgan+Smith+Building,+St+Lucia+QLD+4072", "latlong": "-27.496937,153.0128046", "zoom": 20 },
+            { "locationHint": "Hawken B", "display": "Dorothy+Hill+Engineering+and+Sciences+Library", "latlong": "-27.5000086,153.0132045", "zoom": 20 },
+            { "locationHint": "Sir Llew Edwards B", "display": "Sir+Llew+Edwards+Building", "latlong": "-27.4957145,153.0132919", "zoom": 20 },
+            { "locationHint": "Zelman Cowan B", "display": "Zelman+Cowen+Building,+St+Lucia+QLD+4067", "latlong": "-27.4990138,153.0144133", "zoom": 20 },
+            { "locationHint": "Gatton Library", "display": "UQ+Gatton+J.K.+Murray+Library", "latlong": "-27.5550314,152.3357461", "zoom": 20 },
+            { "locationHint": "Herston B", "display": "Herston+Health+Sciences+Library", "latlong": "-27.4488643,153.0277196", "zoom": 20 },
+            { "locationHint": "School of Public Health B", "display": "School+of+Public+Health", "latlong": "-27.4487423,153.0231839", "zoom": 20 },
+            { "locationHint": "UQCCR Building", "display": "UQCCR", "latlong": "-27.4487067,153.028542", "zoom": 20 },
+            { "locationHint": "Aubigny Place B", "display": "Aubigny+Place+-+Mater+Hospital+Brisbane", "latlong": "-27.486558,153.027563", "zoom": 20, "placeID": 'ChIJ586ySG1akWsRwlxYji6m8kw' },
+            { "locationHint": "PACE Health Sciences Library", "display": "UQ+School+Of+Public+Health", "latlong": "-27.4999636,153.0303293", "zoom": 19 },
+            { "locationHint": "Bundaberg", "display": "UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-24.8688817,152.3321844", "zoom": 18 },
+            { "locationHint": "Hervey Bay", "display": "UQ+Health+Sciences+Learning+%26+Discovery+Centre", "latlong": "-25.298911,152.8212355", "zoom": 20 },
+            { "locationHint": "Rockhampton", "display": "The+University+of+Queensland,+Rural+Clinical+School,+Rockhampton", "latlong": "-23.3809301,150.496215", "zoom": 18 },
+            { "locationHint": "Toowoomba", "display": "School's+Teaching+and+Learning+Centre+South+Toowoomba", "latlong": "-27.568576,151.9421979", "zoom": 20 }
         ];
         var url = false;
         for (var i = 0; i < listKnownLocations.length; i++) {
             var trainRegExp = new RegExp(listKnownLocations[i].locationHint, 'i');
             if (venue.match(trainRegExp)) {
               // after much experimentation, this format currently works on desktop AND ios AND android!
-              url = 'https://www.google.com/maps/search/?api=1&destination=' + listKnownLocations[i].display + '&query=' + listKnownLocations[i].latlong;
+              // maps docs: https://developers.google.com/maps/documentation/urls/guide
+              url = 'https://www.google.com/maps/@?api=1&map_action=map&center=' + listKnownLocations[i].latlong + '&zoom=' + listKnownLocations[i].zoom;
               break;
             }
         }
