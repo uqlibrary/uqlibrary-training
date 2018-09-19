@@ -111,7 +111,7 @@
         // latlong: latitude & longitude for the map url
 
         var listKnownLocations = [
-            { "locationHint": "Biological Sciences Library", "display": "Biological+Sciences+Library", "latlong": "-27.4969967,153.0113495", "zoom": 20 },
+            { "locationHint": "Biological Sciences Library", "display": "Biological+Sciences+Library", "latlong": "-27.4969967,153.0113495", "zoom": 20, "query_place_id": "ChIJbaJ6sYNQkWsRYvptjIAIPRE" },
             { "locationHint": "Colin Clark B", "display": "Colin+Clark+Building", "latlong": "-27.4947559,153.0140859", "zoom": 20 },
             { "locationHint": "Duhig Tower", "display": "Duhig+Tower", "latlong": "-27.4966319,153.0144148", "zoom": 20 },
             { "locationHint": "Duhig B", "display": "Duhig+Tower", "latlong": "-27.4966319,153.0144148", "zoom": 20 },
@@ -136,7 +136,7 @@
             if (venue.match(trainRegExp)) {
               // after much experimentation, this format currently works on desktop AND ios AND android!
               // maps docs: https://developers.google.com/maps/documentation/urls/guide
-              url = 'https://www.google.com/maps/@?api=1&map_action=map&center=' + listKnownLocations[i].latlong + '&zoom=' + listKnownLocations[i].zoom;
+              url = 'https://www.google.com/maps/search/?api=1&query=' + listKnownLocations[i].latlong;
               break;
             }
         }
