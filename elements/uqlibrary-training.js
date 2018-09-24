@@ -234,32 +234,34 @@
 
         //set up all categories
         if (event.labels) {
-          for(var labelIndex = 0; labelIndex < event.labels.length; labelIndex++) {
-            var category = event.labels[labelIndex];
+          for (var labelIndex in event.labels) {
+            if (event.labels.hasOwnProperty(labelIndex)) {
+              var category = event.labels[labelIndex];
 
-            var catIndex = categories.indexOf(category.id);
+              var catIndex = categories.indexOf(category.id);
 
-            if (catIndex < 0) {
-              category.events = [];
-              category.displayName = category.name.replace(/.*\./ , '');
-              category.firstEventId = event.entityId;
-              processedEvents.push(category);
+              if (catIndex < 0) {
+                category.events = [];
+                category.displayName = category.name.replace(/.*\./, '');
+                category.firstEventId = event.entityId;
+                processedEvents.push(category);
 
-              categories.push(category.id);
-              catIndex = categories.length - 1;
+                categories.push(category.id);
+                catIndex = categories.length - 1;
+              }
+
+              if (!category.events) {
+                  category = processedEvents[catIndex];
+              }
+
+              //create display string for start date
+              var startDate = new Date(event.start);
+              event.formattedDate = moment(event.start).format('ddd D MMM YYYY');
+              event.link = this.parentUrl + event.entityId;
+
+              //add this event to the category
+              category.events.push(event);
             }
-
-            if (!category.events) {
-              category = processedEvents[catIndex];
-            }
-
-            //create display string for start date
-            var startDate = new Date(event.start);
-            event.formattedDate = moment(event.start).format('ddd D MMM YYYY');
-            event.link = this.parentUrl + event.entityId;
-
-            //add this event to the category
-            category.events.push(event);
           }
         }
 
