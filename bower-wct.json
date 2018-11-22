@@ -10,7 +10,7 @@
   "private": true,
   "main": "elements/uqlibrary-training.html",
   "devDependencies": {
-    "polymer": "Polymer/polymer#1.8.1",
+    "polymer": "Polymer/polymer#^1.8.1",
     "web-component-tester": "5.0.1",
     "test-fixture": "PolymerElements/test-fixture#1.1.2",
     "moment": "2.18.1",
