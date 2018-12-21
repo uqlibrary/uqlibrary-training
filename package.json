@@ -31,5 +31,9 @@
   },
   "dependencies": {
     "bower": "~1.8.0"
+  },
+  "engines": {
+    "npm": "^6.5.0",
+    "node": "^8.14.0"
   }
 }
