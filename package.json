@@ -24,10 +24,10 @@
   "devDependencies": {
     "browser-sync": "^2.24.5",
     "growl": "^1.10.5",
-    "gulp": "^4.0.0",
+    "gulp": "^3.9.1",
     "hoek": "^5.0.3",
     "lodash": "^4.17.5",
-    "web-component-tester": "^6.8.0"
+    "web-component-tester": "^5.0.0"
   },
   "dependencies": {
     "bower": "~1.8.0"
