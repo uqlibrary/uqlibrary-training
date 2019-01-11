@@ -1,5 +1,6 @@
 {
   "name": "uqlibrary-training",
+  "version": "1.1.11",
   "license": "MIT",
   "description": "Web component to display UQlibrary training events",
   "main": "index.html",
@@ -21,17 +22,18 @@
     "url": "https://github.com/uqlibrary/uqlibrary-training/issues"
   },
   "devDependencies": {
-    "browser-sync": "^2.24.5",
+    "browser-sync": "^2.26.3",
+    "chai": "^4.2.0",
     "growl": "^1.10.5",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "hoek": "^6.1.2",
     "web-component-tester": "*"
   },
   "dependencies": {
-    "bower": "~1.8.0"
+    "bower": "^1.8.4"
   },
   "engines": {
     "npm": "^6.5.0",
-    "node": "^8.14.0"
+    "node": "^11.6.0"
   }
 }
