@@ -6,7 +6,7 @@
 
 uqlibrary-training is a simple list view showing training links for the Library at the University of Queensland.
 
-Full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-training).
+Full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-training/uqlibrary-training/).
 
 ## Getting Started
 
@@ -38,7 +38,7 @@ Return to your demo page, refresh and you should be getting live data.
 
 * Please adhere to the Polymer code style guide provided at [Style Guide](http://polymerelements.github.io/style-guide/).
 * Colors and common styles are imported (bower install) from [uqlibrary-styles](http://github.com/uqlibrary/uqlibrary-styles).
-* GitHub pages should be updated after every commit to Master by running the "generate-gh-pages.sh" in the /bin/ directory
+* * GitHub pages should be updated after every commit to `polymer1.0` branch by running `bin/generate-gh-pages.sh`
 
 ## Testing
 
