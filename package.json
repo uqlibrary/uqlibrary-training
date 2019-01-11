@@ -22,15 +22,13 @@
     "url": "https://github.com/uqlibrary/uqlibrary-training/issues"
   },
   "devDependencies": {
+    "bower": "^1.8.4",
     "browser-sync": "^2.26.3",
     "chai": "^4.2.0",
     "growl": "^1.10.5",
     "gulp": "^4.0.0",
     "hoek": "^6.1.2",
     "web-component-tester": "*"
-  },
-  "dependencies": {
-    "bower": "^1.8.4"
   },
   "engines": {
     "npm": "^6.5.0",
