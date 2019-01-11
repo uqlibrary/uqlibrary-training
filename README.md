@@ -8,21 +8,25 @@ uqlibrary-training is a simple list view showing training links for the Library 
 
 Full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-training).
 
-### Getting Started
+## Getting Started
+
 Install Node.JS and run the following oneliner in the project directory:
+
 ```sh
-npm install -g bower && npm install && bower install
+npm install -g bower gulp-cli web-component-tester
+npm install
+bower install
 ```
 
-### Running with live data locally
-Add dev-app.library.uq.edu.au to your /etc/hosts or equivalent file
+## Running with live data locally
 
-```
+Add `dev-app.library.uq.edu.au` to your `/etc/hosts` or equivalent file
+
+```sh
 gulp live
 ```
 
-This comments out the calls to create the Mock cookies in index.html.  Note the browser often caches the html so 
-check the source for the calls and do a hard refresh if they aren't commented out.
+This comments out the calls to create the Mock cookies in index.html.  Note the browser often caches the html so check the source for the calls and do a hard refresh if they aren't commented out.
 
 If you still have the mock cookies in your browser, delete them via your browser.
 
@@ -30,26 +34,30 @@ Use the Masquerading function at app.library.uq.edu.au/v1/home to masquerade as 
 
 Return to your demo page, refresh and you should be getting live data.
 
-### Developing
-- Please adhere to the Polymer code style guide provided at [Style Guide](http://polymerelements.github.io/style-guide/). 
-- Colors and common styles are imported (bower install) from [uqlibrary-styles](http://github.com/uqlibrary/uqlibrary-styles).
-- GitHub pages should be updated after every commit to Master by running the "generate-gh-pages.sh" in the /bin/ directory
+## Developing
 
-### Testing
-Tests are run using the Web Component Tester. Either navigate to /tests/index.html in a browser or using the command line:
+* Please adhere to the Polymer code style guide provided at [Style Guide](http://polymerelements.github.io/style-guide/).
+* Colors and common styles are imported (bower install) from [uqlibrary-styles](http://github.com/uqlibrary/uqlibrary-styles).
+* GitHub pages should be updated after every commit to Master by running the "generate-gh-pages.sh" in the /bin/ directory
+
+## Testing
+
+Tests are run using the Web Component Tester.
+
 ```sh
-wct --local all
+npm test
 ```
 
-#### UAT testing
+### UA testing
 
-We have a testing branch on Drupal at https://library.stage.drupal.uq.edu.au/library-services/training
+We have a testing branch on Drupal at <https://library.stage.drupal.uq.edu.au/library-services/training>
 
 If you:
-- commit to master brnanch of uqlibrary-training
-- make a new release on github for repo uqlibrary-training
-- update bower.json on branch master of repo uqlibrary-reusable-components
-- wait for the invalidation on AWS
+
+* Commit to master branch of `uqlibrary-training`
+* Make a new release on github for repo `uqlibrary-training`
+* Update bower.json on branch master of repo `uqlibrary-reusable-components`
+* Wait for the invalidation on AWS
 
 then you will be able to preview a change on this page of drupal
 

@@ -7,11 +7,11 @@
  subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 
-"use strict";
+'use strict';
 
 // Include Gulp & tools we"ll use
-var gulp = require("gulp");
-var browsersync = require("browser-sync");
+var gulp = require('gulp');
+var browsersync = require('browser-sync');
 
 var browsersyncConfig = {
   open: "external",
@@ -28,23 +28,25 @@ var browsersyncConfig = {
 };
 
 // Watch files for changes & reload
-gulp.task("serve", [], function () {
+gulp.task('serve', function (done) {
   console.log("Running server...");
   browsersync(browsersyncConfig);
+  done();
 });
 
 // Watch files for changes & reload
-gulp.task("serve-compact", [], function () {
-  console.log("Running server...");
-  browsersyncConfig.startPath = "/uqlibrary-training/demo/index-compact.html";
+gulp.task('serve-compact', function (done) {
+  console.log('Running server...');
+  browsersyncConfig.startPath = '/uqlibrary-training/demo/index-compact.html';
   browsersync(browsersyncConfig);
+  done();
 });
 
 // Run the server, but comment out the mock data cookies
 // Note: For some reason it often requires a manual hard browser refresh
 // to switch from normal serving to this mode
-gulp.task("live", [], function () {
-  console.log("Running demonstration server...");
+gulp.task('live', function (done) {
+  console.log('Running demonstration server...');
   browsersyncConfig.rewriteRules = [
     {
       match: /(document\.cookie="UQLMockData)/g,
@@ -56,37 +58,32 @@ gulp.task("live", [], function () {
     }
   ];
   browsersync(browsersyncConfig);
+  done();
 });
 
-gulp.task("live-compact", [], function () {
-  console.log("Running demonstration server...");
+gulp.task('live-compact', function (done) {
+  console.log('Running demonstration server...');
 
-  browsersyncConfig.startPath = "/uqlibrary-training/demo/index-compact.html";
+  browsersyncConfig.startPath = '/uqlibrary-training/demo/index-compact.html';
   browsersyncConfig.rewriteRules = [
     {
       match: /(document\.cookie="UQLMockData)/g,
-      replace: "// $1"
+      replace: '// $1'
     },
     {
       match: /\/\/ (delete_cookie)/g,
-      replace: "$1"
+      replace: '$1'
     }
   ];
   browsersync(browsersyncConfig);
+  done();
 });
 
 // Build production files, the default task
-gulp.task("default", ["serve"], function (cb) {
-});
+gulp.task('default', gulp.series('serve', function (done) {
+  done();
+}));
 
 // Load tasks for web-component-tester
 // Adds tasks for `gulp test:local` and `gulp test:remote`
-require("web-component-tester").gulp.init(gulp);
-
-// Load custom tasks from the `tasks` directory
-try {
-  require("require-dir")("tasks");
-}
-catch (err) {
-  // Do nothing
-}
+require('web-component-tester').gulp.init(gulp);
