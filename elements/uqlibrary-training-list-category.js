@@ -63,7 +63,7 @@
         var keywordRegExp = new RegExp(keyword, 'i');
         var filterPasses = (!keyword || trainingEvent.name.match(keywordRegExp) || trainingEvent.details.match(keywordRegExp))
             && (!week || (moment(trainingEvent.start) >= moment(week.startData) && moment(trainingEvent.start) <= moment(week.endData)))
-            && (!campus || trainingEvent.categories.campus.join(',').toLowerCase().indexOf(campus.toLowerCase()) >= 0);
+            && (!campus || (trainingEvent.categories.campus && trainingEvent.categories.campus.join(',').toLowerCase().indexOf(campus.toLowerCase()) >= 0));
 
         if (filterPasses) {
           that.displayCounter++;
