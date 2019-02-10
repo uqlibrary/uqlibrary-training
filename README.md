@@ -56,9 +56,9 @@ If you:
 
 * Commit to master branch of `uqlibrary-training`
 * Make a new release on github for repo `uqlibrary-training`
-* Update bower.json on branch master of repo `uqlibrary-reusable-components`
+* Update bower.json & package.json & package-lock.json with the new relese number on branch master of repo `uqlibrary-reusable-components`
 * Wait for the invalidation on AWS
 
 then you will be able to preview a change on this page of drupal
 
-Bear in mind master branches of both uqlibrary-training and uqlibrary-reusable-components will be 'locked' until these changes are approved or rolledback as any pushes form master to prod of reusable will take the changes you are testing live :(
+Bear in mind master branches of both uqlibrary-training and uqlibrary-reusable-components must be considered 'locked' until these changes are approved or rolledback as any pushes from master to prod of reusable will take the changes you are testing live :( (If this becomes an ongoing problem we can define a different branch of reusbale as staging and ask ITS to change the branch they call to that staging branch)
