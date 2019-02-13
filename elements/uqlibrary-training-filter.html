@@ -8,8 +8,6 @@ Example:
     <uqlibrary-training auto-load="true"></uqlibrary-training>
 
 @demo
-
-@demo demo/index.html Demo of the Full view
 -->
 <dom-module id="uqlibrary-training-filter">
 
@@ -30,7 +28,7 @@ Example:
             }
 
             .card-content {
-                @apply(--layout-horizontal);
+                @apply --layout-horizontal;
             }
             paper-card .card-content {
                 padding-top: 0;
@@ -43,18 +41,18 @@ Example:
 
             .card-content > div {
                 padding-left: 16px;
-                @apply(--layout-flex);
+                @apply --layout-flex;
             }
 
             @media all and (max-width: 650px) {
 
                 .card-content {
-                    @apply(--layout-vertical);
+                    @apply --layout-vertical;
                     overflow: hidden;
                 }
 
                 .card-content > div {
-                    @apply(--layout-flex-none);
+                    @apply --layout-flex-none;
                     padding: 0px;
                 }
 

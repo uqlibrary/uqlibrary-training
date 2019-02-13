@@ -8,8 +8,6 @@ Example:
     <uqlibrary-training-list events="{{events}}"></uqlibrary-training>
 
 @demo
-
-@demo demo/index.html Demo of the Full view
 -->
 <dom-module id="uqlibrary-training-list">
 
@@ -23,7 +21,7 @@ Example:
       paper-item {
         font-size: var(--body-font-size);
         cursor: pointer;
-        @apply(--paper-item-height);
+        @apply --paper-item-height;
       }
 
       paper-icon-item {
@@ -42,13 +40,13 @@ Example:
 
       .no-classes span {
         text-align: center;
-        @apply(--layout-flex);
+        @apply --layout-flex;
       }
 
       .date {
         text-align: center;
-        @apply(--layout-vertical);
-        @apply(--layout-center-justified);
+        @apply --layout-vertical;
+        @apply --layout-center-justified;
         width: 100%;
       }
 
