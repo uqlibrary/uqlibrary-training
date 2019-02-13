@@ -1,6 +1,6 @@
 {
   "name": "uqlibrary-training",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "keywords": [
     "seed",
     "polymer",
@@ -10,7 +10,7 @@
   "private": true,
   "main": "elements/uqlibrary-training.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.9.3",
+    "polymer": "Polymer/polymer#^1.11.3",
     "uqlibrary-api": "uqlibrary/uqlibrary-api",
     "uqlibrary-ga": "uqlibrary/uqlibrary-ga",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles",
@@ -30,7 +30,7 @@
     "paper-menu": "PolymerElements/paper-menu#1.2.2",
     "paper-ripple": "PolymerElements/paper-ripple#1.0.10",
     "paper-styles": "PolymerElements/paper-styles#1.2.1",
-    "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+    "test-fixture": "PolymerElements/test-fixture#^1.1.2",
     "moment": "^2.23.0",
     "webcomponentsjs": "Polymer/webcomponentsjs#0.7.24"
   },
@@ -38,8 +38,6 @@
     "web-component-tester": "*"
   },
   "resolutions": {
-    "test-fixture": "^1.0.0",
-    "platinum-elements": "^2.0.0",
-    "platinum-bluetooth": "^2.0.0"
+    "test-fixture": "^1.1.2"
   }
 }
