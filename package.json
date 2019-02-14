@@ -9,7 +9,10 @@
   },
   "scripts": {
     "test": "polymer test",
-    "start": "polymer serve"
+    "start": "gulp serve",
+    "start:compact": "gulp serve-compact",
+    "live": "gulp live",
+    "live:compact": "gulp live-compact"
   },
   "repository": {
     "type": "git",
