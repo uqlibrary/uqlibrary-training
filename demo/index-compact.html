@@ -17,15 +17,22 @@
 </head>
 <body class="fullbleed">
 
-<div class="layout">
-    <uqlibrary-training event-filter-id="" max-event-count="6" ga-app-name="Home Page Training" compact-view="true"></uqlibrary-training>
-</div>
-
-<script>
-    (function () {
-        document.cookie="UQLMockData=enabled";
-        document.cookie="UQLMockData-PType=1";
-    }());
+<script>    
+    document.cookie="UQLMockData=enabled";
+    document.cookie="UQLMockData-PType=1";
+    
+    // Do not remove these two lines.
+    // document.cookie="UQLMockData=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    // document.cookie="UQLMockData-PType=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 </script>
+
+<div class="layout">
+    <uqlibrary-training 
+        event-filter-id="" 
+        max-event-count="6" 
+        ga-app-name="Home Page Training" 
+        compact-view="true"
+    ></uqlibrary-training>
+</div>
 </body>
 </html>

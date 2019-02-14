@@ -42,39 +42,31 @@ gulp.task('serve-compact', function (done) {
   done();
 });
 
+var cookieToggle = [
+  {
+    match: /(document\.cookie="UQLMockData(-PType)?=[^;])/g,
+    replace: '// $1'
+  },
+  {
+    match: /\/\/ (document\.cookie="UQLMockData(-PType)?=;)/g,
+    replace: "$1"
+  }
+];
+
 // Run the server, but comment out the mock data cookies
 // Note: For some reason it often requires a manual hard browser refresh
 // to switch from normal serving to this mode
 gulp.task('live', function (done) {
   console.log('Running demonstration server...');
-  browsersyncConfig.rewriteRules = [
-    {
-      match: /(document\.cookie="UQLMockData)/g,
-      replace: "// $1"
-    },
-    {
-      match: /\/\/ (delete_cookie)/g,
-      replace: "$1"
-    }
-  ];
+  browsersyncConfig.rewriteRules = cookieToggle;
   browsersync(browsersyncConfig);
   done();
 });
 
 gulp.task('live-compact', function (done) {
   console.log('Running demonstration server...');
-
   browsersyncConfig.startPath = '/uqlibrary-training/demo/index-compact.html';
-  browsersyncConfig.rewriteRules = [
-    {
-      match: /(document\.cookie="UQLMockData)/g,
-      replace: '// $1'
-    },
-    {
-      match: /\/\/ (delete_cookie)/g,
-      replace: '$1'
-    }
-  ];
+  browsersyncConfig.rewriteRules = cookieToggle;
   browsersync(browsersyncConfig);
   done();
 });
