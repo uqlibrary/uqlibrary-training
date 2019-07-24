@@ -40,7 +40,6 @@ Example:
             }
 
             .card-content > div {
-                padding-left: 16px;
                 @apply --layout-flex;
             }
 
@@ -75,9 +74,10 @@ Example:
                 white-space: nowrap;
             }
 
+            .onlineClassCheckbox,
             .quicklinks {
-                padding-left: 32px;
-                padding-left: 2rem;
+                padding-left: 16px;
+                padding-left: 1rem;
                 padding-bottom: 16px;
                 padding-bottom: 1rem;
             }
@@ -145,6 +145,12 @@ Example:
                             </template>
                         </paper-listbox>
                     </paper-dropdown-menu>
+                </div>
+            </div>
+
+            <div>
+                <div class="onlineClassCheckbox">
+                    <paper-checkbox on-click="_onlineCheckboxClicked">Only events available online</paper-checkbox>
                 </div>
             </div>
 

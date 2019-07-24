@@ -107,7 +107,7 @@
             "St Lucia"
           ]
         },
-          "isOnlineClass": false
+          "isOnlineClass": true
       },
       {
         "entityId": 442519,
@@ -422,7 +422,7 @@
               "eventType": "Training and Workshops",
               "campus": ["Herston"]
           },
-          "isOnlineClass": false
+          "isOnlineClass": true
     }
       ];
 
@@ -503,25 +503,23 @@
       }, 50);
     });
 
-      test('It should show 1 event when the search keyword "TANK" is used' , function (done) {
-          element.events = data;
-          element.filterCriteria.keyword = "TANK";
-          setTimeout(function() {
-              expect(element.querySelectorAll('a.uqlibrary-training-list-category').length).to.be.equal(1);
-              done();
-          }, 50);
-      });
+    test('It should show 1 event when the search keyword "TANK" is used' , function (done) {
+        element.events = data;
+        element.filterCriteria.keyword = "TANK";
+        setTimeout(function() {
+            expect(element.querySelectorAll('a.uqlibrary-training-list-category').length).to.be.equal(1);
+            done();
+        }, 50);
+    });
 
-      test('It should show 1 event when the search keyword "TaNk" is used' , function (done) {
-          element.events = data;
-          element.filterCriteria.keyword = "TaNk";
-          setTimeout(function() {
-              expect(element.querySelectorAll('a.uqlibrary-training-list-category').length).to.be.equal(1);
-              done();
-          }, 50);
-      });
-
-
+    test('It should show 1 event when the search keyword "TaNk" is used' , function (done) {
+        element.events = data;
+        element.filterCriteria.keyword = "TaNk";
+        setTimeout(function() {
+            expect(element.querySelectorAll('a.uqlibrary-training-list-category').length).to.be.equal(1);
+            done();
+        }, 50);
+    });
 
     test('It should display the category titles when hideCategoryTitle is not set', function (done) {
       element.events = data;
@@ -622,6 +620,25 @@
           done();
       }, 30);
     });
+
+    test('It should show 4 events when the online checkbox is on' , function (done) {
+        element.events = longdata;
+        element.filterCriteria.onlineOnly = true;
+        setTimeout(function() {
+            expect(element.querySelectorAll('a.uqlibrary-training-list-category').length).to.be.equal(4);
+            done();
+        }, 50);
+    });
+
+      test('It should show 5 events when the online checkbox is off' , function (done) {
+          element.events = longdata;
+          element.filterCriteria.onlineOnly = false;
+          setTimeout(function() {
+              // there are 6 'false' entries, but only 5 show in the 'less' view
+              expect(element.querySelectorAll('a.uqlibrary-training-list-category').length).to.be.equal(5);
+              done();
+          }, 50);
+      });
 
   });
 </script>

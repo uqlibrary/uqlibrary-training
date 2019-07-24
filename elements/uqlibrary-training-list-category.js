@@ -46,12 +46,12 @@
       this.numDisplayedRequired = this.numRecordsMinimum;
     },
 
-    // when they click the more or less
+    // when they click the 'show more events' or 'show less events' icon
     _showMoreLess: function() {
         this.$.categoriesList.render();
     },
 
-    filterEvents: function(category, keyword, week, campus) {
+    filterEvents: function(category, keyword, week, campus, onlineOnly) {
       var that = this;
       return function(trainingEvent) {
         if (typeof(category.firstEventId) !== undefined && trainingEvent.entityId === category.firstEventId) {
@@ -63,7 +63,8 @@
         var keywordRegExp = new RegExp(keyword, 'i');
         var filterPasses = (!keyword || trainingEvent.name.match(keywordRegExp) || trainingEvent.details.match(keywordRegExp))
             && (!week || (moment(trainingEvent.start) >= moment(week.startData) && moment(trainingEvent.start) <= moment(week.endData)))
-            && (!campus || (trainingEvent.categories.campus && trainingEvent.categories.campus.join(',').toLowerCase().indexOf(campus.toLowerCase()) >= 0));
+            && (!campus || (trainingEvent.categories.campus && trainingEvent.categories.campus.join(',').toLowerCase().indexOf(campus.toLowerCase()) >= 0))
+            && (!onlineOnly || trainingEvent.isOnlineClass);
 
         if (filterPasses) {
           that.displayCounter++;

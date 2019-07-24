@@ -11,7 +11,8 @@
           return {
             keyword: '',
             week: '',
-            campus: ''
+            campus: '',
+            online: false
           };
         }
       },
@@ -21,7 +22,7 @@
         observer: "_searchCampusChanged"
       },
 
-        _selectedWeekIndex: {
+      _selectedWeekIndex: {
         type: Number,
         observer: "_searchWeekChanged"
       },
@@ -49,6 +50,11 @@
        */
       weekList : {
         type: Array
+      },
+
+      onlineOnly: {
+        type: Boolean,
+        value: false
       }
     },
 
@@ -56,7 +62,15 @@
       '_searchKeywordChanged(filterCriteria.keyword)'
       ],
 
-      _searchWeekChanged: function(newValue, oldValue) {
+    _onlineCheckboxClicked: function(e) {
+      this.$.ga.addEvent("filter", 'online');
+
+      this.onlineOnly = ! this.onlineOnly;
+
+      this.set('filterCriteria.onlineOnly', this.onlineOnly);
+    },
+
+    _searchWeekChanged: function(newValue, oldValue) {
       this.$.ga.addEvent("filter", 'by period');
       if (this._selectedWeekIndex > 0)
         this.set('filterCriteria.week', this.weekList[newValue - 1]);

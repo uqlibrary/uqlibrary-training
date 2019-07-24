@@ -68,7 +68,8 @@
           return {
             keyword: '',
             week: '',
-            campus: ''
+            campus: '',
+            onlineOnly: false
           };
         }
       },

@@ -54,7 +54,7 @@
     },
 
     /**
-     * These are the backup links. Saved in the JS to make it easier to minify.
+     * These are the backup links - displayed if the API is not available. Saved in the JS to make it easier to minify.
      * @private
      */
     _backupLinks: function () {

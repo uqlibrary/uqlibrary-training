@@ -184,7 +184,7 @@ Example:
                 id="categoriesList"
                 items="[[category.events]]"
                 as="trainingEvent"
-                filter="{{filterEvents(category, filterCriteria.keyword, filterCriteria.week, filterCriteria.campus)}}"
+                filter="{{filterEvents(category, filterCriteria.keyword, filterCriteria.week, filterCriteria.campus, filterCriteria.onlineOnly)}}"
                 rendered-item-count="{{renderedCount}}">
 
         <paper-item class="an-entry" on-click="toggle" id$="item[[trainingEvent.entityId]]">
