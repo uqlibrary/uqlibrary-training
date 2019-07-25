@@ -53,11 +53,14 @@ We have a testing branch on Drupal at <https://library.stage.drupal.uq.edu.au/li
 
 If you:
 
-* Commit to master branch of `uqlibrary-training`
+* Commit your desired change to master branch of `uqlibrary-training`
 * Make a new release on github for repo `uqlibrary-training`
+* Edit baseApiUrl on uqlibrary-api.html in repo uqlibrary-api to point to https://api.library.uq.edu.au/staging, commit and make a release
 * Push branch `master` of repo `uqlibrary-reusable-components` on codeship (usually re-run the last successful build on codeship)
 * Wait for the invalidation on AWS
 
-then you will be able to preview a change on this page of drupal
+then you will be able to preview a change on this page of drupal.
 
-Bear in mind master branches of both uqlibrary-training and uqlibrary-reusable-components must be considered 'locked' until these changes are approved or rolledback as any pushes from master to prod of reusable will take the changes you are testing live :( (If this becomes an ongoing problem we can define a different branch of reusable as staging and ask ITS to change the branch they use on Drupal)
+(Remember to revert uqlibrary-api when you finish!!!)
+
+Bear in mind master branches of all of uqlibrary-api and uqlibrary-training and uqlibrary-reusable-components must be considered 'locked' until these changes are approved or rolledback as any pushes from master to prod of reusable will take the changes you are testing live :( (If this becomes an ongoing problem we can define a different branch of reusable as staging and ask ITS to change the branch they use on Drupal)
