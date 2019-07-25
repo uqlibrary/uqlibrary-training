@@ -21,7 +21,7 @@
                 label: "Excel"
             },
             {
-                term: "cast",
+                term: "Creating a Structured Thesis",
                 label: "Creating a Structure Thesis (CaST)"
             },
             {
