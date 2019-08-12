@@ -1,0 +1,253 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-training-list-category>` is a simple element that displays a list of training events
+
+Example:
+
+    <uqlibrary-training-list-category events="{{events}}"></uqlibrary-training-category>
+
+@demo
+-->
+<dom-module id="uqlibrary-training-list-category">
+
+  <template>
+
+    <style is="custom-style" include="common-styles">
+
+      :host {
+        font-family: var(--font-family);
+        font-size: var(--body-font-size);
+
+        display: block;
+        position: relative;
+        box-sizing: border-box;
+        --paper-item-min-height: 48px;
+        --paper-item-body-two-line-min-height: 72px;
+      }
+
+      paper-card {
+        width: 100%;
+      }
+
+      paper-item {
+
+        --paper-item: {
+          border-bottom: 1px solid var(--border-color);
+        }
+
+        --paper-item-focused-before: {
+          opacity: 0;
+        }
+      }
+
+      paper-item {
+        min-height: auto;
+      }
+
+      .control-block {
+        white-space: nowrap;
+
+      }
+
+      .event-date {
+        min-width: 48px;
+        min-width: 3rem;
+        margin-right: 0;
+        cursor: default;
+        display: inline-flex;
+      }
+
+      /* right align the date within its space */
+      .event-date span {
+        margin-left: auto;
+      }
+
+      a {
+        cursor: default;
+      }
+
+      paper-icon-item .content-icon {
+        display: none;
+      }
+
+      .event-line {
+        @apply --layout-horizontal;
+        flex-direction: column;
+      }
+
+      .event-line div {
+        @apply --layout-start;
+      }
+
+      .event-title {
+        margin-top: 10px;
+        margin-top: 0.625rem;
+        line-height: normal;
+        padding-right: 8px;
+        padding-right: 0.5rem;
+      }
+
+
+      @media all and (min-width: 450px) {
+        .event-date span {
+          padding-right: 8px;
+          padding-right: 0.5rem;
+        }
+      }
+
+
+      @media all and (max-width: 550px) {
+        .event-line div {
+          overflow: hidden;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+        }
+
+        /* the location line should not wrap on mobile - we only want the building name really anyway */
+        .event-venue {
+          text-overflow: ellipsis;
+          max-width: 240px;
+          white-space: nowrap;
+        }
+
+        /* restrict title to 2 lines - cant do ellipsis with more than one line :( */
+        .event-title {
+          max-height: 42px;
+          max-height: 2.625rem;
+        }
+
+      }
+
+      @media all and (max-width: 400px) {
+        .card-content,
+        .an-entry {
+          padding-right: 4px;
+          padding-left: 4px;
+        }
+      }
+
+      .an-entry {
+        justify-content: space-between;
+      }
+
+      .event-venue {
+        font-size: 12px;
+        font-size: 0.75rem;
+        color: var(--secondary-color);
+        background-color: inherit;
+        display: block;
+        margin-bottom: 8px;
+        margin-bottom: 0.5rem;
+        margin-top: -4px;
+        margin-top: -0.25rem;
+        line-height: normal;
+        padding-top: 4px;
+        padding-top: 0.25rem;
+        padding-bottom: 4px;
+        padding-bottom: 0.25rem;
+      }
+
+      .show-more {
+        text-align: right;
+        padding-right: 6px;
+        padding-right: 0.5rem;
+        padding-bottom: 8px;
+        padding-bottom: 0.5rem;
+      }
+
+      h2 {
+        padding: 0 16px;
+        padding: 0 1rem;
+        font-size: 24px;
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #000;
+      }
+
+      div.divider {
+        margin-bottom: 16px;
+        height: 0;
+      }
+
+      /* otherwise we get a yucky space for every filtered out block */
+      div.no-events-in-category {
+        margin-bottom: -16px;
+      }
+
+    </style>
+
+    <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
+
+    <paper-card heading="[[_getCategoryTitle(category.displayName, hideCategoryTitle, renderedCount)]]">
+      <template is="dom-repeat"
+                id="categoriesList"
+                items="[[category.events]]"
+                as="trainingEvent"
+                filter="{{filterEvents(category, filterCriteria.keyword, filterCriteria.week, filterCriteria.campus, filterCriteria.onlineOnly)}}"
+                rendered-item-count="{{renderedCount}}">
+
+        <paper-item class="an-entry" on-click="toggle" id$="item[[trainingEvent.entityId]]">
+
+          <div class="event-line">
+              <div class="event-title"><a>[[trainingEvent.name]]</a></div>
+            <div class="event-venue">[[ trainingEvent.venue ]]</div>
+          </div>
+
+          <div class="control-block">
+            <div class="event-date">
+              <span>[[_formatDate(trainingEvent.start)]]</span>
+            </div>
+            <iron-icon class="down" icon="icons:arrow-drop-down"></iron-icon>
+            <iron-icon class="up hidden" icon="icons:arrow-drop-up"></iron-icon>
+          </div>
+
+          <paper-ripple></paper-ripple>
+        </paper-item>
+
+        <iron-collapse id$="collapse[[trainingEvent.entityId]]" data-id$="[[trainingEvent.entityId]]">
+          <div class="card-active">
+            <div class="card-content">
+              <paper-card>
+                <uqlibrary-training-details
+                        ga-app-name="[[gaAppName]]"
+                        user-account="[[userAccount]]"
+                        event="[[trainingEvent]]"
+                        show-login-button="true">
+                </uqlibrary-training-details>
+              </paper-card>
+            </div>
+          </div>
+        </iron-collapse>
+      </template>
+
+      <template is="dom-if" if="{{renderedCount}}">
+        <div class="card-content show-more">
+          <template is="dom-if"  if="[[showMoreButton]]">
+            <paper-button id="moreButton" class="button-colored-secondary" on-click="showMoreEntries">
+              Show more
+            </paper-button>
+          </template>
+
+          <template is="dom-if" if="[[showLessButton]]">
+            <paper-button id="lessButton" class="button-colored-secondary" on-click="showLessEntries">
+              Show less
+            </paper-button>
+          </template>
+        </div>
+      </template>
+    </paper-card>
+
+    <template is="dom-if" if="{{!renderedCount}}">
+      <div class="card-content no-events-in-category"></div>
+    </template>
+
+    <template is="dom-if" if="{{renderedCount}}">
+      <div class="divider">&nbsp;</div>
+    </template>
+
+  </template>
+
+  <script src="uqlibrary-training-list-category.js"></script>
+
+</dom-module>

@@ -1,0 +1,94 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-training-compact>` is a simple element that displays training events for a given filter ID
+
+Example:
+
+    <uqlibrary-training-compact auto-load="true"></uqlibrary-training-compact>
+
+@demo demo/index-compact.html
+-->
+<dom-module id="uqlibrary-training-compact">
+
+    <template>
+        <style is="custom-style" include="common-styles">
+            :host {
+                font-family: var(--font-family);
+                font-size: var(--body-font-size);
+            }
+
+            #pages {
+                position: absolute;
+                top: 0;
+                right:0;
+                left:0;
+                bottom: 0;
+            }
+
+            uqlibrary-training-details {
+                --display-event-details: none;
+                --display-event-summary: block;
+            }
+
+            uqlibrary-training-details .header {
+                background-color: var(--theme-color);
+                text-align: left;
+            }
+
+            uqlibrary-training-details .header span {
+                vertical-align: middle;
+            }
+
+            .arrow-back {
+                --paper-icon-button: {
+                    border-radius: 50%;
+                };
+            }
+
+            uqlibrary-training-list {
+                --paper-item-height: {
+                    min-height: 30px;
+                    border-bottom: 1px solid var(--menu-border-color);
+                }
+            }
+
+        </style>
+
+        <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
+
+        <neon-animated-pages
+                id="pages"
+                selected="{{_selectedPage}}"
+                entry-animation="[[_entryAnimation]]"
+                exit-animation="[[_exitAnimation]]">
+
+            <uqlibrary-training-list
+                errors-found="[[errorsFound]]"
+                compact-view="[[compactView]]"
+                id="list"
+                ga-app-name="[[gaAppName]]"
+                events="[[events]]"
+                on-event-clicked="_eventClicked">
+                <content>
+                    <!-- <paper-item class="header inverse">Upcoming training</paper-item> -->
+                </content>
+            </uqlibrary-training-list>
+
+            <uqlibrary-training-details
+                id="details"
+                user-account="[[userAccount]]"
+                ga-app-name="[[gaAppName]]"
+                event="[[_selectedEvent]]">
+                <content>
+                    <paper-item class="header inverse">
+                        <paper-icon-button class="button-colored-theme arrow-back" icon="arrow-back" on-click="_showList" aria-label="Back to events list"></paper-icon-button>
+                        <span>Event details</span>
+                    </paper-item>
+                </content>
+            </uqlibrary-training-details>
+
+        </neon-animated-pages>
+    </template>
+    <script src="uqlibrary-training-compact.js"></script>
+</dom-module>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+    <title>uql-training demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../elements/elements.html">
+
+    <style>
+        .layout {
+            padding: 16px;
+        }
+        .layout>h2 {
+            text-transform: uppercase;
+            color: #202020;
+        }
+        .layout>hr {
+            height: 20px; background-color: #202020;
+        }
+    </style>
+
+</head>
+<body class="fullbleed">
+
+<script>        
+    document.cookie="UQLMockData=enabled";
+    document.cookie="UQLMockData-PType=1";
+    
+    // Do not remove these two lines.
+    // document.cookie="UQLMockData=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    // document.cookie="UQLMockData-PType=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+</script>
+
+<div class="layout">
+    <h2>Example 1: has filter and headers on section</h2>
+    <p>Usage:</p>
+    <p>&lt;uqlibrary-training event-filter-id="" max-event-count="100" ga-app-name="UQL Drupal Training" compact-view="false"&gt;&lt;/uqlibrary-training&gt;</p>
+    <uqlibrary-training event-filter-id="" max-event-count="100" ga-app-name="UQL Drupal Training" compact-view="false"></uqlibrary-training>
+
+    <hr/>
+
+    <h2>Example 2: no filter, no section headings</h2>
+    <p>Usage:</p>
+    <pre>&lt;uqlibrary-training
+        event-filter-id="" 
+        max-event-count="100" 
+        ga-app-name="UQL Drupal Training" 
+        compact-view="false" 
+        hide-filter="true" 
+        hide-category-title="true"
+    &gt;&lt;/uqlibrary-training&gt;</pre>
+    <uqlibrary-training 
+        event-filter-id="" 
+        max-event-count="100" 
+        ga-app-name="UQL Drupal Training" 
+        compact-view="false" 
+        hide-filter="true" 
+        hide-category-title="true"
+    ></uqlibrary-training>
+</div>
+
+</body>
+</html>

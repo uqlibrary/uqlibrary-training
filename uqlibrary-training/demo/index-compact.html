@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+    <title>uql-training demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../elements/elements.html">
+    <style>
+        .layout {
+            padding: 16px;
+        }
+    </style>
+</head>
+<body class="fullbleed">
+
+<script>    
+    document.cookie="UQLMockData=enabled";
+    document.cookie="UQLMockData-PType=1";
+    
+    // Do not remove these two lines.
+    // document.cookie="UQLMockData=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    // document.cookie="UQLMockData-PType=;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+</script>
+
+<div class="layout">
+    <uqlibrary-training 
+        event-filter-id="" 
+        max-event-count="6" 
+        ga-app-name="Home Page Training" 
+        compact-view="true"
+    ></uqlibrary-training>
+</div>
+</body>
+</html>

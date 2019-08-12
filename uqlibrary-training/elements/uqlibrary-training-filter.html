@@ -1,0 +1,168 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-training>` is a simple element that displays training events for a given filter ID
+
+Example:
+
+    <uqlibrary-training auto-load="true"></uqlibrary-training>
+
+@demo
+-->
+<dom-module id="uqlibrary-training-filter">
+
+    <template>
+        <style is="custom-style" include="common-styles">
+            :host {
+                font-family: var(--font-family);
+                font-size: var(--body-font-size);
+
+                display: block;
+                position: relative;
+                box-sizing: border-box;
+            }
+
+            paper-card {
+                width: 100%;
+                background-color: #fcfcfc;
+            }
+
+            .card-content {
+                @apply --layout-horizontal;
+            }
+            paper-card .card-content {
+                padding-top: 0;
+                margin-top: -16px;
+            }
+
+            paper-dropdown-menu {
+                width: 100%;
+            }
+
+            .card-content > div {
+                @apply --layout-flex;
+            }
+
+            @media all and (max-width: 650px) {
+
+                .card-content {
+                    @apply --layout-vertical;
+                    overflow: hidden;
+                }
+
+                .card-content > div {
+                    @apply --layout-flex-none;
+                    padding: 0px;
+                }
+
+                .quicklinks {
+                    padding-left: 16px;
+                    padding-left: 1rem;
+                }
+            }
+
+            paper-input paper-icon-button{
+                --paper-icon-button: {
+                    padding: 0px;
+                    width: 24px;
+                    height: 24px;
+                    color: #9b9b9b;
+                }
+            }
+
+            paper-item {
+                white-space: nowrap;
+            }
+
+            .onlineClassCheckbox,
+            .quicklinks {
+                padding-left: 16px;
+                padding-left: 1rem;
+                padding-bottom: 16px;
+                padding-bottom: 1rem;
+            }
+
+            .quicklinks h4 {
+                font-size: 12px;
+                font-size: 0.75rem;
+                color: #1d1d1d;
+                background-color: inherit;
+                display: inline;
+                padding-right: 32px;
+                padding-right: 2rem;
+            }
+
+            .quicklinks paper-button {
+                display: inline-flex;
+                background-color: var(--accent-color);
+                color: #fff;
+                border-radius: 32px;
+                border-radius: 1rem;
+                padding: 0 16px;
+                padding: 0 1rem;
+                margin-right: 4px;
+                margin-right: 0.25rem;
+                margin-bottom: 9px;
+                margin-bottom: 0.5625rem;
+                line-height: 2.5;
+                text-transform: none;
+                font-size: 13px;
+                font-size: 0.8125rem;
+                white-space: nowrap;
+            }
+        </style>
+
+        <uqlibrary-ga id="ga" app-name="[[gaAppName]]"></uqlibrary-ga>
+
+        <paper-card heading="Filter events">
+            <div class="card-content">
+
+                <div>
+                    <paper-input label="By keyword" aria-label="filter by keyword" id="inputKeyword" value="{{filterCriteria.keyword}}">
+                        <paper-icon-button suffix on-tap="_clearFilter" icon="clear" alt="clear" title="clear" aria-label="clear filter">
+                        </paper-icon-button>
+                    </paper-input>
+
+                </div>
+
+                <div>
+                    <paper-dropdown-menu label="By campus" aria-label="filter by campus" id="campusDropdown">
+                        <paper-listbox class="dropdown-content" selected="{{_selectedCampusIndex}}">
+                            <paper-item label="All locations" aria-label="All locations" role="option">All locations</paper-item>
+                            <template is="dom-repeat" items="{{campusList}}">
+                                <paper-item label="[[item]]" aria-label="[[item]]" role="option">[[item]]</paper-item>
+                            </template>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
+                </div>
+
+                <div>
+                    <paper-dropdown-menu label="By week" aria-label="filter by week" id="weekDropdown">
+                        <paper-listbox class="dropdown-content" selected="{{_selectedWeekIndex}}">
+                            <paper-item label="All available" aria-label="All available" role="option">All available</paper-item>
+                            <template is="dom-repeat" items="{{weekList}}">
+                                <paper-item class="filter-date-item" label="[[item.label]]" aria-label="[[item.label]]" role="option">[[item.label]]</paper-item>
+                            </template>
+                        </paper-listbox>
+                    </paper-dropdown-menu>
+                </div>
+            </div>
+
+            <div>
+                <div class="onlineClassCheckbox">
+                    <paper-checkbox aria-label="Only events available online" on-click="_onlineCheckboxClicked">Only events available online</paper-checkbox>
+                </div>
+            </div>
+
+            <div class="quicklinks">
+                <h4>Popular events:</h4>
+                <template is="dom-repeat" items="{{quicklinkList}}">
+                    <paper-button on-click="_quickLinkClicked">[[item.label]]</paper-button>
+                </template>
+            </div>
+        </paper-card>
+
+    </template>
+
+    <script src="uqlibrary-training-filter.js"></script>
+</dom-module>
