@@ -1,6 +1,6 @@
 # uqlibrary-training
 
-[![Codeship Status for uqlibrary/uqlibrary-mylibrary](https://codeship.com/projects/f0334440-bdaa-0133-87bd-2a1d867cc1c8/status?branch=master)](https://codeship.com/projects/136640)
+[![Codeship Status for uqlibrary/uqlibrary-mylibrary](https://app.codeship.com/projects/f0334440-bdaa-0133-87bd-2a1d867cc1c8/status?branch=master)](https://app.codeship.com/projects/136640)
 [![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-training.svg)](https://david-dm.org/uqlibrary/uqlibrary-training)
 [![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-training/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-training?type=dev)
 
@@ -34,10 +34,10 @@ Return to your demo page, refresh and you should be getting live data.
 
 ## Developing
 
-* Please adhere to the Polymer code style guide provided at [Style Guide](http://polymerelements.github.io/style-guide/).
-* Colors and common styles are imported (bower install) from [uqlibrary-styles](http://github.com/uqlibrary/uqlibrary-styles).
-* A preview of the component can be viewed locally by running `npm start`. Use the second URL from the command output.
-* GitHub pages should be updated after every commit to `polymer1.0` branch by running `bin/generate-gh-pages.sh`
+- Please adhere to the Polymer code style guide provided at [Style Guide](http://polymerelements.github.io/style-guide/).
+- Colors and common styles are imported (bower install) from [uqlibrary-styles](http://github.com/uqlibrary/uqlibrary-styles).
+- A preview of the component can be viewed locally by running `npm start`. Use the second URL from the command output.
+- GitHub pages should be updated after every commit to `polymer1.0` branch by running `bin/generate-gh-pages.sh`
 
 ## Testing
 
@@ -53,11 +53,11 @@ We have a testing branch on Drupal at <https://library.stage.drupal.uq.edu.au/li
 
 If you:
 
-* Commit your desired change to master branch of `uqlibrary-training`
-* Make a new release on github for repo `uqlibrary-training`
-* Edit baseApiUrl on uqlibrary-api.html in repo uqlibrary-api to point to https://api.library.uq.edu.au/staging, commit and make a release
-* Push branch `master` of repo `uqlibrary-reusable-components` on codeship (usually re-run the last successful build on codeship)
-* Wait for the invalidation on AWS
+- Commit your desired change to master branch of `uqlibrary-training`
+- Make a new release on github for repo `uqlibrary-training`
+- Edit baseApiUrl on uqlibrary-api.html in repo uqlibrary-api to point to <https://api.library.uq.edu.au/staging>, commit and make a release
+- Push branch `master` of repo `uqlibrary-reusable-components` on codeship (usually re-run the last successful build on codeship)
+- Wait for the invalidation on AWS
 
 then you will be able to preview a change on this page of drupal.
 
