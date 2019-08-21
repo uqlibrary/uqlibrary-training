@@ -1,11 +1,7 @@
 {
   "name": "uqlibrary-training",
-  "version": "1.1.15",
-  "keywords": [
-    "seed",
-    "polymer",
-    "web-components"
-  ],
+  "version": "1.1.16",
+  "keywords": ["seed", "polymer", "web-components"],
   "ignore": [],
   "private": true,
   "main": "elements/uqlibrary-training.html",
@@ -32,7 +28,7 @@
     "paper-ripple": "PolymerElements/paper-ripple#1.0.10",
     "paper-styles": "PolymerElements/paper-styles#1.2.1",
     "test-fixture": "PolymerElements/test-fixture#^1.1.2",
-    "moment": "^2.23.0",
+    "moment": "^2.24.0",
     "webcomponentsjs": "Polymer/webcomponentsjs#0.7.24"
   },
   "devDependencies": {
