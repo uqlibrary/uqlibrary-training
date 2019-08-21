@@ -61,9 +61,9 @@ Example:
                 }
             }
 
-            paper-toggle-button {
-                --paper-toggle-button-checked-bar-color:  var(--accent-color);
-                --paper-toggle-button-checked-button-color:  var(--accent-color);
+            .onlineToggle paper-toggle-button {
+                --paper-toggle-button-checked-bar-color: var(--accent-color);
+                --paper-toggle-button-checked-button-color: var(--accent-color);
                 --paper-toggle-button-checked-ink-color: var(--accent-color);
             }
 
@@ -80,7 +80,7 @@ Example:
                 white-space: nowrap;
             }
 
-            .onlineClassCheckbox,
+            .onlineToggle,
             .quicklinks {
                 padding-left: 16px;
                 padding-left: 1rem;
@@ -155,7 +155,7 @@ Example:
             </div>
 
             <div>
-                <div class="onlineClassCheckbox">
+                <div class="onlineToggle">
                     <paper-toggle-button aria-label="Only events available online" on-click="_onlineCheckboxClicked">Only events available online</paper-toggle-button>
                 </div>
             </div>

@@ -62,7 +62,7 @@
       '_searchKeywordChanged(filterCriteria.keyword)'
       ],
 
-    _onlineCheckboxClicked: function(e) {
+    _onlineToggleClicked: function(e) {
       this.$.ga.addEvent("filter", 'online');
 
       this.onlineOnly = ! this.onlineOnly;
