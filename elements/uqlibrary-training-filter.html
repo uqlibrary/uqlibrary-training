@@ -61,6 +61,12 @@ Example:
                 }
             }
 
+            paper-toggle-button {
+                --paper-toggle-button-checked-bar-color:  var(--accent-color);
+                --paper-toggle-button-checked-button-color:  var(--accent-color);
+                --paper-toggle-button-checked-ink-color: var(--accent-color);
+            }
+
             paper-input paper-icon-button{
                 --paper-icon-button: {
                     padding: 0px;
@@ -150,7 +156,7 @@ Example:
 
             <div>
                 <div class="onlineClassCheckbox">
-                    <paper-checkbox aria-label="Only events available online" on-click="_onlineCheckboxClicked">Only events available online</paper-checkbox>
+                    <paper-toggle-button aria-label="Only events available online" on-click="_onlineCheckboxClicked">Only events available online</paper-toggle-button>
                 </div>
             </div>
 
