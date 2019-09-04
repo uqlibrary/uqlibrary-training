@@ -191,13 +191,16 @@
      * Event handler for training api call
      * @private
      */
-    _trainingDataLoaded: function(event) {
-        if (Object.prototype.toString.call( event.detail ) !== '[object Array]') {
-            this.events = [];
-            this.errorsFound = true;
+    _trainingDataLoaded: function(events) {
+        if (
+            (Object.prototype.toString.call( events.detail ) === '[object Object]' && Object.keys(events.detail).length > 0)
+            || Object.prototype.toString.call( events.detail ) === '[object Array]'
+        ) {
+          this.events = events.detail;
+          this.errorsFound = false;
         } else {
-            this.events = event.detail;
-            this.errorsFound = false;
+          this.events = [];
+          this.errorsFound = true;
         }
     },
 
@@ -213,7 +216,6 @@
      * @private
      */
     _processData: function (events) {
-
       var processedEvents = [];
       var categories = [];
       var campuses = [];
@@ -225,78 +227,79 @@
       var weekData;
       var found;
 
-      for(var eventIndex = 0; eventIndex < events.length; eventIndex++){
-        var event = events[eventIndex];
+      for (var eventIndex in events) {
+        if (events.hasOwnProperty(eventIndex)) {
+          var event = events[eventIndex];
+          //if event doesn't have a category, put it into category 'Other'
+          if (!event.labels) {
+            event.labels = [{id: '0', name: 'Other'}];
+          }
 
-        //if event doesn't have a category, put it into category 'Other'
-        if (!event.labels) {
-          event.labels = [{ id: '0', name: 'Other'}];
-        }
+          //set up all categories
+          if (event.labels) {
+            for (var labelIndex in event.labels) {
+              if (event.labels.hasOwnProperty(labelIndex)) {
+                var category = event.labels[labelIndex];
 
-        //set up all categories
-        if (event.labels) {
-          for (var labelIndex in event.labels) {
-            if (event.labels.hasOwnProperty(labelIndex)) {
-              var category = event.labels[labelIndex];
+                var catIndex = categories.indexOf(category.id);
 
-              var catIndex = categories.indexOf(category.id);
+                if (catIndex < 0) {
+                  category.events = [];
+                  category.displayName = category.name.replace(/.*\./, '');
+                  category.firstEventId = event.entityId;
+                  processedEvents.push(category);
 
-              if (catIndex < 0) {
-                category.events = [];
-                category.displayName = category.name.replace(/.*\./, '');
-                category.firstEventId = event.entityId;
-                processedEvents.push(category);
+                  categories.push(category.id);
+                  catIndex = categories.length - 1;
+                }
 
-                categories.push(category.id);
-                catIndex = categories.length - 1;
-              }
-
-              if (!category.events) {
+                if (!category.events) {
                   category = processedEvents[catIndex];
+                }
+
+                //create display string for start date
+                var startDate = new Date(event.start);
+                event.formattedDate = moment(event.start).format('ddd D MMM YYYY');
+                event.link = this.parentUrl + event.entityId;
+
+                //add this event to the category
+                category.events.push(event);
               }
-
-              //create display string for start date
-              var startDate = new Date(event.start);
-              event.formattedDate = moment(event.start).format('ddd D MMM YYYY');
-              event.link = this.parentUrl + event.entityId;
-
-              //add this event to the category
-              category.events.push(event);
             }
           }
-        }
 
-        //setup all campuses
-        if (event.categories && event.categories.campus) {
-          for(var index=0; index < event.categories.campus.length; index++) {
-            var campus = event.categories.campus[index];
-            if (campuses.indexOf(campus) < 0) {
-              campuses.push(campus);
+          //setup all campuses
+          if (event.categories && event.categories.campus) {
+            for (var index = 0; index < event.categories.campus.length; index++) {
+              var campus = event.categories.campus[index];
+              if (campuses.indexOf(campus) < 0) {
+                campuses.push(campus);
+              }
             }
           }
-        }
 
-        //setup all event weeks
-        startOfWeek = moment(event.start).startOf('week');
-        endOfWeek = moment(event.start).endOf('week');
-        weekLabel = startOfWeek.format('D MMM') + ' - ' + endOfWeek.format('D MMM') + ' ';
-        weekData = {
-          "label": weekLabel,
-          "startData": startOfWeek.format('YYYY-MM-DD'),
-          "endData": endOfWeek.format('YYYY-MM-DD')
-        };
+          //setup all event weeks
+          startOfWeek = moment(event.start).startOf('week');
+          endOfWeek = moment(event.start).endOf('week');
+          weekLabel = startOfWeek.format('D MMM') + ' - ' + endOfWeek.format('D MMM') + ' ';
+          weekData = {
+            "label": weekLabel,
+            "startData": startOfWeek.format('YYYY-MM-DD'),
+            "endData": endOfWeek.format('YYYY-MM-DD')
+          };
 
-        found = false;
-        for (var ii = 0; ii < weeks.length; ii++) {
-          if (weeks[ii].label === weekLabel) {
-            found = true;
-            break;
+          found = false;
+          for (var ii = 0; ii < weeks.length; ii++) {
+            if (weeks[ii].label === weekLabel) {
+              found = true;
+              break;
+            }
           }
-        }
-        if (!found) {
+          if (!found) {
             weeks.push(weekData);
-        }
-      }
+          }
+        } // end if hasownproperty
+      } // end for loop
 
       // sort the events by section name to give constancy of section ordering
       if (processedEvents) {
