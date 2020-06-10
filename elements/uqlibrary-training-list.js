@@ -17,6 +17,13 @@
 
     _eventsChangedList: function () {
       var events = [];
+      // there is something strange happening that sometimes the api sends us an object
+      // convert to an array when it happens
+      if (Object.prototype.toString.call( this.events ) === '[object Object]' && Object.keys(this.events).length > 0) {
+        this.events = Object.values(this.events).map(function(value, entry) {
+          return value;
+        });
+      }
       if (!this.errorsFound && Object.prototype.toString.call( this.events ) === '[object Array]') {
           events = this.events;
           for (var i = 0; i < events.length; i++) {
