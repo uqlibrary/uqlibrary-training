@@ -8,11 +8,13 @@
     "test": "test"
   },
   "scripts": {
+    "postinstall": "bower update",
     "test": "polymer test",
     "start": "gulp serve",
     "start:compact": "gulp serve-compact",
     "live": "gulp live",
-    "live:compact": "gulp live-compact"
+    "live:compact": "gulp live-compact",
+    "cleandeps": "THISDIR=${PWD##*/}; BOWERDEPS=$(ls ../ --hide=$THISDIR); cd ..; rm -rf $BOWERDEPS $THISDIR/node_modules"
   },
   "repository": {
     "type": "git",
@@ -26,9 +28,9 @@
     "url": "https://github.com/uqlibrary/uqlibrary-training/issues"
   },
   "devDependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bower": "^1.8.8",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.26.14",
     "chai": "^4.2.0",
     "growl": "^1.10.5",
     "gulp": "^4.0.2",
